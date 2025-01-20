@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% if(session.getAttribute("userDTO")==null){
 	System.out.println("없음");
 	response.sendRedirect(request.getContextPath()+"/app/user/login/login.jsp");
@@ -18,37 +19,8 @@
 </head>
 
 <body>
-    <header class="main-header">
-      <nav class="main-header-container">
-        <div class="main-header-content">
-          <div class="main-header-logo">
-          	<a href="${pageContext.request.contextPath}/app/preset/main.jsp">learnning</a>
-          </div>
-          <div class="main-header-post-container">
-            <a href="../partyForum/partyForum.html">
-              <li>파티 모집</li>
-            </a>
-            <a href="../communityForum/communityForum.html">
-              <li>커뮤니티</li>
-            </a>
-          </div>
-        </div>
-        <div class="main-header-dropdown-container">
-          <div class="main-header-user-box">
-            <i class="icon-down-dir"></i>사용자<i class="icon-user-circle-o"></i>
-          </div>
-          <div class="main-header-dropdown">
-            <a href="${pageContext.request.contextPath}/app/myPage/checkPass.jsp">• 개인 정보 수정</a>
-            <hr>
-            <a href="${pageContext.request.contextPath}/app/myPage/myPageRecruitment.jsp">• 모집 현황</a>
-            <hr>
-            <a href="${pageContext.request.contextPath}/myPageMyPost.my">• 내 게시물</a>
-            <hr>
-            <a href="${pageContext.request.contextPath}/logoutOk.us">• 로그 아웃</a>
-          </div>
-        </div>
-      </nav>
-    </header>
+    <!-- 헤더 -->
+   <jsp:include page="/app/preset/header.jsp" />
 
   <main>
     <div class="myPage-container">
@@ -84,11 +56,8 @@
     </div>
   </main>
 
-  <footer class="main-footer">
-    <div class="main-login-footer-text">
-      <span><a href="">이용약관</a></span> | <span><a href="">개인정보 처리 방침</a></span> | <span><a href="">고객센터</a></span>
-    </div>
-  </footer>
+  <!-- 푸터 -->
+   <jsp:include page="/app/preset/footer.jsp" />
 </body>
 <script>
   const pageBtn = document.querySelector(".myPage-changePageBtn");

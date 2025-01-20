@@ -10,6 +10,7 @@ public class MyForumDTO {
 //    forum_update DATE,
 //    forum_content VARCHAR2(2000) NOT NULL,
 
+	private String forumNumber;
 	private String userNickname;
 	private String userTier;
 	private String forumCategory;
@@ -19,8 +20,16 @@ public class MyForumDTO {
 
 	@Override
 	public String toString() {
-		return "[\'" + userNickname + "\', \'" + userTier + "\', \'" + forumCategory + "\'" + ", \'" + forumTitle + "\', "
-				+ commentCount + ", \'" + forumDate + "\']";
+		return "[" + forumNumber + ", \'" + userNickname + "\', \'" + userTier + "\', \'" + forumCategory + "\'"
+				+ ", \'" + forumTitle + "\', " + commentCount + ", \'" + forumDate + "\']";
+	}
+
+	public String getForumNumber() {
+		return forumNumber;
+	}
+
+	public void setForumNumber(String forumNumber) {
+		this.forumNumber = forumNumber;
 	}
 
 	public String getUserNickname() {

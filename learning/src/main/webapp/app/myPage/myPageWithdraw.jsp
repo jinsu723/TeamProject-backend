@@ -26,7 +26,7 @@
          <h3>삭제처리 되었습니다</h3>
       </div>
       <div style="height: 100px;"></div>
-      <button class="withDrawBtn"><a href='request.getContextPath()+"/app/preset/main.jsp"'>확인</a></button>
+      <button class="withDrawBtn">확인</button>
    </main>
    <footer class="main-footer">
       <div class="nonLogin-footer-text">
@@ -34,5 +34,7 @@
       </div>
    </footer>
 </body>
-
+<script type="text/javascript">
+	document.querySelector(".withDrawBtn").addEventListener("click", () => location.href = '<%= request.getContextPath() %>/app/preset/main.jsp');
+</script>
 </html>

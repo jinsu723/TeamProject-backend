@@ -26,6 +26,16 @@ public class MyPageDAO {
 		return sql.update("mypage.changeTier", map);
 	}
 
+	public int checkNick(String nick) {
+		System.out.println("닉네임 중복체크");
+		return sql.selectOne("mypage.checkNickName", nick);
+	}
+
+	public void changeNick(Map<String, String> nick) {
+		System.out.println("닉네임 변경");
+		sql.update("mypage.changeNick", nick);
+	}
+
 	public int deleteUser(int num) {
 		System.out.println("DAO 유저 삭제");
 		System.out.println(num);

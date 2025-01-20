@@ -10,6 +10,7 @@
 	</delete>
 	
 	<resultMap type="MyForumDTO" id="posts">
+		<result property="forumNumber" column="FORUM_NUMBER"/>
 		<result property="userNickname" column="USER_NICKNAME"/>
 		<result property="userTier" column="USER_TIER"/>
 		<result property="forumCategory" column="FORUM_CATEGORY"/>
@@ -18,11 +19,20 @@
 		<result property="commentCount" column="COMMENT_COUNT"/>
 	</resultMap>
 	<select id="mypost" parameterType="int" resultMap="posts">
-		SELECT TU.USER_NICKNAME, TU.USER_TIER, tf.FORUM_CATEGORY, tf.FORUM_TITLE, tf.FORUM_DATE, (SELECT count(*) FROM TBL_COMMENT tc  WHERE tf.FORUM_NUMBER = TC.FORUM_NUMBER )"COMMENT_COUNT"
+		SELECT tf.FORUM_NUMBER, TU.USER_NICKNAME, TU.USER_TIER, tf.FORUM_CATEGORY, tf.FORUM_TITLE, tf.FORUM_DATE, (SELECT count(*) FROM TBL_COMMENT tc  WHERE tf.FORUM_NUMBER = TC.FORUM_NUMBER )"COMMENT_COUNT"
 		FROM TBL_FORUM tf  
 		JOIN tbl_user tu
 		ON tf.USER_NUMBER = tu.USER_NUMBER
 		WHERE tf.user_number = #{num}
 		ORDER BY FORUM_DATE DESC
 	</select>
+	
+	<select id="checkNickName" parameterType="String" resultType="int">
+		SELECT count(*) FROM TBL_USER WHERE USER_NICKNAME = #{nick}
+	</select>
+	
+	<update id="changeNick" parameterType="String">
+		UPDATE TBL_USER SET USER_NICKNAME = #{newNick} WHERE USER_NICKNAME = #{nick}
+	</update>
+	
 </mapper>

@@ -49,10 +49,8 @@
          <!-- 닉네임 -->
          <div class="myPage-container-box">
             <h2>닉네임</h2>
-            <div>
-               <% if(session.getAttribute("userDTO")!=null){%><%= dto.getUserNickname() %><%} %>
+            <div><% if(session.getAttribute("userDTO")!=null){%><%= dto.getUserNickname() %><%} %></div>
                <button class="myPage-nickBtn">닉네임 변경</button>
-            </div>
             
          </div>
 
@@ -92,8 +90,10 @@
             <div class="myPage-box-text">
                전화번호를 변경합니다. 새로 입력하는 전화번호로 본인인증이 진행됩니다.
             </div>
-            <input type="text">
-            <button class="myPage-phoneBtn">인증번호 받기</button>
+            <div>
+            	<input type="text" class="myPage-phoneText">
+            	<button class="myPage-phoneBtn">인증번호 받기</button>
+            </div>
             <div class="myPage-phoneCheck">
                <br>
                <input type="text" class="myPage-phoneCheckText">
@@ -109,9 +109,7 @@
                계정을 삭제합니다. 삭제시 복구가 불가능하며 작성했던 게시글, 댓글 등 데이터가 전부 삭제됩니다.<br>
                계정 삭제가 진행되면 회원의 정보가 모두 삭제되며, 약관에 대한 계약이 모두 철회됩니다.
             </div>
-            <form action="${pageContext.request.contextPath}/deleteUser.my">
             	<button class="myPage-delBtn">회원 탈퇴</button>
-            </form>
          </div>
       </div>
    </main>
@@ -121,12 +119,20 @@
 </body>
 <script type="text/javascript">
   const selec = document.querySelectorAll(".myPage-drop-op");
-  console.log(selec.length);
   for (let i = 0; i < selec.length; i++) {
    if(selec[i].textContent == "<% if(session.getAttribute("userDTO")!=null){%><%= dto.getUserTier() %><%} %>"){
       selec[i].selected="true";
       break;
-   }
+    }
   }
+  const contextPath = "<%= request.getContextPath() %>";
+  let isChangeNickName = "<%= request.getAttribute("nickChanged") %>";
+  if(isChangeNickName==="true"){
+	  alert("닉네임이 변경되었습니다");
+  }else if(isChangeNickName==="false"){
+	  alert("변경실패했습니다\n닉네임이 이미 존재합니다");
+  }
+  isChangeNickName = "";
+  <% request.removeAttribute("nickChanged"); %>
 </script>
 </html>

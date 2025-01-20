@@ -49,6 +49,10 @@ main {
 	width: 100%;
 }
 
+.myPage-content-list {
+	cursor: pointer;
+}
+
 .myPage-pageNation {
 	display: flex;
 	justify-content: center;
