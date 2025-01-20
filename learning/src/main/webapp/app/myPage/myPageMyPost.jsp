@@ -27,7 +27,7 @@
     <nav class="main-header-container">
       <div class="main-header-content">
         <div class="main-header-logo">
-          <a href="${pageContext.request.contextPath}/app/preset/main.jsp">learnning</a>
+          <a href="${pageContext.request.contextPath}/app/preset/main.jsp">learning</a>
         </div>
         <div class="main-header-post-container">
           <a href="${pageContext.request.contextPath}/app/partyForum/partyForum.jsp">

@@ -25,7 +25,9 @@ public class MyPageChangeTier implements Execute {
 		map.put("userNum", ((UserDTO) request.getSession().getAttribute("userDTO")).getUserNumber() + "");
 		request.setAttribute("update", new MyPageDAO().chageTier(map));
 
-		System.out.println(request.getAttribute("update"));
+		System.out.println("티어 업데이트 : " + request.getAttribute("update"));
+		((UserDTO)request.getSession().getAttribute("userDTO")).setUserTier(request.getParameter("tier"));
+		System.out.println("userDTO : " + request.getSession().getAttribute("userDTO"));
 		rs.setPath(request.getContextPath() + "/app/myPage/myPageMain.jsp");
 		rs.setRedirect(true);
 		return rs;
