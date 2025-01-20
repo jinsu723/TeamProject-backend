@@ -17,7 +17,6 @@
    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/preset/preset.css">
    <script defer src="${pageContext.request.contextPath}/assets/js/myPageMain/myPageMain.js"></script>
    <script defer src="${pageContext.request.contextPath}/assets/js/preset/mainLogin.js"></script>
-   <script defer src="${pageContext.request.contextPath}/app/user/logout.us"></script>
    
    <style type="text/css">
    	hr{
@@ -30,49 +29,7 @@
 
 <body>
    <!-- 헤더 -->
-   <header class="main-header">
-  <nav class="main-header-container">
-    <div class="main-header-content">
-      <div class="main-header-logo">
-        <a href="${pageContext.request.contextPath}/app/preset/main.jsp">learnning</a>
-      </div>
-      <div class="main-header-post-container">
-        <a href="${pageContext.request.contextPath}/app/partyForum/partyForum.jsp">
-          <li>파티 모집</li>
-        </a> <a href="${pageContext.request.contextPath}/app/communityForum/communityForum.jsp">
-          <li>커뮤니티</li>
-        </a>
-      </div>
-    </div>
-    <c:choose>
-      <c:when test="${not empty sessionScope.userDTO}">
-        <div class="main-header-dropdown-container">
-          <div class="main-header-user-box">
-            <i class="icon-down-dir"></i>
-            <%= session.getAttribute("userNickname") %><i class="icon-user-circle-o"></i>
-          </div>
-          <div class="main-header-dropdown">
-            <a href="${pageContext.request.contextPath}/app/myPage/checkPass.jsp">• 개인 정보 수정</a>
-            <hr />
-            <a href="${pageContext.request.contextPath}/app/myPage/myPageRecruitment.jsp">• 모집 현황</a>
-            <hr />
-            <a href="${pageContext.request.contextPath}/myPageMyPost.my">• 내 게시물</a>
-            <hr />
-            <a href="${pageContext.request.contextPath}/logoutOk.us">• 로그 아웃</a>
-          </div>
-        </div>
-      </c:when>
-      <c:otherwise>
-        <div class="main-nlog-header-container">
-          <li class="main-nlog-header-join"><a
-              href="${pageContext.request.contextPath}/app/user/login/login.jsp">로그인</a></li>
-          <li class="main-nlog-header-join"><a
-              href="${pageContext.request.contextPath}/app/user/signUp/signUp1.jsp">회원가입</a></li>
-        </div>
-      </c:otherwise>
-    </c:choose>
-  </nav>
-</header>
+   <jsp:include page="/app/preset/header.jsp" />
 
    <!-- 메인 -->
    <main class="myPage-main">
@@ -92,8 +49,11 @@
          <!-- 닉네임 -->
          <div class="myPage-container-box">
             <h2>닉네임</h2>
-            <div><% if(session.getAttribute("userDTO")!=null){%><%= dto.getUserNickname() %><%} %></div>
-            <button class="myPage-nickBtn">비밀번호 변경</button>
+            <div>
+               <% if(session.getAttribute("userDTO")!=null){%><%= dto.getUserNickname() %><%} %>
+               <button class="myPage-nickBtn">닉네임 변경</button>
+            </div>
+            
          </div>
 
          <!-- 비밀번호 -->
@@ -156,18 +116,13 @@
       </div>
    </main>
    <!-- 푸터 -->
-   <footer class="main-footer">
-      <div class="main-login-footer-text">
-         <span><a href="">이용약관</a></span> | <span><a href="">개인정보 처리 방침</a></span> | <span><a href="">고객센터</a></span>
-      </div>
-   </footer>
+   <jsp:include page="/app/preset/footer.jsp" />
 
 </body>
 <script type="text/javascript">
   const selec = document.querySelectorAll(".myPage-drop-op");
   console.log(selec.length);
   for (let i = 0; i < selec.length; i++) {
-   console.log(selec[i].textContent);
    if(selec[i].textContent == "<% if(session.getAttribute("userDTO")!=null){%><%= dto.getUserTier() %><%} %>"){
       selec[i].selected="true";
       break;
