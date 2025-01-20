@@ -13,7 +13,7 @@
   <div class="total-container">
     <div class="signup2-container">
       <header>
-        <p>LEARNNING</p>
+        <p>LEARNING</p>
       </header>
       <main>
         <p class="signup2-text1">본인인증을 위해<br> 전화번호를 입력해 주세요.</p>

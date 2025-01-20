@@ -13,7 +13,7 @@
   <div class="total-container">
     <div class="signup5-container">
       <header>
-        <p>LEARNNING</p>
+        <p>LEARNING</p>
       </header>
       <main>
         <p class="signup5-text1">이제 마지막 단계입니다<br> 본인의 게임 티어를 선택해 주세요.</p>

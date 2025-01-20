@@ -30,6 +30,7 @@
             <a href="#">이용약관</a> | <a href="#">개인정보 처리 방침</a> | <a href="#">고객센터</a>
         </footer>
     </div>
+<%-- <script defer src="${pageContext.request.contextPath}/assets/js/user/login/login.js"></script> --%>
 </body>
 </html>
 

@@ -20,7 +20,7 @@
       </header>
       <main>
         <p class="welcome-text1">
-          <span class="highlight"><%= request.getAttribute("userNickname") %></span> 환영합니다!
+          <span class="highlight"><%= request.getAttribute("userNickname") %></span>님 환영합니다!
         </p>
         <p class="welcome-text2">
           확인 버튼을 눌러<br>
