@@ -13,7 +13,7 @@
   <div class="total-container">
     <div class="signup1-container">
       <header>
-        <p>LEARNNING</p>
+        <p>LEARNING</p>
       </header>
       
       <main>

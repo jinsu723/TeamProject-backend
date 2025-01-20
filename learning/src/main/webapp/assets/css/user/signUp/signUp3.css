@@ -150,7 +150,7 @@ input[type="text"]::placeholder,
   text-decoration: underline;
 }
 
-.error-message {
+.signup3-error-message {
   display: none; 
   color: red;
   font-size: 12px;

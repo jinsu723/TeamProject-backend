@@ -35,6 +35,25 @@ public class UserDAO {
 		sqlSession.insert("User.signUp", userDTO);
 	}
 
+	
+	// 닉네임 중복 검사
+	public boolean checkNickname(String userNickname) {
+		int count = sqlSession.selectOne("User.checkNickname", userNickname);
+		return count > 0; // 중복이면 true, 아니면 false
+	}
+
+	// 아이디 중복 검사
+	public boolean isIdDuplicate(String userId) {
+		int count = sqlSession.selectOne("User.checkId", userId);
+		return count > 0;
+	}
+
+//	// 전화번호 중복 검사
+//	public boolean isPhoneDuplicate(String phone) {
+//		int count = sqlSession.selectOne("User.checkPhone", phone);
+//		return count > 0;
+//	}
+
 	// 전체 회원 수
 	public int selectCount() {
 		return sqlSession.selectOne("User.totalUser");
