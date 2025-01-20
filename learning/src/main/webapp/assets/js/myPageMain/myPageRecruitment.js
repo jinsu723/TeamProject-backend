@@ -95,17 +95,17 @@ function addList(idx, arr) {
 
 
 
-//모집 - 신청 전환 qjxms
+//모집 - 신청 전환 버튼
 pageBtn.addEventListener("click", () => {
 	const form = document.createElement("form");
 	form.method = "post";
 	pageToggle.classList.toggle("fa-flip-horizontal");
 	if (document.querySelector(".myPage-forum-text").innerText == "신청 현황") {
 		document.querySelector(".myPage-forum-text").innerText = '모집 현황';
-		form.action = "http://naver.com";
+		//form.action = "http://naver.com";
 	} else {
 		document.querySelector(".myPage-forum-text").innerText = '신청 현황';
-		form.action = "http://google.com";
+		//form.action = "http://google.com";
 	}
 	document.body.appendChild(form);
 	form.submit();

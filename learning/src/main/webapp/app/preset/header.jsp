@@ -1,3 +1,4 @@
+<%@page import="com.learning.app.dto.UserDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
    <header class="main-header">
@@ -18,7 +19,7 @@
             <c:when test="${not empty sessionScope.userDTO}">
                <div class="main-header-dropdown-container">
                   <div class="main-header-user-box">
-                     <i class="icon-down-dir"></i><%= session.getAttribute("userNickname") %><i class="icon-user-circle-o"></i>
+                     <i class="icon-down-dir"></i><%= ((UserDTO)session.getAttribute("userDTO")).getUserNickname() %><i class="icon-user-circle-o"></i>
                   </div>
                   <div class="main-header-dropdown">
                      <a href="${pageContext.request.contextPath}/app/myPage/checkPass.jsp">• 개인 정보 수정</a>

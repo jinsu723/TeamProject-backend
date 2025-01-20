@@ -60,14 +60,17 @@ public class MyPageFrontController extends HttpServlet {
 		switch (target) {
 		case "/checkPass.my":
 			System.out.println("비밀번호 확인");
-
 			result = new MyPageCheckPass().execute(request, response);
+			break;
+
+		case "/changeNickName.my":
+			System.out.println("닉네임 변경");
+			result = new MyPageNickName().execute(request, response);
 			break;
 
 		case "/changeTier.my":
 			System.out.println("티어 : " + request.getParameter("tier"));
 			System.out.println("유저 넘버 : " + ((UserDTO) request.getSession().getAttribute("userDTO")).getUserNumber());
-
 			result = new MyPageChangeTier().execute(request, response);
 			break;
 
@@ -83,7 +86,6 @@ public class MyPageFrontController extends HttpServlet {
 
 		case "/myPageRecruitment.my":
 			System.out.println(request.getRequestURI());
-			
 			break;
 		}
 		System.out.println("result : " + result);

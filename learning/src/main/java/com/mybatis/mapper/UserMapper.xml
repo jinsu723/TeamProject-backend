@@ -3,7 +3,7 @@
 <mapper namespace="User">
     <!-- 로그인 쿼리 -->
     <select id="login" parameterType="map" resultType="UserDTO">
-        SELECT user_number, user_id, user_passwd, user_nickname, user_tier, user_phone, user_join_date, user_ben_ctn
+        SELECT user_number, user_id, user_passwd, user_nickname, user_tier, user_phone, user_join_date, user_ben_cnt
         FROM tbl_user
         WHERE user_id = #{id} AND user_passwd = #{pw}
     </select>

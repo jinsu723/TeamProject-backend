@@ -21,6 +21,7 @@ public class MyPageDeleteUser implements Execute {
 		Result rs = new Result();
 
 		System.out.println(new MyPageDAO().deleteUser(((UserDTO) session.getAttribute("userDTO")).getUserNumber()));
+		session.invalidate();
 
 		rs.setPath(request.getContextPath()+"/app/myPage/myPageWithdraw.jsp");
 		rs.setRedirect(true);
