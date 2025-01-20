@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="User">
+    <!-- 로그인 쿼리 -->
+    <select id="login" parameterType="map" resultType="UserDTO">
+        SELECT user_number, user_id, user_passwd, user_nickname, user_tier, user_phone, user_join_date, user_ben_ctn
+        FROM tbl_user
+        WHERE user_id = #{id} AND user_passwd = #{pw}
+    </select>
+    
+    <!-- 회원가입 쿼리 -->
+    <insert id="signUp" parameterType="UserDTO">
+        INSERT INTO tbl_user (user_number, user_id, user_passwd, user_nickname, user_tier, user_phone, user_join_date)
+        VALUES (seq_user.nextVal, #{userId}, #{userPasswd}, #{userNickname}, #{userTier}, #{userPhone}, SYSDATE)
+    </insert>
+    
+    <!--  전화번호 중복 확인 쿼리  -->
+	<select id="checkPhone" parameterType="UserDTO" resultType="int">
+		select count(*) from tbl_user where user_phone = #{userPhone}
+	</select>
+	
+	
+	<!--  전체 회원 조회  -->
+	<select id="managerUser" resultType="UserDTO">
+	SELECT user_number, user_nickname, user_tier, user_phone, user_join_date FROM tbl_user
+	</select>
+	<!--  전체 회원 수 조회  -->
+	<select id="totalUser" resultType="int">
+	SELECT count(*) FROM tbl_user
+	</select>
+</mapper>

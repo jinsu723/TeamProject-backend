@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mypage">
+	<update id="changeTier" parameterType="Map">
+		UPDATE TBL_USER SET USER_TIER = #{tier} WHERE user_number=#{userNum}
+	</update>
+	
+	<delete id="deleteUser" parameterType="int">
+		DELETE FROM TBL_USER WHERE USER_number = #{num}
+	</delete>
+	
+	<resultMap type="MyForumDTO" id="posts">
+		<result property="userNickname" column="USER_NICKNAME"/>
+		<result property="userTier" column="USER_TIER"/>
+		<result property="forumCategory" column="FORUM_CATEGORY"/>
+		<result property="forumTitle" column="FORUM_TITLE"/>
+		<result property="forumDate" column="FORUM_DATE"/>
+		<result property="commentCount" column="COMMENT_COUNT"/>
+	</resultMap>
+	<select id="mypost" parameterType="int" resultMap="posts">
+		SELECT TU.USER_NICKNAME, TU.USER_TIER, tf.FORUM_CATEGORY, tf.FORUM_TITLE, tf.FORUM_DATE, (SELECT count(*) FROM TBL_COMMENT tc  WHERE tf.FORUM_NUMBER = TC.FORUM_NUMBER )"COMMENT_COUNT"
+		FROM TBL_FORUM tf  
+		JOIN tbl_user tu
+		ON tf.USER_NUMBER = tu.USER_NUMBER
+		WHERE tf.user_number = #{num}
+		ORDER BY FORUM_DATE DESC
+	</select>
+</mapper>

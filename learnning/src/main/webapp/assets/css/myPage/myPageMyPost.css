@@ -1,0 +1,99 @@
+body {
+	padding: 0px;
+	margin: 0px;
+	height: 100vh;
+}
+
+main {
+	position: relative;
+	min-height: 80%;
+	width: 100%;
+}
+
+.myPage-container {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	align-items: center;
+	width: 100%;
+}
+
+.myPage-container h1 {
+	margin: 80px auto;
+}
+
+.myPage-changePage {
+	width: 70%;
+	font-size: 20px;
+}
+
+.myPage-changePageBtn {
+	float: right;
+}
+
+.myPage-container hr {
+	width: 100%;
+	margin: 5px;
+}
+
+.myPage-main {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 70%;
+}
+
+.myPage-content {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.myPage-pageNation {
+	display: flex;
+	justify-content: center;
+	font-family: "Noto Sans KR Medium";
+	font-size: 16px;
+	height: 50px;
+	width: 100%;
+	position: absolute;
+	bottom: 0px;
+}
+
+.myPage-pageNation-number {
+	font-family: "Noto Sans KR Medium";
+	font-size: 16px;
+	text-align: center;
+	height: 50px;
+	width: auto;
+}
+
+.myPage-pageNation span {
+	margin: 0px 10px;
+	cursor: pointer;
+}
+
+.myPage-content .nick {
+	width: 10%;
+	text-align: left;
+}
+
+.myPage-content .tear {
+	width: 12%;
+}
+
+.myPage-content .categori {
+	width: 9%;
+}
+
+.myPage-content .title {
+	width: 40%;
+}
+
+.myPage-content .comment {
+	width: 9%;
+}
+
+.myPage-content .date {
+	width: 20%;
+}

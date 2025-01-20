@@ -1,0 +1,169 @@
+* { /* 해당 페이지 전체 여백들 0으로 시자작 */
+  margin: 0px;
+  padding: 0px;
+}
+
+body{
+  height: 100vh;
+  width: 100%;
+  /* background-color: red; */
+}
+
+
+
+
+
+
+.partyForumEdit-main{
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  /* background-color: blue; */
+}
+.partyForumEdit-container{
+  width: 100%;
+  height: 100%;
+}
+.partyForumEdit-main-container { /* 해당 컨텐츠가 들어갈 모든 요소들(main태그안에 큰 틀) */
+  left: 50%;
+  margin-top: 30px;
+  position: absolute;
+  text-align: center;
+  width: 70%;;
+  transform: translate(-50%, 0%);
+  /* border: 1px solid red; */
+}
+.partyForumEdit-main-title{ /* 커뮤니티 글꼴 적용 */
+  margin-bottom: 30px;
+  font-family: "Noto Sans KR ExtraBold";
+}
+
+.partyForumEdit-title, .partyForumEdit-content{
+  display: flex;
+  flex-direction: row;
+  /* border: 1px solid blue; */
+}
+.partyForumEdit-title, .partyForumEdit-content{
+  font-family: "Noto Sans KR ExtraBold";
+  font-size: 20px;
+  margin-right: 20px;
+}
+.partyForumEdit-title-text, .partyForumEdit-content-text{
+  margin-left: 35px;
+  margin-right: 20px;
+  line-height: 40px;
+}
+.partyForumEdit-title>input{
+  background-color: #F5F5F5;
+  border-radius: 10px;
+  padding: 0px 10px;
+  width: 85%;
+  height: 4vh;
+  border: 1px solid black;
+  /* border: 0; */
+  color: black;
+}
+.partyForumEdit-content-text-content{
+  width: 80%;
+  background-color: #F5F5F5;
+  border-radius: 10px;
+  padding: 10px;
+  min-width: 85%;
+  overflow-y: auto;
+  height: auto;
+  font-size: 16px;
+  height: 377px;
+  border: 1px solid black;
+  text-align: left;
+  color: black;
+  font-family: "Noto Sans KR Regular";
+}
+/* .partyForumEdit-content-text-content>textarea{
+  width: 100%;
+  background-color: #F5F5F5;
+  font-size: 15px;
+  padding-top: 10px;
+  resize: none;
+  border: 0px;
+  height: 95%;
+}
+.partyForumEdit-title>input, .partyForumEdit-content>textarea {
+  background-color: #F5F5F5;
+  border-radius: 10px;
+  padding: 0px 10px;
+  width: 85%;
+  height: 4vh;
+  border: 1px solid black;
+  border: 0;/
+  color: black;
+  font-family: "Noto Sans KR Medium";
+}
+.partyForumEdit-content-text-content>textarea:focus {
+  outline: none;
+}
+.partyForumEdit-content > textarea::placeholder{
+  margin-top: 20px;
+} */
+
+.partyForumEdit-content{
+  margin-top: 20px;
+}
+.partyForumEdit-file{
+  margin-top: 10px;
+  position: relative;
+  display: flex;
+  width: 85%;
+  margin-left: 7%; 
+  /* border: 1px solid green; */
+}
+.partyForumEdit-content-text-content-image{
+  height: 173px;
+  width: 235px;
+  border: 1px solid red;
+}
+
+.icon-file-image{
+  font-size: 35px;
+}
+.partyForumEdit-file-select{
+  padding-top: 5px;
+  padding-left: 5px;
+  background-color: #F5F5F5;
+  width: 35%;
+  text-align: left;
+  margin-top: 10px;
+  border: 1px solid black;
+}
+.partyForumEdit-editCancel-button{
+  margin-top: 10px;
+  border: 0;
+  background-color: #595959;
+  color: white;
+  position: absolute;
+  border-radius: 5px;
+  width: 10%;
+  height: 100%;
+  font-size: 20px;
+  right: 12%;
+}
+.partyForumEdit-editComplete-button{
+  margin-top: 10px;
+  border: 0;
+  background-color: #595959;
+  color: white;
+  position: absolute;
+  border-radius: 5px;
+  width: 10%;
+  height: 100%;
+  font-size: 20px;
+  right: 0%;
+}
+
+
+
+
+
+ 
+
+
+

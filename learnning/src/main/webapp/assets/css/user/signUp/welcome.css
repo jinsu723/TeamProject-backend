@@ -1,0 +1,84 @@
+.total-container {
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.welcome-container {
+  margin: 0;
+  padding: 40px 50px;
+  width: 600px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  max-width: 90%;
+  box-sizing: border-box;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+header p {
+  font-size: 60px;
+  margin: 0;
+  padding: 0;
+}
+
+.welcome-text1 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.welcome-text1 .highlight {
+  color: #007bff; /* 파란색 강조 */
+}
+
+.welcome-text2 {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #555;
+}
+
+.welcome-buttons-container {
+  margin-top: 30px;
+}
+
+.welcome-button {
+  width: 100%;
+  padding: 15px 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: #000;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.welcome-button:hover {
+  background-color: #975a5a;;
+}
+
+.welcome-footer {
+  margin-top: 30px;
+  font-size: 14px;
+  color: #777;
+}
+
+.welcome-footer a {
+  text-decoration: none;
+  color: #777;
+  margin: 0 5px;
+}
+
+.welcome-footer a:hover {
+  text-decoration: underline;
+}
+

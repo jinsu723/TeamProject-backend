@@ -1,0 +1,170 @@
+.total-container {
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.signup2-container {
+  margin: 0;
+  padding: 30px 40px;
+  width: 600px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  max-width: 90%;
+  box-sizing: border-box;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header p {
+  font-family: "Metal Mania", cursive;
+  font-size: 60px;
+  text-align: center;
+  color: #333;
+  margin: 0;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+.signup2-text1 {
+  font-size: 24px;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+  margin: 30px 10px;
+  padding-bottom: 15px;
+}
+
+.signup2-input-container{
+  display: flex;
+  margin: 10px 10px;
+  gap :10px;
+}
+
+#signup2-certify-section{
+  display: flex;
+  margin: 30px 10px;
+  gap :10px;
+}
+
+input[type="text"],
+#certify-code {
+  flex: 1;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+ 
+}
+
+input[type="text"]::placeholder,
+#certify-code::placeholder {
+  color: #aaa;
+  font-size: 12px;
+}
+
+.signup2-certify-button1,
+.signup2-certify-button2 {
+  padding: 5px 15px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.signup2-certify-button1:hover,
+.signup2-certify-button2:hover {
+  background-color: #555;
+  color: #fff;
+  border-color: #aaa;
+}
+
+.signup2-hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s, opacity 0.3s ease;
+}
+
+.signup2-visible {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0.3s, opacity 0.3s ease;
+}
+
+.signup2-info-list {
+  font-size: 13px;
+  color: #777;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.signup2-buttons-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  margin: 20px 0px; 
+}
+
+.signup2-next-button {
+  width: 90%;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  background-color: #ccc;
+  color: #fff;
+  cursor: not-allowed;
+  transition: background-color 0.3s ease;
+}
+
+.signup2-next-button.active {
+  background-color: #333;
+  cursor: pointer;
+}
+
+.signup2-next-button:hover {
+  background-color: #975a5a;
+}
+
+.signup2-next-button:disabled:hover {
+  background-color: #ccc; 
+  cursor: not-allowed; 
+}
+
+.signup2-footer {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: #777;
+}
+
+.signup2-footer a {
+  text-decoration: none;
+  color: #777;
+  margin: 0 5px;
+}
+
+.signup2-footer a:hover {
+  text-decoration: underline;
+}
+
+.error-message {
+  display: none; 
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}

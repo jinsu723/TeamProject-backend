@@ -1,0 +1,133 @@
+body {
+   padding: 0px;
+   margin: 0px;
+   height: 100vh;
+}
+
+hr{
+   margin: 0px;
+   padding: 0px;
+   width: 100%;
+}
+
+main {
+   position: relative;
+   min-height: 80%;
+   width: 100%;
+}
+
+.myPage-container {
+   display: flex;
+   flex-direction: column;
+   text-align: center;
+   align-items: center;
+   width: 100%;
+}
+
+.myPage-container h1 {
+   margin: 80px auto;
+   color: red;
+}
+
+.myPage-changePage {
+   width: 70%;
+   font-size: 20px;
+}
+
+.myPage-changePageBtn {
+   float: right;
+}
+
+.myPage-container hr {
+   width: 100%;
+   margin: 5px;
+}
+
+.myPage-main {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   width: 70%;
+}
+
+.myPage-content {
+   display: flex;
+   justify-content: space-between;
+   width: 100%;
+}
+
+
+
+.myPage-content .approve button {
+   width: 40%;
+   margin: 0px 5%;
+   border: none;
+   border-radius: 5px;
+}
+
+.myPage-content .approve .approve-true {
+   background-color: yellowgreen;
+}
+
+.myPage-content .approve .approve-false {
+   background-color: brown;
+   color: white;
+   width: 40%;
+   margin: 0px 5%;
+   border: none;
+   border-radius: 5px;
+}
+
+.text-color-red {
+   color: red;
+}
+
+.text-color-green {
+   color: green;
+}
+
+
+.myPage-pageNation {
+   display: flex;
+   justify-content: center;
+   font-family: "Noto Sans KR Medium";
+   font-size: 16px;
+   height: 50px;
+   width: 100%;
+   position: absolute;
+   bottom: 0px;
+}
+
+.myPage-pageNation-number {
+   font-family: "Noto Sans KR Medium";
+   font-size: 16px;
+   text-align: center;
+   height: 50px;
+   width: auto;
+}
+
+.myPage-pageNation span {
+   margin: 0px 10px;
+   cursor: pointer;
+}
+
+.myPage-content .nick {
+   width: 18%;
+   text-align: left;
+}
+
+.myPage-content .tear {
+   width: 10%;
+}
+
+.myPage-content .title {
+   width: 42%;
+}
+
+.myPage-content .date {
+   width: 18%;
+}
+
+.myPage-content .approve {
+   width: 12%;
+}

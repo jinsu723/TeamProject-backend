@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Forum">
+    <!-- partyForumWriting -->
+    <insert id="partyForumWriting" parameterType="partyForumDTO">
+        INSERT INTO tbl_forum (forum_number, user_number, forum_category, forum_title, forum_date, forum_update, forum_content)
+		VALUES (seq_forum.nextVal, #{userNumber}, #{forumCategory}, #{forumTitle}, SYSDATE, NULL, #{forumContent})
+        
+    </insert>
+    
+    <select id="partyForumFind" resultType="partyForumDTO">
+		SELECT f.forum_number, u.user_nickname, f.forum_title, f.FORUM_CONTENT, f.forum_date
+		FROM tbl_forum f
+		JOIN tbl_user u
+		ON f.user_number = u.user_number
+		ORDER BY f.forum_number DESC
+    </select>
+</mapper>

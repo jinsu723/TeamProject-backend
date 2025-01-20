@@ -1,0 +1,135 @@
+.total-container {
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.signup5-container {
+  margin: 0;
+  padding: 30px 40px;
+  width: 600px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  max-width: 90%;
+  box-sizing: border-box;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header p {
+  font-family: "Metal Mania", cursive;
+  font-size: 60px;
+  text-align: center;
+  color: #333;
+  margin: 0;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+.signup5-text1 {
+  font-size: 24px;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+  margin: 30px 10px;
+  padding-bottom: 15px;
+}
+
+.signup5-choose-message{
+  margin: 20px 10px;
+  font-size: 14px;
+  color: #333;
+  font-weight: bold;
+}
+
+.signup5-choose-container{
+  margin: 20px 10px 100px 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+select#tier-select {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+select#tier-select:hover {
+  border-color: #333;
+  background-color: #f9f9f9;
+}
+
+select#tier-select option {
+  padding: 10px;
+}
+
+
+.signup5-info-list {
+  font-size: 13px;
+  color: #777;
+  line-height: 1.5;
+  margin-bottom: 40px;
+}
+
+.signup5-buttons-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  margin: 20px 0px; 
+}
+
+.signup5-complete-button {
+  justify-content: center;
+  width: 90%;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  background-color: #ccc;
+  color: #fff;
+  cursor: not-allowed;
+  transition: background-color 0.3s ease;
+}
+
+.signup5-complete-button.active {
+  background-color: #333;
+  cursor: pointer;
+}
+
+.signup5-complete-button.active:hover {
+  background-color: #975a5a;
+}
+
+.signup5-footer {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: #777;
+}
+
+.signup5-footer a {
+  text-decoration: none;
+  color: #777;
+  margin: 0 5px;
+}
+
+.signup5-footer a:hover {
+  text-decoration: underline;
+}

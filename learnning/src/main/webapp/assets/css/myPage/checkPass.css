@@ -1,0 +1,135 @@
+.total-container {
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.checkPass-container {
+  margin: 0;
+  padding: 30px 40px;
+  width: 600px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  max-width: 90%;
+  box-sizing: border-box;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header p {
+  font-family: "Metal Mania", cursive;
+  font-size: 60px;
+  text-align: center;
+  color: #333;
+  margin: 0;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+.checkPass-text1 {
+  font-size: 24px;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+  margin: 30px 10px;
+  padding-bottom: 15px;
+}
+
+.checkPass-input-container1{
+  display: flex;
+  margin: 10px 10px;
+}
+
+
+input[type="password"]{
+  flex: 1;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+input::placeholder {
+  color: #aaa;
+  font-size: 12px;
+}
+
+.checkPass-info-list {
+  font-size: 12px;
+  color: #777;
+  line-height: 1.5;
+  margin-top: 50px;
+  margin-left: 30px;
+  margin-bottom: 40px;
+}
+
+.checkPass-buttons-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  margin: 20px 0px; 
+}
+
+.checkPass-next-button {
+  justify-content: center;
+  width: 90%;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  background-color: #ccc;
+  color: #fff;
+  cursor: not-allowed;
+  transition: background-color 0.3s ease;
+}
+
+.checkPass-next-button.active {
+  background-color: #333;
+  cursor: pointer;
+}
+
+.checkPass-next-button:hover {
+  background-color: #975a5a;
+}
+
+.checkPass-next-button:disabled:hover {
+  background-color: #ccc; 
+  cursor: not-allowed; 
+}
+
+.checkPass-footer {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: #777;
+}
+
+.checkPass-footer a {
+  text-decoration: none;
+  color: #777;
+  margin: 0 5px;
+}
+
+.checkPass-footer a:hover {
+  text-decoration: underline;
+}
+
+.checkPass-error-message1{
+  display: none; 
+  color: red; 
+  font-size: 12px; 
+  margin-top: 5px; 
+  margin-left: 15px; 
+  line-height: 1.2; 
+}
