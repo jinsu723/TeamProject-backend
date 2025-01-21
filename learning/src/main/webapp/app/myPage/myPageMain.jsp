@@ -125,12 +125,14 @@
       break;
     }
   }
-  const contextPath = "<%= request.getContextPath() %>";
+  const contextPath = '<%= request.getContextPath() %>';
   let isChangeNickName = "<%= request.getAttribute("nickChanged") %>";
   if(isChangeNickName==="true"){
 	  alert("닉네임이 변경되었습니다");
+	  location.href = '<%= request.getContextPath() %>/app/myPage/myPageMain.jsp';
   }else if(isChangeNickName==="false"){
 	  alert("변경실패했습니다\n닉네임이 이미 존재합니다");
+	  location.href = '<%= request.getContextPath() %>/app/myPage/myPageMain.jsp';
   }
   isChangeNickName = "";
   <% request.removeAttribute("nickChanged"); %>

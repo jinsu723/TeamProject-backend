@@ -107,8 +107,8 @@ pageBtn.addEventListener("click", () => {
 		document.querySelector(".myPage-forum-text").innerText = '신청 현황';
 		//form.action = "http://google.com";
 	}
-	document.body.appendChild(form);
-	form.submit();
+	//document.body.appendChild(form);
+	//form.submit();
 	current = 1;
 	pageNation(current);
 });
