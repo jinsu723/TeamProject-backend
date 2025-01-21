@@ -10,9 +10,7 @@ import javax.servlet.http.HttpSession;
 import com.learning.app.Execute;
 import com.learning.app.Result;
 import com.learning.app.dao.AdminDAO;
-import com.learning.app.dao.UserDAO;
 import com.learning.app.dto.AdminDTO;
-import com.learning.app.dto.UserDTO;
 
 public class AdminLoginOkController implements Execute{
 
@@ -41,7 +39,7 @@ public class AdminLoginOkController implements Execute{
 	        System.out.println("로그인 성공");
 	        HttpSession session = request.getSession();
 	        session.setAttribute("adminDTO", dto);
-	        result.setPath(request.getContextPath() + "/app/admin/adminUser.jsp");
+	        result.setPath(request.getContextPath() + "/app/admin/adminMain.jsp");
 	        result.setRedirect(true);
 	    } else { // 로그인 실패
 	        System.out.println("로그인 실패");

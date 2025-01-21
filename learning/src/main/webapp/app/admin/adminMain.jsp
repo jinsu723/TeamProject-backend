@@ -19,11 +19,11 @@
   <header class="main-nonLogin-header">
     <nav>
       <div class="main-nonLogin-nav">
-        <div class="main-nonLogin-logo"><a href="${pageContext.request.contextPath}/app/admin/adminUser.jsp">learnning</a></div>
+        <div class="main-nonLogin-logo"><a href="${pageContext.request.contextPath}/app/admin/adminMain.jsp">learning</a></div>
         <ul class="main-nonLogin-contents main-nonLogin-ul">
             <div class="mng-users-contentes-drop">
-              <div class="mng-users-text"><a href="${pageContext.request.contextPath}/app/admin/adminUser.jsp">회원 관리</a>  
-                <div id="mng-users-dropText"><a href="${pageContext.request.contextPath}/app/admin/adminBanUser.jsp">밴 회원 관리</a></div>
+              <div class="mng-users-text"><a href="${pageContext.request.contextPath}/adminUser.ad">회원 관리</a>  
+                <div id="mng-users-dropText"><a href="${pageContext.request.contextPath}/ben.ad">밴 회원 관리</a></div>
               </div>
             </div>
           <li id="mng-contents-drop">게시글 관리

@@ -13,7 +13,7 @@
 
 <body>
     <div class="adminLogin-container">
-        <p class="adminLogin-logo">LEARNNING</p>
+        <p class="adminLogin-logo">LEARNING</p>
         <p class="adminLogin-subtitle">CREW</p>
         <form id="adminLogin-form" action="${pageContext.request.contextPath}/adminloginOk.ad" method="post">
             <div class="adminLogin-input-container">

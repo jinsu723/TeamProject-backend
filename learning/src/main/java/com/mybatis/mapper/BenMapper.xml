@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Ben">
+
+	<!-- 밴 된 회원 조회 -->
+	<select id="viewBen" resultType="com.learning.app.dto.BenDTO">
+		select user_id, user_nickname, ben_reason, ben_start_date, (ben_start_date + ben_period) ben_end_date, ben_period
+		from tbl_user u join tbl_ben b
+		on u.user_number = b.user_num
+		order by ben_number desc
+	</select>
+	
+	<!-- 벤 된 회원 수 조회 -->
+	<select id="benedUserNumber" resultType="int">
+		select count(*) as bendedUsers
+		from tbl_ben
+	</select>
+</mapper>
