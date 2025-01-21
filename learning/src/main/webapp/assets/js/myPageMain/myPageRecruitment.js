@@ -1,7 +1,3 @@
-let arr = [];
-arr[0] = ['짱구', '그랜드마스터', 'What is Oracle?', '2025-01-18 18:59:51', '대기중'];
-arr[1] = ['맹구', '브론즈', '갱승주고 남탓하는 정글', '2025-01-18 18:59:58', '수락'];
-arr[2] = ['철수', '골드', 'Tips for SQL Optimization', '2025-01-18 18:59:58', '거절'];
 document.addEventListener("DOMContentLoaded", () => {
 	if (pageType == '모집') {
 		document.querySelector(".myPage-forum-text").innerText = '모집 현황';
@@ -39,25 +35,25 @@ function addList(idx, arr) {
 	// 닉네임 추가
 	newData = document.createElement("span");
 	newData.classList.add("nick");
-	newData.innerText = arr[idx][0];
+	newData.innerText = arr[idx][1];
 	newContent.appendChild(newData);
 
 	// 티어 추가
 	newData = document.createElement("span");
 	newData.classList.add("tear");
-	newData.innerText = arr[idx][1];
+	newData.innerText = arr[idx][2];
 	newContent.appendChild(newData);
 
 	// 제목 추가
 	newData = document.createElement("span");
 	newData.classList.add("title");
-	newData.innerText = arr[idx][2];
+	newData.innerText = arr[idx][4];
 	newContent.appendChild(newData);
 
 	// 작성시간 추가
 	newData = document.createElement("span");
 	newData.classList.add("date");
-	newData.innerText = arr[idx][3];
+	newData.innerText = arr[idx][6];
 	newContent.appendChild(newData);
 
 
@@ -66,23 +62,55 @@ function addList(idx, arr) {
 		document.querySelector(".myPage-forum-text").innerText = '모집 현황';
 		newData = document.createElement("span");
 		newData.classList.add("approve");
-		let newDataBtn = document.createElement("button");
-		newDataBtn.classList.add("approve-true");
-		newDataBtn.innerText = "수락";
-		newData.appendChild(newDataBtn);
-		newDataBtn = document.createElement("button");
-		newDataBtn.classList.add("approve-false");
-		newDataBtn.innerText = "거절";
-		newData.appendChild(newDataBtn);
-		newContent.appendChild(newData);
+
+		if (arr[idx][7] == '대기중') {
+
+			let newDataBtn = document.createElement("button");
+			newDataBtn.classList.add("approve-true");
+			newDataBtn.innerText = "수락";
+			newDataBtn.addEventListener("click", () => {
+				alert("모집 신청을 수락합니다");
+				const form = document.createElement("form");
+				form.method = "post";
+				form.action = contextPath +
+					"/myPageRecruitmentBnt.my?partyNum=" + arr[idx][0] + "&isAgree=true";;
+				document.body.appendChild(form);
+				form.submit();
+			});
+			newData.appendChild(newDataBtn);
+
+			newDataBtn = document.createElement("button");
+			newDataBtn.classList.add("approve-false");
+			newDataBtn.innerText = "거절";
+			newDataBtn.addEventListener("click", () => {
+				alert("모집 신청을 거절합니다");
+				const form = document.createElement("form");
+				form.method = "post";
+				form.action = contextPath +
+					"/myPageRecruitmentBnt.my?partyNum=" + arr[idx][0] + "&isAgree=false";
+				document.body.appendChild(form);
+				form.submit();
+			});
+			newData.appendChild(newDataBtn);
+			newContent.appendChild(newData);
+		} else {
+			if (arr[idx][7] == '수락') {
+				newData.innerText = '수락'
+				newData.classList.add("text-color-green");
+			} else {
+				newData.innerText = '거절'
+				newData.classList.add("text-color-red");
+			}
+			newContent.appendChild(newData);
+		}
 	} else {
 		document.querySelector(".myPage-forum-text").innerText = '신청 현황';
 		newData = document.createElement("span");
 		newData.classList.add("approve");
-		newData.innerText = arr[idx][4];
+		newData.innerText = arr[idx][7];
 		if (newData.innerText == '수락') {
 			newData.classList.add("text-color-green");
-		} else if (newData.innerText == '거절') {
+		} else if (newData.innerText == '거절' || newData.innerText == '삭제됨') {
 			newData.classList.add("text-color-red");
 		}
 		newContent.appendChild(newData);
@@ -102,13 +130,13 @@ pageBtn.addEventListener("click", () => {
 	pageToggle.classList.toggle("fa-flip-horizontal");
 	if (document.querySelector(".myPage-forum-text").innerText == "신청 현황") {
 		document.querySelector(".myPage-forum-text").innerText = '모집 현황';
-		//form.action = "http://naver.com";
+		form.action = contextPath + "/myPageCheckRecruite.my";
 	} else {
 		document.querySelector(".myPage-forum-text").innerText = '신청 현황';
-		//form.action = "http://google.com";
+		form.action = contextPath + '/myPageRecruitment.my';
 	}
-	//document.body.appendChild(form);
-	//form.submit();
+	document.body.appendChild(form);
+	form.submit();
 	current = 1;
 	pageNation(current);
 });

@@ -6,35 +6,31 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.learning.app.Execute;
 import com.learning.app.Result;
 import com.learning.app.dao.MyPageDAO;
-import com.learning.app.dto.ForumDTO;
 import com.learning.app.dto.MyForumDTO;
 import com.learning.app.dto.UserDTO;
 
-public class MyPageMyPost implements Execute {
-
+public class MyPageRecruitmentBnt implements Execute {
 	@Override
 	public Result execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Result rs = new Result();
 
-		HttpSession session = request.getSession();
-		UserDTO dto = (UserDTO) session.getAttribute("userDTO");
-		session.setMaxInactiveInterval(60 * 60 * 24);
+		int partyNum = Integer.parseInt(request.getParameter("partyNum"));
+		if (request.getParameter("isAgree").equals("true")) {
+			new MyPageDAO().recruiteAgree(partyNum);
+			System.out.println("수락 완");
+		} else {
+			new MyPageDAO().recruiteDisagree(partyNum);
+			System.out.println("거절 완");
+		}
 
-		System.out.println("유저 num : " + dto.getUserNumber());
-		List<MyForumDTO> list = new MyPageDAO().myPostList(dto.getUserNumber());
-
-		System.out.println("게시물 : " + list);
-		request.setAttribute("posts", list);
-
-		rs.setPath("/app/myPage/myPageMyPost.jsp");
-		rs.setRedirect(false);
+		request.setAttribute("pageType", "모집");
+		rs.setPath(request.getContextPath() + "/myPageCheckRecruite.my");
+		rs.setRedirect(true);
 		return rs;
 	}
-
 }

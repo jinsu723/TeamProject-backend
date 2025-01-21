@@ -17,11 +17,12 @@ public class MyForumDTO {
 	private String forumTitle;
 	private String forumDate;
 	private String commentCount;
+	private String partyState;
 
 	@Override
 	public String toString() {
 		return "[" + forumNumber + ", \'" + userNickname + "\', \'" + userTier + "\', \'" + forumCategory + "\'"
-				+ ", \'" + forumTitle + "\', " + commentCount + ", \'" + forumDate + "\']";
+				+ ", \'" + forumTitle + "\', " + commentCount + ", \'" + forumDate + "\', \'" + partyState + "\']";
 	}
 
 	public String getForumNumber() {
@@ -78,6 +79,14 @@ public class MyForumDTO {
 
 	public void setCommentCount(String commentCount) {
 		this.commentCount = commentCount;
+	}
+
+	public String getPartyState() {
+		return partyState;
+	}
+
+	public void setPartyState(String partyState) {
+		this.partyState = partyState;
 	}
 
 }

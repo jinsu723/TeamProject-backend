@@ -43,7 +43,7 @@ function addList(idx, arr) {
 	// 제목 추가
 	newData = document.createElement("span");
 	newData.classList.add("title");
-	newData.innerText = arr[idx][3];
+	newData.innerText = arr[idx][4];
 	newContent.appendChild(newData);
 
 	// 댓글 수 추가

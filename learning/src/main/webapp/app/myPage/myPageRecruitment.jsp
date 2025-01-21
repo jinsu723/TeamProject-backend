@@ -1,3 +1,5 @@
+<%@page import="com.learning.app.dto.MyForumDTO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% if(session.getAttribute("userDTO")==null){
@@ -39,7 +41,7 @@
         <span class="nick">닉네임</span>
         <span class="tear">티어</span>
         <span class="title">제목</span>
-        <span class="date">작성시간</span>
+        <span class="date">게시일</span>
         <span class="approve">승인</span>
       </div>
       <hr style="width: 70%;">
@@ -59,15 +61,32 @@
   <!-- 푸터 -->
    <jsp:include page="/app/preset/footer.jsp" />
 </body>
-<script>
+
+
+<script type="text/javascript">
+let current = 1;
+let arr = [];
+<% 
+if(session.getAttribute("userDTO")!=null){
+	List<MyForumDTO> list = (List<MyForumDTO>) request.getAttribute("posts");
+	if(list != null){
+		for(int i = 0; i < list.size(); i++){
+			MyForumDTO data = list.get(i);
+			%>arr[<%=i%>] = <%=data%>;
+		<%}
+	}%>
   const pageBtn = document.querySelector(".myPage-changePageBtn");
   const pageToggle = document.querySelector(".myPage-changePageToggle");
   const pageList = document.querySelector(".myPage-main");
   const pageSize = 10;
-  const pageItems = 3;
+  const pageItems = <%if (list != null) {%>"<%= list.size() %>"<%}%>;
   const pageCount = Math.ceil(pageItems / pageSize);
-  const pageType = '모집';
-  let current = 1;
+  const pageType = '<%= request.getAttribute("pageType") %>';
+  const contextPath = '<%= request.getContextPath() %>';
+  
+  console.log(pageItems);
+  console.log(pageType);  
 </script>
 
 </html>
+<%}%>

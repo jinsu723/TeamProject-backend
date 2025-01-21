@@ -73,6 +73,8 @@
 	<jsp:include page="/app/preset/footer.jsp" />
 	
 <script>
+const contextPath = '<%= request.getContextPath()%>';
+
 const forumCount = {
 	forumNumber: ${ partyForumCount }	
 };

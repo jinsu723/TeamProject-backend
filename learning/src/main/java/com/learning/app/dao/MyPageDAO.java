@@ -16,11 +16,6 @@ public class MyPageDAO {
 		sql = MyBatisConfig.getSqlSessionFactory().openSession(true);
 	}
 
-	public int checkPass(String pass) {
-		System.out.println("DAO 체크패스 이거 삭제할듯");
-		return sql.selectOne("mypage.check", pass);
-	}
-
 	public int chageTier(Map<String, String> map) {
 		System.out.println("DAO 티어변경");
 		return sql.update("mypage.changeTier", map);
@@ -45,5 +40,23 @@ public class MyPageDAO {
 	public List<MyForumDTO> myPostList(int num) {
 		System.out.println("내 게시글 목록 조회");
 		return sql.selectList("mypage.mypost", num);
+	}
+
+	public List<MyForumDTO> myRecruitmentList(int num) {
+		return sql.selectList("mypage.myRecruitmentList", num);
+	}
+
+	public List<MyForumDTO> checkRecruiting(int num) {
+		return sql.selectList("mypage.checkRecruiting", num);
+	}
+
+	public void recruiteAgree(int num) {
+		System.out.println("수락");
+		sql.selectOne("mypage.recruiteAgree", num);
+	}
+
+	public void recruiteDisagree(int num) {
+		System.out.println("거절");
+		sql.selectOne("mypage.recruiteDisagree", num);
 	}
 }
