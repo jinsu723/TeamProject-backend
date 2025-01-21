@@ -1,8 +1,37 @@
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('form');
+    if (form) {
+        form.addEventListener('submit', function(event) {
+            const content = document.querySelector('.partyForumWriting-content-text-content').innerHTML;
+
+            document.querySelector('#hiddenForumContent').value = content;
+
+        });
+    }
+});
+
+
+
 const writingPost = document.querySelector('.partyForumWriting-button');
 const writingTitle = document.querySelector('#title');
 const writingContent = document.querySelector('.partyForumWriting-content-text-content');
-console.log(typeof writingContent);
-let writingSelectFile = document.querySelector('.icon-file-image');
+const hiddenInput = document.querySelector('#hiddenForumContent');
+
+/*document.querySelector('form').onsubmit = function(event) {
+    // contentEditable 영역의 내용을 가져옴
+    const content = document.querySelector('.partyForumWriting-content-text-content').innerHTML;
+    
+    // hidden input에 내용 할당
+    document.querySelector('#hiddenForumContent').value = content;
+
+    // 디버깅: 값을 콘솔에 출력하여 제대로 복사됐는지 확인
+    console.log('Title:', document.querySelector('#title').value);  // title 값 확인
+    console.log('Content:', document.querySelector('#hiddenForumContent').value);  // content 값 확인
+};
+
+form.addEventListener('submit', function () {
+    hiddenInput.value = contentDiv.innerHTML; // contentEditable 내용을 hidden input에 복사
+});*/
 
 
 writingPost.addEventListener("click", function () {

@@ -22,6 +22,10 @@ public class partyForumDAO {
     public List<partyForumDTO> getForumList() {
         return sqlSession.selectList("Forum.partyForumFind");
     }
+    
+    public List<partyForumDTO> getForumDetail(int forumNumber) {
+    	return sqlSession.selectList("Forum.partyForumDetail", forumNumber);
+    }
 
 	
 

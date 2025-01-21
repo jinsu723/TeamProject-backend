@@ -4,7 +4,7 @@ public class partyForumDTO {
 
 	private int forumNumber;		//forum_number		게시글 번호 pk
 	private int userNumber;			//user_number		유저 번호 fk
-	private String forumCategory;	//forum_category	게시글 카테고리
+	private String userTier;	//forum_category	게시글 카테고리
 	private String forumTitle;		//forum_title		게시글 제목
 	private String forumDate;		//forum_dater		게시글 작성일
 	private String forumUpdate;		//forum_update		게시글 업데이트 날짜
@@ -27,12 +27,12 @@ public class partyForumDTO {
 		this.userNumber = userNumber;
 	}
 
-	public String getForumCategory() {
-		return forumCategory;
+	public String getuserTier() {
+		return userTier;
 	}
 
-	public void setForumCategory(String forumCategory) {
-		this.forumCategory = forumCategory;
+	public void setuserTier(String userTier) {
+		this.userTier = userTier;
 	}
 
 	public String getForumTitle() {

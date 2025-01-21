@@ -1,110 +1,132 @@
-let hostIndex = location.href.indexOf(location.host) + location.host.length;
-let contextPath = location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
-console.log("게시글 총 숫자: " + forumCount.forumNumber);
-
+// 필요한 DOM 요소
 const writeBtn = document.querySelector('.partyForum-write-btn');
 const postSearch = document.querySelector('#partyForum-search');
-const postSize = 10; // 한 페이지당 표시될 게시물 수
-const totalPost = 20; // 서버에서 받은 총 게시물 수
-let currentPageNumber = 1;
-
 const moveFirst = document.querySelector('.icon-angle-double-left');
 const moveLast = document.querySelector('.icon-angle-double-right');
 const movePrev = document.querySelector('.icon-left-open');
 const moveNext = document.querySelector('.icon-right-open');
 
-const posts = [];
-for (let i = 1; i <= forumCount.forumNumber; i++) {
-	posts.push({
-		
-		
-	})
-
-}
-
-forumList.forEach(forum => {
-    console.log('번호:', forum.userNickname);
-    console.log('작성자:', forum.forumTitle);
-    console.log('카테고리:', forum.forumDate);
-});
-
-
-const totalPages = Math.ceil(posts.length / postSize);
-
-const bottomNumber = document.querySelector('.partyForum-page-number-button');
 const postContainer = document.querySelector('.partyForum-list');
 const postBottomNumberContainer = document.querySelector('.partyForum-page-numbers');
 
+// 총 게시글을 담을 상수 배열 posts 생성
+const posts = [];
+forumList.forEach(forum => {
+    const postItem = document.createElement('li');
+    postItem.classList.add('partyForum-list-item');
+    postItem.innerHTML = `
+        <div class="partyForum-list-writer">${forum.userNickname}</div>
+        <div class="partyForum-list-userSkill">${forum.userTier}</div>
+        <div class="partyForum-list-title">${forum.forumTitle}</div>
+        <div class="partyForum-list-write-time">${forum.forumDate}</div>
+    `;
+    const postLine = document.createElement('hr');
+    postLine.classList.add('partyForum-list-item-line');
+
+    posts.push({
+		postNum: forum.forumNumber,
+        writer: forum.userNickname,
+        skill: forum.userTier,
+        title: forum.forumTitle,
+        date: forum.forumDate,
+        element: postItem,
+        line: postLine
+    });
+});
+
+const postSize = 10; // 한 페이지당 표시할 게시물 수
+let currentPageNumber = 1; // 현재 페이지 번호
+
+// 총 페이지 수 계산
+function getTotalPages() {
+    return Math.ceil(posts.length / postSize);
+}
+
+// 특정 페이지의 게시물 가져오기
 function getPost(page) {
-	postContainer.innerHTML = '';
-	const start = (page - 1) * postSize;
-	const end = page * postSize;
-	const postDisplay = posts.slice(start, end);
-	forumList.forEach(forum => {
+    postContainer.innerHTML = '';
+    let count = 0; // 표시한 게시물 개수 카운트
 
-		const postItem = document.createElement('li');
-		postItem.classList.add('partyForum-list-item');
-		postItem.innerHTML = `
-		<div class="partyForum-list-writer">${forum.userNickname}</div>
-		<div class="partyForum-list-userSkill">언랭이요</div>
-		<div class="partyForum-list-title">${forum.forumTitle}</div>
-		<div class="partyForum-list-write-time">${forum.forumDate}</div>
-	`;
-		const postLine = document.createElement('hr');
-		postLine.classList.add('partyForum-list-item-line');
-		postContainer.appendChild(postItem);
-		postContainer.appendChild(postLine);
+    // 시작 인덱스와 종료 조건
+    for (let i = (page - 1) * postSize; i < posts.length; i++) {
+        if (count >= postSize) break;
+
+        const post = posts[i];
+        postContainer.appendChild(post.element);
+        postContainer.appendChild(post.line);
+
+        count++; // 출력한 게시물 수 증가
+    }
+	
+	posts.forEach(post => {
+	    post.element.addEventListener('click', function() {
+	        // 클릭된 게시글의 postNum을 가져옴
+	        console.log("게시글 클릭됨:", post.title, post.postNum);
+
+	        // 상세 페이지 URL 생성
+	        const detailPageLink = `http://localhost:8080/asd/app/partyForum/partyForumDetail.fo?postNum=${encodeURIComponent(post.postNum)}`;
+
+	        // 페이지 이동
+	        location.href = detailPageLink;
+	    });
 	});
+	
 }
 
+
+
+// 페이지 번호 버튼 표시
 function postBottomNumber() {
-	postBottomNumberContainer.innerHTML = '';
-	const numberStart = Math.floor((currentPageNumber - 1) / 10) * 10 + 1;
-	const numberEnd = Math.min(numberStart + 9, totalPages);
+    postBottomNumberContainer.innerHTML = '';
+    const totalPages = getTotalPages();
+    const numberStart = Math.floor((currentPageNumber - 1) / 10) * 10 + 1;
+    const numberEnd = Math.min(numberStart + 9, totalPages);
 
-	for (let i = numberStart; i <= numberEnd; i++) {
-		const numbers = document.createElement('p');
-		numbers.textContent = i;
+    for (let i = numberStart; i <= numberEnd; i++) {
+        const numbers = document.createElement('p');
+        numbers.textContent = i;
 
-		if (i === currentPageNumber) {
-			numbers.classList.add('partyForum-page-numbers-selector');
-		} else {
-			numbers.classList.add('partyForum-page-numbers-unSelector');
-		}
+        if (i === currentPageNumber) {
+            numbers.classList.add('partyForum-page-numbers-selector');
+        } else {
+            numbers.classList.add('partyForum-page-numbers-unSelector');
+        }
 
-		numbers.disabled = i === currentPageNumber;
-		numbers.addEventListener('click', () => movePost(i));
-		postBottomNumberContainer.appendChild(numbers);
-	}
+        numbers.addEventListener('click', () => movePost(i));
+        postBottomNumberContainer.appendChild(numbers);
+    }
 }
 
+// 특정 페이지로 이동
 function movePost(post) {
-	if (post < 1 || post > totalPages) return;
-	currentPageNumber = post;
-	getPost(currentPageNumber);
-	postBottomNumber();
+    const totalPages = getTotalPages();
+    if (post < 1 || post > totalPages) return;
+    currentPageNumber = post;
+    getPost(currentPageNumber);
+    postBottomNumber();
 }
 
-// 페이지네이션 처리
+// 페이지 이동 이벤트 리스너
 movePrev.addEventListener('click', () => movePost(currentPageNumber - 1));
 moveNext.addEventListener('click', () => movePost(currentPageNumber + 1));
 moveFirst.addEventListener('click', () => movePost(1));
-moveLast.addEventListener('click', () => movePost(totalPages));
+moveLast.addEventListener('click', () => movePost(getTotalPages()));
 
-// 페이지와 페이지 번호 업데이트
+// 초기 렌더링
 getPost(currentPageNumber);
 postBottomNumber();
 
-writeBtn.addEventListener("click", function() {
-	var link = '${pageContext.request.contextPath}/app/partyForum/partyForumWriting.jsp';
-	location.href = link;
-	// location.replace(link);
-	window.open('${pageContext.request.contextPath}/app/partyForum/partyForumWriting.jsp');
-});
+// 글쓰기 버튼 이벤트
+/*writeBtn.addEventListener("click", function() {
+    const link = `${pageContext.request.contextPath}/app/partyForum/partyForumWriting.jsp`;
+    location.href = link;
+    window.open(link);
+});*/
 
+// 검색 이벤트
 postSearch.addEventListener("keydown", function(event) {
-	if (event.key === 'Enter') {
-		event.preventDefault(); // 기본 동작(새 줄 추가) 방지
-		alert(`${postSearch.value}의 내용을 검색합니다`);
-	}
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        alert(`${postSearch.value}의 내용을 검색합니다`);
+    }
 });
