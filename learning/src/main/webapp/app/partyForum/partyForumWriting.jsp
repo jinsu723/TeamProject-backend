@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,42 +17,9 @@
 
 <body>
 
-	<header class="main-header">
-		<nav class="main-header-container">
-			<div class="main-header-content">
-				<div class="main-header-logo">
-					<a href="">learnning</a>
-				</div>
-				<div class="main-header-post-container">
-					<a href="../partyForum/partyForum.html">
-						<li>파티 모집</li>
-					</a> <a href="../communityForum/communityForum.html">
-						<li>커뮤니티</li>
-					</a>
-				</div>
-			</div>
-			<div class="main-header-dropdown-container">
-				<div class="main-header-user-box">
-					<i class="icon-down-dir"></i>사용자<i class="icon-user-circle-o"></i>
-				</div>
-				<div class="main-header-dropdown">
-					<a href="../myPage/checkPass.html">• 개인 정보 수정</a>
-					<hr />
-					<a href="../myPage/myPageRecruitment.html">• 모집 현황</a>
-					<hr />
-					<a href="../myPage/myPageMyPost.html">• 내 게시물</a>
-					<hr />
-					<a href="./mainNonLogin.html">• 로그 아웃</a>
-				</div>
-			</div>
-		</nav>
-	</header>
-
+	<jsp:include page="/app/preset/header.jsp" />
 
 	<main class="partyForumWriting-main">
-		<!-- forumDTO.setForumCategory(request.getParameter("forumCategory"));
-		forumDTO.setForumTitle(request.getParameter("forumTitle"));
-		forumDTO.setForumContent(request.getParameter("forumContent")); -->
 
 		<div class="partyForumWriting-main-container">
 			<div class="partyForumWriting-main-container-title">
@@ -60,13 +29,31 @@
 			<form action="WritingEnd.fo" method="post">
 				<div class="partyForumWriting-title">
 					<p class="partyForumWriting-title-text">제목</p>
-					<input type="text" name="forumTitel" id="title"
+					<input type="text" name="forumTitle" id="title"
 						placeholder="제목을 입력하세요(50자)">
 				</div>
 				<div class="partyForumWriting-content">
 					<p class="partyForumWriting-content-text">내용</p>
 					<div class="partyForumWriting-content-text-content"
 						name="forumContent" contentEditable="true"></div>
+					<input type="hidden" name="forumContent" id="hiddenForumContent">
+					<script>
+					document.querySelector('form').onsubmit = function(event) {
+					    // contentEditable 영역의 내용을 가져옴
+					    const content = document.querySelector('.partyForumWriting-content-text-content').innerHTML;
+					    
+					    // hidden input에 내용 할당
+					    document.querySelector('#hiddenForumContent').value = content;
+
+					    // 디버깅: 값을 콘솔에 출력하여 제대로 복사됐는지 확인
+					    console.log('Title:', document.querySelector('#title').value);  // title 값 확인
+					    console.log('Content:', document.querySelector('#hiddenForumContent').value);  // content 값 확인
+					};
+
+					form.addEventListener('submit', function () {
+					    hiddenInput.value = contentDiv.innerHTML; // contentEditable 내용을 hidden input에 복사
+					});
+					</script>
 				</div>
 				<div class="partyForumWriting-file">
 
@@ -82,12 +69,7 @@
 
 	</main>
 
-	<footer class="main-footer">
-		<div class="main-login-footer-text">
-			<span><a href="">이용약관</a></span> | <span><a href="">개인정보
-					처리 방침</a></span> | <span><a href="">고객센터</a></span>
-		</div>
-	</footer>
+	<jsp:include page="/app/preset/footer.jsp" />
 
 
 	<script src="${pageContext.request.contextPath}/assets/js/partyForum/partyForumWriting.js"></script>

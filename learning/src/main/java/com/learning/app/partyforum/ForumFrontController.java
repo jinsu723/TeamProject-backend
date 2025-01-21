@@ -36,6 +36,12 @@ public class ForumFrontController extends HttpServlet{
 		// URL에 따른 요청 분기
 		System.out.println("target : " + target);
 		switch (target) {
+		
+        case "/app/partyForum/partyForum.fo": // 게시글 목록을 보여주는 URL
+            result = new PartyForumFindController().execute(request, response); // 게시글 목록 조회 서비스 호출
+            System.out.println("partyForum 목록 출력"); //게시글 목록이 정상적으로 나왔는지 확인 
+            break;
+            
 		case "/app/partyForum/partyWriting.fo":
 			System.out.println("partyWriting");
 			request.getRequestDispatcher("/app/partyForum/partyForumWriting.jsp").forward(request, response);
@@ -43,13 +49,18 @@ public class ForumFrontController extends HttpServlet{
 		case "/app/partyForum/WritingEnd.fo":
 			System.out.println("WritingEnd");
 			result = new WritingEndController().execute(request, response);
-
+			break;
+		case "/app/partyForum/partyForumDetail.fo":
+			System.out.println("partyForumDetail");
+			result = new PartyForumDetailController().execute(request, response);
+			break;
+		case "/app/partyForum/partyDelete.fo":
+			System.out.println("partyDelete");
+			result = new PartyForumDeleteController().execute(request, response);
+//			result = new PartyForumDetailController().execute(request, response);
 			break;
 			
-        case "/app/partyForum/partyForum.fo": // 게시글 목록을 보여주는 URL
-            result = new PartyForumFindController().getPartyForumList(request, response); // 게시글 목록 조회 서비스 호출
-            System.out.println("나오냐");
-            break;
+
             
 		case "/app/user/login/findPassOk.us":
 			System.out.println("find pass");
@@ -67,6 +78,6 @@ public class ForumFrontController extends HttpServlet{
 			} else {
 				request.getRequestDispatcher(result.getPath()).forward(request, response);
 			}
-		}
+		} 
 	}
 }

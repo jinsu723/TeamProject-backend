@@ -3,8 +3,7 @@ const partyForumDetailTitle = document.querySelector('.partyForumDetail-title-co
 const partyForumDetailWriterUserName = document.querySelector('.partyForumDetail-writer-userName');     //게시글 작성자
 const partyForumDetailContent = document.querySelector('.partyForumDetail-content-text');               //게시글 내용
 const partyForumDetailUploadTime = document.querySelector('.partyForumDetail-writer-uploadTime');       //게시글 시간
-const partyForumDetailTypeText = document.querySelector('.partyForumDetail-title-text');                //공략, 자유
-let partyForumDetailType = 1;                                                                               //공략, 자유 구분을 위해 숫자
+const partyForumDetailTypeText = document.querySelector('.partyForumDetail-title-text');                //유저 티어
 const partyForumDetailContentImage = document.querySelector('.partyForumDetail-content-images');        //게시글 사진
 let imageUrl = null;                                                                                            //이미지 경로
 const partyForumIndexButton = document.querySelector('.partyForumDetail-partyForum-index-button');  //목록 버튼
@@ -17,49 +16,37 @@ const commentAddButton = partyForumDetailCommentTextInput.querySelector('button'
 const commentList = document.querySelector('.partyForumDetail-comment-list');
 const commentDeleteButton = document.querySelector('.partyForumDetail-comment-delete');
 
-// 함수나 기능 정의하기
 
+let forumTitle = "";
+let userTier = "";
+let userNickname = "";
+let forumDate = "";
+let forumUpDate = "";
+let forumContent = "";
+forumDetail.forEach(forumDetail => {
+/*  console.log(forumDetail.forumTitle);
+  console.log(forumDetail.userNickname);
+  console.log(forumDetail.forumDate);
+  console.log(forumDetail.forumUpDate);*/
+  forumTitle = forumDetail.forumTitle;
+  userTier = forumDetail.userTier;
+  userNickname = forumDetail.userNickname;
+  forumDate = forumDetail.forumDate;
+  forumUpDate = forumDetail.forumUpDate;
+  forumContent = forumDetail.forumContent;
+
+});
 //1. 게시글 정보 불러오기(제목, 내용, 시간, 작성자, 사진 링크 등등)
 function getpartyForumDetailValue() {
-  partyForumDetailTitle.innerText = "데베에서 게시글 타이틀 가져오기";
-  partyForumDetailWriterUserName.innerText = "데베에서 게시글 작성자 가져오기";
-  partyForumDetailUploadTime.innerText = "데베에서 게시글 시간 가져오기";
-  partyForumDetailContent.innerText = "데베에서 게시글 내용 가져오기";
-  partyForumDetailContentImage.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoAGhKZZ5fYXELfJZDfeFyou9MgSeUplBp3Q&s'; //해당 사진을 데베에서 링크로 할당해주기
-
-  //11개 
-  if (partyForumDetailType === 1) {
-    partyForumDetailTypeText.innerText = "언랭";
-  } else if (partyForumDetailType === 2) {
-    partyForumDetailTypeText.innerText = "아이언";
+  partyForumDetailTitle.innerText = forumTitle;
+  partyForumDetailTypeText.innerText = userTier;
+  partyForumDetailWriterUserName.innerText = userNickname;
+  if(forumUpDate === undefined){
+	partyForumDetailUploadTime.innerText = forumDate
+  }else{
+	partyForumDetailUploadTime.innerText = forumUpDate
   }
-  else if (partyForumDetailType === 3) {
-    partyForumDetailTypeText.innerText = "브론즈";
-  }
-  else if (partyForumDetailType === 4) {
-    partyForumDetailTypeText.innerText = "실버";
-  }
-  else if (partyForumDetailType === 5) {
-    partyForumDetailTypeText.innerText = "골드";
-  }
-  else if (partyForumDetailType === 6) {
-    partyForumDetailTypeText.innerText = "플래티넘";
-  }
-  else if (partyForumDetailType === 7) {
-    partyForumDetailTypeText.innerText = "에메랄드";
-  }
-  else if (partyForumDetailType === 8) {
-    partyForumDetailTypeText.innerText = "다이아";
-  }
-  else if (partyForumDetailType === 9) {
-    partyForumDetailTypeText.innerText = "마스터";
-  }
-  else if (partyForumDetailType === 10) {
-    partyForumDetailTypeText.innerText = "그랜드마스터";
-  }
-  else {
-    partyForumDetailTypeText.innerText = "챌린저";
-  }
+  partyForumDetailContent.innerText = forumContent;
 
 
 }
@@ -132,6 +119,8 @@ partyForumEditButton.addEventListener("click", function () {
   location.href = link;
   window.open(link);
 });
+
+
 partyForumDeleteButton.addEventListener("click", function () {
   if (confirm("해당 게시글을 삭제하시겠습니까?")) {
     alert("삭제되었습니다");
@@ -143,6 +132,7 @@ partyForumDeleteButton.addEventListener("click", function () {
 
   }
 });
+
 partyForumApplyButton.addEventListener("click", function () {
   if (confirm("참가 하시겠습니까??")) {
     alert("신청이 완료되었습니다");

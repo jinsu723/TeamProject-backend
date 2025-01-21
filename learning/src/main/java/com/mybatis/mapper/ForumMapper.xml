@@ -4,15 +4,24 @@
     <!-- partyForumWriting -->
     <insert id="partyForumWriting" parameterType="partyForumDTO">
         INSERT INTO tbl_forum (forum_number, user_number, forum_category, forum_title, forum_date, forum_update, forum_content)
-		VALUES (seq_forum.nextVal, #{userNumber}, #{forumCategory}, #{forumTitle}, SYSDATE, NULL, #{forumContent})
+		VALUES (seq_forum.nextVal, #{userNumber}, #{userTier}, #{forumTitle}, SYSDATE, NULL, #{forumContent})
         
     </insert>
     
     <select id="partyForumFind" resultType="partyForumDTO">
-		SELECT f.forum_number, u.user_nickname, f.forum_title, f.FORUM_CONTENT, f.forum_date
+		SELECT f.forum_number, u.user_nickname, u.user_tier, f.forum_title, f.FORUM_CONTENT, f.forum_date
 		FROM tbl_forum f
 		JOIN tbl_user u
 		ON f.user_number = u.user_number
 		ORDER BY f.forum_number DESC
+    </select>
+    
+    <select id="partyForumDetail" parameterType="Int" resultType="partyForumDTO">
+		SELECT f.FORUM_TITLE , f.FORUM_CONTENT , u.USER_NICKNAME , f.FORUM_DATE , f.FORUM_UPDATE , u.USER_TIER
+		FROM TBL_FORUM f
+		JOIN tbl_user u
+		ON f.user_number = u.user_number
+		WHERE FORUM_NUMBER = #{forumNumber}
+    
     </select>
 </mapper>
