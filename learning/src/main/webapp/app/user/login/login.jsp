@@ -30,6 +30,31 @@
             <a href="#">이용약관</a> | <a href="#">개인정보 처리 방침</a> | <a href="#">고객센터</a>
         </footer>
     </div>
+    
+    <!-- 서버의 로그인 메시지를 JavaScript로 전달 -->
+    <!-- 포워드 방식 -->
+   <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const loginMessage = '<%= request.getAttribute("loginMessage") != null ? request.getAttribute("loginMessage") : "" %>';
+            
+            if (loginMessage) {
+                alert(loginMessage); // 로그인 실패 메시지 출력
+            }
+        });
+    </script>
+    
+  <%--   <!-- 리퀘스트 방식 -->
+     <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const loginMessage = '<%= (String) session.getAttribute("loginMessage") %>';
+            
+            if (loginMessage) {
+                alert(loginMessage); // 메시지 출력
+                <% session.removeAttribute("loginMessage"); %> // 메시지 삭제
+            }
+        });
+    </script> --%>
+  
 <%-- <script defer src="${pageContext.request.contextPath}/assets/js/user/login/login.js"></script> --%>
 </body>
 </html>

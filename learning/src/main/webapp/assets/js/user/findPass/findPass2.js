@@ -62,15 +62,4 @@ document.addEventListener("DOMContentLoaded", () => {
     nextButton.classList.remove("active");
   }
 
-  // "다음" 버튼 클릭 이벤트
-  nextButton.addEventListener("click", (event) => {
-    if (nextButton.disabled) {
-      event.preventDefault();
-      return;
-    }
-
-    alert("새로운 비밀번호가 설정되었습니다!");
-    // 실제 이동 코드 추가
-    // window.location.href = "next-page.html";
-  });
 });

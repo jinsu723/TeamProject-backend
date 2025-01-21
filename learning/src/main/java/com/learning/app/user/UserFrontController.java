@@ -89,7 +89,13 @@ public class UserFrontController extends HttpServlet {
 //			break;	
 
 		case "/findPass1.us":
-			System.out.println("findPassOk");
+			System.out.println("findPass1");
+			result = new FindPass1Controller().execute(request, response);
+			break;
+			
+		case "/findPass2.us":
+			System.out.println("findPass2");
+			result = new FindPass2Controller().execute(request, response);
 			break;
 
 		default:

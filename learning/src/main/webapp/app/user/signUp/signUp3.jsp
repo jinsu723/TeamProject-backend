@@ -19,7 +19,7 @@
         <p class="signup3-text1">커뮤니티에서 활동하기 위해<br> 닉네임을 결정해 주세요.</p>
         <form action="${pageContext.request.contextPath}/signUp3.us" method="post">
           <div class="signup3-input-container">
-            <input type="text" name="userNickname" id="nickname" placeholder="닉네임을 입력해주세요(최대 글자)" maxlength="10" pattern="^[a-zA-Z0-9가-힣]{1,7}$" required>
+            <input type="text" name="userNickname" id="nickname" placeholder="닉네임을 입력해주세요(최대 글자)" maxlength="7" pattern="^[a-zA-Z0-9가-힣]{1,7}$" required>
             <button type="button" class="signup3-certify-button">중복검사</button>
           </div>
   

@@ -9,7 +9,7 @@
   <title>비밀번호 확인</title>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/myPage/checkPass.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/preset/preset.css">
-  <%-- <script defer src="${pageContext.request.contextPath}/assets/js/myPageMain/checkPass.js"></script> --%>
+  <script defer src="${pageContext.request.contextPath}/assets/js/myPageMain/checkPass.js"></script>
 </head>
 
 <body>
