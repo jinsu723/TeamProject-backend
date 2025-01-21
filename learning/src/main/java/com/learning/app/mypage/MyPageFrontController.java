@@ -50,44 +50,57 @@ public class MyPageFrontController extends HttpServlet {
 
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		Result result = new Result();
 		System.out.println("\nmypage 서블릿");
 
 		String target = request.getRequestURI().substring(request.getContextPath().length());
 		System.out.println(target);
 
-		Result result = null;
+		if (request.getSession().getAttribute("userDTO") == null) {
+			result.setPath("/app/user/login/login.jsp");
+			result.setRedirect(false);
+		} else {
+			result = null;
+			switch (target) {
+			case "/checkPass.my":
+				System.out.println("비밀번호 확인");
+				result = new MyPageCheckPass().execute(request, response);
+				break;
 
-		switch (target) {
-		case "/checkPass.my":
-			System.out.println("비밀번호 확인");
-			result = new MyPageCheckPass().execute(request, response);
-			break;
+			case "/changeNickName.my":
+				System.out.println("닉네임 변경");
+				result = new MyPageNickName().execute(request, response);
+				break;
 
-		case "/changeNickName.my":
-			System.out.println("닉네임 변경");
-			result = new MyPageNickName().execute(request, response);
-			break;
+			case "/changeTier.my":
+				System.out.println("티어 : " + request.getParameter("tier"));
+				System.out
+						.println("유저 넘버 : " + ((UserDTO) request.getSession().getAttribute("userDTO")).getUserNumber());
+				result = new MyPageChangeTier().execute(request, response);
+				break;
 
-		case "/changeTier.my":
-			System.out.println("티어 : " + request.getParameter("tier"));
-			System.out.println("유저 넘버 : " + ((UserDTO) request.getSession().getAttribute("userDTO")).getUserNumber());
-			result = new MyPageChangeTier().execute(request, response);
-			break;
+			case "/deleteUser.my":
+				result = new MyPageDeleteUser().execute(request, response);
+				break;
 
-		case "/deleteUser.my":
-			System.out.println(request.getRequestURI());
-			result = new MyPageDeleteUser().execute(request, response);
-			break;
+			case "/myPageMyPost.my":
+				result = new MyPageMyPost().execute(request, response);
+				break;
 
-		case "/myPageMyPost.my":
-			System.out.println(request.getRequestURI());
-			result = new MyPageMyPost().execute(request, response);
-			break;
+			case "/myPageRecruitment.my":
+				result = new MyPageMyRecruitment().execute(request, response);
+				break;
 
-		case "/myPageRecruitment.my":
-			System.out.println(request.getRequestURI());
-			break;
+			case "/myPageCheckRecruite.my":
+				result = new MyPageCheckingRecruite().execute(request, response);
+				break;
+
+			case "/myPageRecruitmentBnt.my":
+				result = new MyPageRecruitmentBnt().execute(request, response);
+				break;
+			}
 		}
+
 		System.out.println("result : " + result);
 		if (result != null) {
 			if (result.isRedirect()) {
@@ -97,7 +110,7 @@ public class MyPageFrontController extends HttpServlet {
 				System.out.println(result.getPath());
 				request.getRequestDispatcher(result.getPath()).forward(request, response);
 			}
-
 		}
+		// 끝
 	}
 }

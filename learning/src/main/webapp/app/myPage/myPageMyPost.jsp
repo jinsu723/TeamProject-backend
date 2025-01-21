@@ -1,6 +1,5 @@
-<%@page import="com.learning.app.dto.MyForumDTO"%>
 <%@page import="java.util.List"%>
-<%@page import="com.learning.app.dto.ForumDTO"%>
+<%@page import="com.learning.app.dto.MyForumDTO"%>
 <%@page import="com.learning.app.dto.UserDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -73,12 +72,6 @@ const pageSize = 10;
 const pageItems = <%if (list != null) {%>"<%= list.size() %>"<%}%>;
 const pageCount = Math.ceil(pageItems / pageSize);
 const contextPath = '<%= request.getContextPath() %>';
-console.log(arr);
-for (i in arr) {
-  console.log(arr[i]);
-}
-console.log(arr[3]);
-
 </script>
 
 </html>
