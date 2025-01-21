@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ page import="java.util.List"%>
+<%-- <%@ page import="com.fasterxml.jackson.databind.ObjectMapper" %> --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -17,35 +21,7 @@
   <!-- <div class="communityForum-container"> -->
 
 
-  <header class="main-header">
-    <nav class="main-header-container">
-      <div class="main-header-content">
-        <div class="main-header-logo"><a href="">learnning</a></div>
-        <div class="main-header-post-container">
-          <a href="../partyForum/partyForum.html">
-            <li>파티 모집</li>
-          </a>
-          <a href="../communityForum/communityForum.html">
-            <li>커뮤니티</li>
-          </a>
-        </div>
-      </div>
-      <div class="main-header-dropdown-container">
-        <div class="main-header-user-box">
-          <i class="icon-down-dir"></i>사용자<i class="icon-user-circle-o"></i>
-        </div>
-        <div class="main-header-dropdown">
-          <a href="../myPage/checkPass.html">• 개인 정보 수정</a>
-          <hr />
-          <a href="../myPage/myPageRecruitment.html">• 모집 현황</a>
-          <hr />
-          <a href="../myPage/myPageMyPost.html">• 내 게시물</a>
-          <hr />
-          <a href="./mainNonLogin.html">• 로그 아웃</a>
-        </div>
-      </div>
-    </nav>
-  </header>
+  <jsp:include page="/app/preset/header.jsp" />
   <main class="communityForumEdit-main">
     <div class="communityForumEdit-main-container">
       <div class="communityForumEdit-main-container-title">
@@ -88,11 +64,7 @@
     </div>
   </main>
 
-  <footer class="main-footer">
-    <div class="main-login-footer-text">
-      <span><a href="">이용약관</a></span> | <span><a href="">개인정보 처리 방침</a></span> | <span><a href="">고객센터</a></span>
-    </div>
-  </footer>
+  <jsp:include page="/app/preset/footer.jsp" />
 
 
   <script src="${pageContext.request.contextPath}/assets/js/communityForum/communityForumEdit.js"></script>

@@ -21,30 +21,38 @@ public class CommunityFrontController extends HttpServlet {
 		super();
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doProcess(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doProcess(request, response);
 	}
 
-	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		System.out.println("Community 서블릿 실행");
+	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		System.out.println("Community 프론트 컨트롤러 실행");
 		String target = request.getRequestURI().substring(request.getContextPath().length());
 		Result result = null;
+		int postNum = 0;
 		System.out.println("target: " + target);
+		
 		switch (target) {
 		case "/app/communityForum/communityForum.cf":
 			System.out.println("커뮤니티 게시글 페이지로 이동");
 			result = new CommunityListController().execute(request, response);
 			break;
+			
 		case "/app/communityForum/communityForumDetail.cf":
-			System.out.println("커뮤니티 상세글 페이지 이동");
+			System.out.println("상세글 값 넘겨주기: "+request.getParameter("postNum"));
+			postNum = Integer.parseInt(request.getParameter("postNum"));
 			result = new CommunityDetailController().execute(request, response);
+			break;
+		case "/app/communityForum/communityForumDetailDelete.cf":
+			System.out.println("게시글 삭제 후 리스트 페이지로 이동 함수 실행");
+			System.out.println("삭제 값 넘겨주기: "+request.getParameter("postNum"));
+			
+			result = new CommunityDetailDeleteController().execute(request, response);
 			break;
 		default:
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -54,7 +62,6 @@ public class CommunityFrontController extends HttpServlet {
 			if (result.isRedirect()) {
 				response.sendRedirect(result.getPath());
 			} else {
-				System.out.println("포워드 경로 시작:"+result.getPath());
 				request.getRequestDispatcher(result.getPath()).forward(request, response);
 			}
 		}
