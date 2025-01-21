@@ -12,7 +12,7 @@ import java.util.Date;
 public class CommunityDTO {
     private int forumNumber;
     private int userNumber;
-    private String userNicname;
+    private String userNickName;
     private String forumCategory;
     private String forumTitle;
     private Date forumDate;
@@ -21,7 +21,6 @@ public class CommunityDTO {
     private int commentNumber;
     private String commentContent;
     private  Date commentDate;
-    
     
     
     
@@ -38,11 +37,11 @@ public class CommunityDTO {
 	public void setUserNumber(int userNumber) {
 		this.userNumber = userNumber;
 	}
-	public String getUserNicname() {
-		return userNicname;
+	public String getUserNickName() {
+		return userNickName;
 	}
-	public void setUserNicname(String userNicname) {
-		this.userNicname = userNicname;
+	public void setUserNickName(String userNickName) {
+		this.userNickName = userNickName;
 	}
 	public String getForumCategory() {
 		return forumCategory;
@@ -91,5 +90,7 @@ public class CommunityDTO {
 	}
 	public void setCommentDate(Date commentDate) {
 		this.commentDate = commentDate;
-	}	
+	}
+    
+    
 }
