@@ -49,5 +49,6 @@
 		<mapper resource="com/mybatis/mapper/AdminMapper.xml" />
 		<mapper resource="com/mybatis/mapper/ForumMapper.xml" />
 		<mapper resource="com/mybatis/mapper/CommunityMapper.xml" />
+		<mapper resource="com/mybatis/mapper/BenMapper.xml" />
 	</mappers>
 </configuration>

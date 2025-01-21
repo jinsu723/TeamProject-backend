@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ page import="java.util.List"%>
+<%-- <%@ page import="com.fasterxml.jackson.databind.ObjectMapper" %> --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -19,11 +22,11 @@
   <header class="main-nonLogin-header">
     <nav>
       <div class="main-nonLogin-nav">
-        <div class="main-nonLogin-logo"><a href="${pageContext.request.contextPath}/app/admin/adminUser.jsp">learnning</a></div>
+        <div class="main-nonLogin-logo"><a href="${pageContext.request.contextPath}/app/admin/adminMain.jsp">learning</a></div>
         <ul class="main-nonLogin-contents main-nonLogin-ul">
             <div class="mng-users-contentes-drop">
-              <div class="mng-users-text"><a href="${pageContext.request.contextPath}/app/admin/adminBanUser.jsp">밴 회원 관리</a>  
-                <div id="mng-users-dropText"><a href="${pageContext.request.contextPath}/app/admin/adminUser.jsp">회원 관리</a></div>
+              <div class="mng-users-text"><a href="${pageContext.request.contextPath}/ben.ad">밴 회원 관리</a>  
+                <div id="mng-users-dropText"><a href="${pageContext.request.contextPath}/app.admin/adminUser.jsp">회원 관리</a></div>
               </div>
             </div>
           <li id="mng-contents-drop">게시글 관리
@@ -106,6 +109,24 @@
     </div>
   </footer>
   <script defer src="${pageContext.request.contextPath}/assets/js/admin/adminBanUser.js"></script>
+  <script type="text/javascript">
+  const benUserCount = {
+		  benedUsertNumber: ${benedUserNumber}
+  };
+  
+  const bensList = [
+	  <c:forEach var="ben" items="${benList}">
+	  	{
+	  		userId: "${ben.userId}",
+	  		userNickname: "${ben.userNickname}",
+	  		benReason: "${ben.benReason}",
+	  		benStartDate: "${ben.benStartDate}",
+	  		benEndDate: "${ben.benEndDate}",
+	  		benPeriod: "%{ben.benPeriod}"
+	  	}<c:if test="${ben ne benList[benList.size()-1]}">,</c:if>
+	  </c:forEach>
+	  ];
+  </script>
 </body>
 
 </html>

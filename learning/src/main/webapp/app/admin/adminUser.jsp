@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 
 <head>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/preset/adminPreset.css">
@@ -19,11 +21,11 @@
   <header class="main-nonLogin-header">
     <nav>
       <div class="main-nonLogin-nav">
-        <div class="main-nonLogin-logo"><a href="${pageContext.request.contextPath}/app/admin/adminUser.jsp">learnning</a></div>
+        <div class="main-nonLogin-logo"><a href="${pageContext.request.contextPath}/app/admin/adminMain.jsp">learning</a></div>
         <ul class="main-nonLogin-contents main-nonLogin-ul">
             <div class="mng-users-contentes-drop">
               <div class="mng-users-text"><a href="${pageContext.request.contextPath}/app/admin/adminUser.jsp">회원 관리</a>  
-                <div id="mng-users-dropText"><a href="${pageContext.request.contextPath}/app/admin/adminBanUser.jsp">밴 회원 관리</a></div>
+                <div id="mng-users-dropText"><a href="${pageContext.request.contextPath}/ben.ad">밴 회원 관리</a></div>
               </div>
             </div>
           <li id="mng-contents-drop">게시글 관리
@@ -47,10 +49,12 @@
         </div>
       </div>
       <div class="mng-options-container">
-        <button id="mng-reset-button">초기화</button>
+        <button id="mng-reset-button"><a href="${pageContext.request.contextPath}/adminUser.ad">초기화</a></button>
         <div class="mng-options-search">
-          <i class="icon-search"></i>
-          <input type="text" name="search" id="mng-search" placeholder="내용 검색">
+          <%-- <form action="${pageContext.request.contextPath}/admin/adminUser" method="get"> --%>
+             <i class="icon-search"></i>
+             <input type="text" name="nickname" id="mng-search" placeholder="내용 검색" maxlength="30" onkeyup="enterKey();">
+           <!-- </form> -->
         </div>
       </div>
 
@@ -78,15 +82,16 @@
         </div>
         <hr class="mng-list-line">
         <ul class="mng-list">
-          <c:forEach var="user" items="${userList}">
-          	<li class="mng-list-item">
-          		<input type="checkbox" class="mng-list-check">
-          		<div class="mng-list-userNum">${user.userNumber}</div>
-          		<div class="mng-list-nickName">${user.userNickname}</div>
-          		<div class="mng-list-tier">${user.userTier}</div>
-          		<div class="mng-list-phone">${user.userPhone}</div>
-          		<div class="mng-list-write-time">${user.userJoinDate}</div>
-          	</li>
+          <c:forEach var="user" items="${adminUser}">
+             <li class="mng-list-item">
+                <input type="checkbox" class="mng-list-check">
+                <div class="mng-list-userNum">${user.userNumber}</div>
+                <div class="mng-list-nickName">${user.userNickname}</div>
+                <div class="mng-list-tier">${user.userTier}</div>
+                <div class="mng-list-phone">${user.userPhone}</div>
+                <div class="mng-list-write-time">"${user.userJoin}"</div>
+             </li>
+             <hr>
           </c:forEach>
             <!-- <div class="mng-list-writer"><p>키보드워리어</p></div>
             <div class="mng-list-category"><p>공략글</p></div>

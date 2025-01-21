@@ -10,8 +10,7 @@ public class AdminDTO {
 	
 	private int adminNumber; //admin_number
 	private String adminId; //admin_id
-	private String adminPw; //admin_passwd
-	
+	private String adminPasswd; //admin_passwd
 	
 	public int getAdminNumber() {
 		return adminNumber;
@@ -26,19 +25,14 @@ public class AdminDTO {
 		this.adminId = adminId;
 	}
 	public String getAdminPw() {
-		return adminPw;
+		return adminPasswd;
 	}
-	public void setAdminPw(String adminPw) {
-		this.adminPw = adminPw;
+	public void setAdminPw(String adminPasswd) {
+		this.adminPasswd = adminPasswd;
 	}
+	
 	@Override
 	public String toString() {
-		return "AdminDTO [adminNumber=" + adminNumber + ", adminId=" + adminId + ", adminPw=" + adminPw + "]";
+		return "AdminDTO [adminNumber=" + adminNumber + ", adminId=" + adminId + ", adminPw=" + adminPasswd + "]";
 	}
-	
-	
-	
-
-	
-	
 }

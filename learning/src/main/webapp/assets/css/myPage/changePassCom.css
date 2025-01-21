@@ -1,0 +1,88 @@
+.total-container {
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.changePassCom-container {
+  margin: 0;
+  padding: 30px 40px;
+  width: 600px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  max-width: 90%;
+  box-sizing: border-box;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 중앙 정렬 */
+  justify-content: center;
+  margin: 30px 0;
+}
+
+.changePassCom-icon{
+  height: 120px;
+  font-size: 100px;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.changePassCom-text {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+  margin-top: 20px;
+  line-height: 1.5; /* 줄 간격 */
+}
+
+.changePassCom-buttons-container {
+  margin-top: 40px;
+}
+
+.changePassCom-button {
+  width: 200px;
+  height: 50px;
+  background-color: #333; 
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer; 
+  transition: background-color 0.3s ease;
+}
+
+.changePassCom-button:hover {
+  background-color: #975a5a; 
+}
+
+.changePassCom-footer {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: #777;
+}
+
+.changePassCom-footer a {
+  text-decoration: none;
+  color: #777;
+  margin: 0 5px;
+}
+
+.changePassCom-footer a:hover {
+  text-decoration: underline;
+}
