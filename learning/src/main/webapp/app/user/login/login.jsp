@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="login-container">
-        <p class="login-logo">LEARNING</p>
+        <p class="login-logo"><a href="<%=request.getContextPath()%>/app/preset/main.jsp" style="color:black">LEARNING</a></p>
         <p class="login-subtitle">CREW</p>
         <!-- form action 수정 -->
         <form id="login-form" action="${pageContext.request.contextPath}/loginOk.us" method="post">
@@ -36,9 +36,8 @@
    <script>
         document.addEventListener("DOMContentLoaded", () => {
             const loginMessage = '<%= request.getAttribute("loginMessage") != null ? request.getAttribute("loginMessage") : "" %>';
-            
-            if (loginMessage) {
-                alert(loginMessage); // 로그인 실패 메시지 출력
+            if(loginMessage){
+				alert(loginMessage); // 로그인 실패 메시지 출력
             }
         });
     </script>

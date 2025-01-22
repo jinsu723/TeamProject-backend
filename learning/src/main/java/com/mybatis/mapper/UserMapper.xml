@@ -8,6 +8,11 @@
         WHERE user_id = #{id} AND user_passwd = #{pw}
     </select>
     
+    <!-- 밴 테이블 확인 쿼리 -->
+    <select id="checkBen" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM TBL_BEN WHERE USER_NUM = #{userNum}
+    </select>
+    
     <!-- 회원가입 쿼리 -->
     <insert id="signUp" parameterType="UserDTO">
         INSERT INTO tbl_user (user_number, user_id, user_passwd, user_nickname, user_tier, user_phone, user_join_date)

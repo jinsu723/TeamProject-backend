@@ -41,34 +41,33 @@ public class AdminFrontController extends HttpServlet {
 			System.out.println("login");
 			result = new AdminLoginOkController().execute(request, response);
 			break;
-		
+
 		case "/adminlogoutOk.ad":
 			System.out.println("logout");
 			result = new AdminLogoutOkController().execute(request, response);
 			break;
-			
-	      case "/adminMain.ad":
-	          System.out.println("관리자 메인 페이지");
-	          result = new AdminMainController().execute(request, response);
-	          break;
 
-		//전체 회원 목록 조회	
+		case "/adminMain.ad":
+			System.out.println("관리자 메인 페이지");
+			result = new AdminMainController().execute(request, response);
+			break;
+
+		// 전체 회원 목록 조회
 		case "/adminUser.ad":
 			System.out.println("회원 목록 조회");
 			result = new AdminUserController().execute(request, response);
 			break;
-			
+
 		// 밴 된 회원 목록 조회
 		case "/ben.ad":
 			System.out.println("ben");
 			result = new AdminBenController().execute(request, response);
 			break;
-			
+
 		default:
 			response.sendError(HttpServletResponse.SC_NOT_FOUND); // 잘못된 URL 처리
 			return;
 		}
-		
 
 		// 결과에 따라 리다이렉트 또는 포워드 처리
 		if (result != null) {

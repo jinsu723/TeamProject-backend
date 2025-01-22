@@ -3,9 +3,26 @@
 
  <!-- 관리자 로그인 쿼리 -->   
 <mapper namespace="Admin">
+
     <select id="login" parameterType="map" resultType="AdminDTO">
         SELECT admin_number, admin_id, admin_passwd
         FROM tbl_admin
         WHERE admin_id = #{id} AND admin_passwd = #{pw}
     </select>
+    
+    
+    <select id="postCount" parameterType="int" resultType="int">
+    	SELECT count(*) FROM TBL_FORUM WHERE TO_CHAR(FORUM_DATE,'YYYY-MM-DD') = TO_CHAR(SYSDATE-#{day},'YYYY-MM-DD')
+    </select>
+    
+    
+    <select id="tierCount" parameterType="String" resultType="int">
+    	SELECT COUNT(USER_TIER) count FROM TBL_USER WHERE USER_TIER = #{tier}
+    </select>
+    
+    
+    <select id="categoryCount" parameterType="String" resultType="int">
+    	SELECT COUNT(FORUM_CATEGORY) count FROM TBL_FORUM WHERE FORUM_CATEGORY = #{category}
+    </select>
+    
 </mapper>
