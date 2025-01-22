@@ -19,6 +19,7 @@ public class BenDTO {
 	private String benEndDate;
 	private int benPeriod;
 	private int userNumber;
+	private int userBenCnt;
 	
 	public int getBenNumber() {
 		return benNumber;
@@ -68,12 +69,18 @@ public class BenDTO {
 	public void setUserNumber(int userNumber) {
 		this.userNumber = userNumber;
 	}
+	public int getUserBenCnt() {
+		return userBenCnt;
+	}
+	public void setUserBenCnt(int userBenCnt) {
+		this.userBenCnt = userBenCnt;
+	}
+	
 	@Override
 	public String toString() {
 		return "BenDTO [benNumber=" + benNumber + ", userId=" + userId + ", userNickname=" + userNickname
 				+ ", benReason=" + benReason + ", benStartDate=" + benStartDate + ", benEndDate=" + benEndDate
-				+ ", benPeriod=" + benPeriod + ", userNumber=" + userNumber + "]";
+				+ ", benPeriod=" + benPeriod + ", userNumber=" + userNumber + ", userBenCnt=" + userBenCnt + "]";
 	}
-	
 	
 }

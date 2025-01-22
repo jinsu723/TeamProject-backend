@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
 
@@ -12,6 +13,7 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/preset/adminPreset.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/adminUser.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/deleteFont/fontello.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/adminBanUser.css">
 </head>
 <title>회원 관리</title>
 
@@ -21,17 +23,17 @@
   <header class="main-nonLogin-header">
     <nav>
       <div class="main-nonLogin-nav">
-        <div class="main-nonLogin-logo"><a href="${pageContext.request.contextPath}/app/admin/adminMain.jsp">learning</a></div>
+        <div class="main-nonLogin-logo"><a href="${pageContext.request.contextPath}/adminMain.ad">learning</a></div>
         <ul class="main-nonLogin-contents main-nonLogin-ul">
             <div class="mng-users-contentes-drop">
-              <div class="mng-users-text"><a href="${pageContext.request.contextPath}/app/admin/adminUser.jsp">회원 관리</a>  
+              <div class="mng-users-text"><a href="${pageContext.request.contextPath}/adminUser.ad">회원 관리</a>  
                 <div id="mng-users-dropText"><a href="${pageContext.request.contextPath}/ben.ad">밴 회원 관리</a></div>
               </div>
             </div>
           <li id="mng-contents-drop">게시글 관리
               <div class="mng-header-drop">
-                <div id="mng-header-dropDown1"><a href="${pageContext.request.contextPath}/app/admin/adminParty.jsp">파티 관리</a></div>
-                <div id="mng-header-dropDown2"><a href="${pageContext.request.contextPath}/app/admin/adminCommunity.jsp">커뮤니티</a></div>
+                <div id="mng-header-dropDown1"><a href="${pageContext.request.contextPath}/adminParty.ad">파티 관리</a></div>
+                <div id="mng-header-dropDown2"><a href="${pageContext.request.contextPath}/adminCommunity.ad">커뮤니티</a></div>
               </div>
           </li>
         </ul>
@@ -49,72 +51,58 @@
         </div>
       </div>
       <div class="mng-options-container">
-        <button id="mng-reset-button"><a href="${pageContext.request.contextPath}/adminUser.ad">초기화</a></button>
+        <button id="reset-search-button"><a href="${pageContext.request.contextPath}/adminUser.ad">초기화</a></button>
         <div class="mng-options-search">
           <%-- <form action="${pageContext.request.contextPath}/admin/adminUser" method="get"> --%>
              <i class="icon-search"></i>
-             <input type="text" name="nickname" id="mng-search" placeholder="내용 검색" maxlength="30" onkeyup="enterKey();">
+             <input type="text" name="nickname" id="manager-ban-user-search" placeholder="내용 검색" maxlength="30" onkeyup="enterKey();">
            <!-- </form> -->
         </div>
       </div>
 
-      <div class="mng-list-header-container">
-        <hr class="mng-list-line">
-        <div class="mng-list-main">
-          <div class="mng-main-list-check">
-            <p>선택</p>
+  <div class="manager-ban-user-list-header-container">
+        <hr class="manager-ban-user-list-line">
+        <div class="manager-ban-user-list-main">
+          <div class="manager-ban-user-main-list-user-id">
+            <p>유저번호</p>
           </div>
-          <div class="mng-main-list-userNum">
-            <p>유저 번호</p>
-          </div>
-          <div class="mng-main-list-nickName">
+          <div class="manager-ban-user-main-list-ban-nickname">
             <p>닉네임</p>
           </div>
-          <div class="mng-main-list-tier">
+          <div class="manager-ban-user-main-list-ban-content">
             <p>티어</p>
           </div>
-          <div class="mng-main-list-phone">
+          <div class="ban-date">
+          <div class="manager-ban-user-main-list-ban-start-date">
             <p>핸드폰 번호</p>
           </div>
-          <div class="mng-main-list-write-time">
+          <div class="manager-ban-user-main-list-ban-end-date">
             <p>회원 생성 시간</p>
           </div>
+          <div class="manager-ban-user-main-list-ban-end-date">
+            <p>밴 횟수</p>
+          </div>
         </div>
-        <hr class="mng-list-line">
-        <ul class="mng-list">
-          <c:forEach var="user" items="${adminUser}">
-             <li class="mng-list-item">
-                <input type="checkbox" class="mng-list-check">
-                <div class="mng-list-userNum">${user.userNumber}</div>
-                <div class="mng-list-nickName">${user.userNickname}</div>
-                <div class="mng-list-tier">${user.userTier}</div>
-                <div class="mng-list-phone">${user.userPhone}</div>
-                <div class="mng-list-write-time">"${user.userJoin}"</div>
-             </li>
-             <hr>
-          </c:forEach>
-            <!-- <div class="mng-list-writer"><p>키보드워리어</p></div>
-            <div class="mng-list-category"><p>공략글</p></div>
-            <div class="mng-list-title"><p>1</p></div>
-            <div class="mng-list-write-time"><p>2025-1-10 22:55</p></div>
-          </li>
-          <hr class="mng-list-item-line"> -->
-          <!-- (li.mng-list-item>(div.mng-list-writer>p{키보드워리어})(div.mng-list-category>p{공략글})(div.mng-list-title>p{$})(div.mng-list-write-time>p{2025-1-10 22:55}))hr.mng-list-item-line)*45 -->
-
+          <div class="manager-ban-user-main-list-ban-controll-button">
+            <p>관리버튼</p>
+          </div> 
+        </div>
+        <hr class="manager-ban-user-list-line">
+        <ul class="manager-ban-user-list">
         </ul>
       </div>
+    </div>
+      
       <div class="mng-box-footer">
-        <button class="icon-trash"></button>
-        <button class="mng-addBen">밴 등록</button>
         <div id="mng-totalcount">전체 회원 수 : ${totalUserCount}명</div>
       </div>
     </div>
     
-    <div class="mng-page-number-container">
-      <div class="mng-page-number-button">
+    <div class="manager-ban-user-page-number-container">
+      <div class="manager-ban-user-page-number-button">
         <i class="icon-angle-double-left"></i>
         <i class="icon-left-open"></i>
-        <div class="mng-page-numbers"></div>
+        <div class="manager-ban-user-page-numbers"></div>
         <i class="icon-right-open"></i>
         <i class="icon-angle-double-right"></i>
       </div>
@@ -126,7 +114,27 @@
     </div>
   </footer>
 
-  <!-- <script defer src="${pageContext.request.contextPath}/assets/js/admin/adminUser.js"></script> -->
+    <script type="text/javascript">
+  const UserCount = {
+		  UsertNumber: ${totalUserCount}
+  };
+  
+  const userList = [
+	  <c:forEach var="user" items="${adminUser}">
+	  	{
+	  		userNumber: "${user.userNumber}",
+	  		userNickname: "${user.userNickname}",
+	  		userTier: "${user.userTier}",
+	  		userPhone: "${user.userPhone}",
+	  		userJoinDate: "${user.userJoinDate}",
+	  		userBenCnt: "${user.userBenCnt}"
+	  	}
+	  	<c:if test="${user ne userList[userList.size()-1]}">,</c:if>
+	  </c:forEach>
+	  ];
+	//console.log(userList.userNickname);
+  </script>
+  <script defer src="${pageContext.request.contextPath}/assets/js/admin/adminUser.js"></script>
 </body>
 
 </html>

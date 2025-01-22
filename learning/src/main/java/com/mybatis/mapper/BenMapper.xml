@@ -16,4 +16,25 @@
 		select count(*) as bendedUsers
 		from tbl_ben
 	</select>
+	
+	<!-- 벤 취소 -->
+	<delete id="cancelBen" parameterType="String">
+		DELETE FROM tbl_ben b
+		WHERE b.user_num = (select user_number
+							FROM tbl_user
+					  		WHERE user_nickname = #{userNickname})
+	</delete>
+	
+	<!-- 밴 횟수 추가 -->
+	<update id="plusBenCnt" parameterType="String">
+		UPDATE tbl_user
+		SET user_ben_cnt = user_ben_cnt + 1
+		WHERE user_number = #{userNumber}
+	</update>
+	
+	<!-- 벤 회원 추가 -->
+	<insert id="ben" parameterType="com.learning.app.dto.BenDTO">
+		INSERT INTO tbl_ben
+		VALUES(seq_ben.nextval, #{userNumber}, sysdate, #{benPeriod}, #{benReason})
+	</insert>
 </mapper>

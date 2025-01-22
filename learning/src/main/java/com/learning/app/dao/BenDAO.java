@@ -27,4 +27,21 @@ public class BenDAO {
 		
 		return benedUserNum;
 	}
+	
+	// 벤 취소하기
+	public void cancelBen(String userNickname) {
+		sqlSession.delete("Ben.cancelBen", userNickname);
+	}
+	
+	// 밴 횟수 1회 증가시키기
+	public void plusBenCnt(String userNumber) {
+		System.out.println("밴 횟수 추가");
+		sqlSession.update("Ben.plusBenCnt", userNumber);
+	}
+	
+	// 밴 시키기
+	public void Ben(BenDTO benDTO) {
+		System.out.println("벤시키기");
+		sqlSession.insert("Ben.ben", benDTO);
+	}
 }

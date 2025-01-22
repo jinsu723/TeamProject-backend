@@ -63,10 +63,10 @@ public String getUserPhone() {
 public void setUserPhone(String userPhone) {
 	this.userPhone = userPhone;
 }
-public String getUserJoin() {
+public String getUserJoinDate() {
 	return userJoinDate;
 }
-public void setUserJoin(String userJoinDate) {
+public void setUserJoinDate(String userJoinDate) {
 	this.userJoinDate = userJoinDate;
 }
 public int getUserBenCnt() {

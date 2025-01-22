@@ -20,6 +20,8 @@ public class AdminLoginOkController implements Execute{
 	    // DAO와 DTO 객체 생성
 	    System.out.println("AdminLoginOkController 실행");
 	    AdminDAO dao = new AdminDAO();
+	    
+	    System.out.println("AdminDAO 객체 생성");
 	    AdminDTO dto;
 
 	    // 폼 데이터 가져오기

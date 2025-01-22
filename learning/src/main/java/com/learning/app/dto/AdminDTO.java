@@ -11,6 +11,7 @@ public class AdminDTO {
 	private int adminNumber; //admin_number
 	private String adminId; //admin_id
 	private String adminPasswd; //admin_passwd
+	private String userJoinDate;
 	
 	public int getAdminNumber() {
 		return adminNumber;
@@ -24,15 +25,23 @@ public class AdminDTO {
 	public void setAdminId(String adminId) {
 		this.adminId = adminId;
 	}
-	public String getAdminPw() {
+	public String getAdminPasswd() {
 		return adminPasswd;
 	}
-	public void setAdminPw(String adminPasswd) {
+	public void setAdminPasswd(String adminPasswd) {
 		this.adminPasswd = adminPasswd;
 	}
-	
+	public String getUserJoinDate() {
+		return userJoinDate;
+	}
+	public void setUserJoinDate(String userJoinDate) {
+		this.userJoinDate = userJoinDate;
+	}
 	@Override
 	public String toString() {
-		return "AdminDTO [adminNumber=" + adminNumber + ", adminId=" + adminId + ", adminPw=" + adminPasswd + "]";
+		return "AdminDTO [adminNumber=" + adminNumber + ", adminId=" + adminId + ", adminPasswd=" + adminPasswd
+				+ ", userJoinDate=" + userJoinDate + "]";
 	}
+	
+	
 }
