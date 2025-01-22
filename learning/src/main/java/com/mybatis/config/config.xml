@@ -24,6 +24,8 @@
 			alias="partyForumDTO"></typeAlias>
 		<typeAlias type="com.learning.app.dto.AdminDTO"
 			alias="AdminDTO"></typeAlias>
+			<typeAlias type="com.learning.app.dto.AdminPartyDTO"
+			alias="AdminPartyDTO"></typeAlias>
 		<typeAlias type="com.learning.app.dto.CommunityDTO"
 			alias="CommunityDTO"></typeAlias>
 

@@ -30,6 +30,7 @@ function addList(idx, arr) {
 	let newContent = document.createElement("div");
 	newContent.classList.add("myPage-content");
 	newContent.classList.add("myPage-content-list");
+
 	let newData;
 
 	// 닉네임 추가
@@ -49,6 +50,11 @@ function addList(idx, arr) {
 	newData.classList.add("title");
 	newData.innerText = arr[idx][4];
 	newContent.appendChild(newData);
+
+	//클릭 이벤트 추가
+	newData.addEventListener('click', () => {
+		location.href = contextPath + '/app/communityForum/communityForumDetail.cf?postNum=' + arr[idx][0];
+	});
 
 	// 작성시간 추가
 	newData = document.createElement("span");
@@ -72,8 +78,7 @@ function addList(idx, arr) {
 				alert("모집 신청을 수락합니다");
 				const form = document.createElement("form");
 				form.method = "post";
-				form.action = contextPath +
-					"/myPageRecruitmentBnt.my?partyNum=" + arr[idx][0] + "&isAgree=true";;
+				form.action = contextPath + "/myPageRecruitmentBnt.my?partyNum=" + arr[idx][0] + "&isAgree=true";;
 				document.body.appendChild(form);
 				form.submit();
 			});
@@ -86,8 +91,7 @@ function addList(idx, arr) {
 				alert("모집 신청을 거절합니다");
 				const form = document.createElement("form");
 				form.method = "post";
-				form.action = contextPath +
-					"/myPageRecruitmentBnt.my?partyNum=" + arr[idx][0] + "&isAgree=false";
+				form.action = contextPath + "/myPageRecruitmentBnt.my?partyNum=" + arr[idx][0] + "&isAgree=false";
 				document.body.appendChild(form);
 				form.submit();
 			});
@@ -115,6 +119,8 @@ function addList(idx, arr) {
 		}
 		newContent.appendChild(newData);
 	}
+
+
 
 	// 리스트에 넣기
 	pageList.appendChild(newContent);

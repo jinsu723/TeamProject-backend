@@ -55,7 +55,6 @@
 
 	<select id="categoryCount" parameterType="String"
 		resultType="int">
-		SELECT COUNT(FORUM_CATEGORY) count FROM TBL_FORUM WHERE FORUM_CATEGORY =
-		#{category}
+		SELECT COUNT(FORUM_CATEGORY) count FROM TBL_FORUM WHERE FORUM_CATEGORY = #{category}
 	</select>
 </mapper>

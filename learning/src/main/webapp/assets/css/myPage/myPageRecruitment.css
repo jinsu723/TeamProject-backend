@@ -119,6 +119,7 @@ main {
 
 .myPage-content .title {
    width: 42%;
+   cursor: pointer;
 }
 
 .myPage-content .date {
