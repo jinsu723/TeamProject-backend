@@ -22,6 +22,14 @@ document.addEventListener("DOMContentLoaded", () => {
       idError.style.display = "block";
       return;
     }
+   
+   // 5~12자리 유효성 검사
+   if (!/^[a-zA-Z0-9_-]{5,12}$/.test(userId)) {
+       idError.textContent = "아이디는 5~12자리의 영문, 숫자, _, -만 가능합니다.";
+       idError.style.color = "red"; // 오류 메시지는 빨간색
+       idError.style.display = "block";
+       return; // 길이 유효성 검사를 통과하지 못하면 중복검사 요청 중단
+   }
 
     // AJAX 요청
     fetch(`${contextPath}/idCheck.us`, {

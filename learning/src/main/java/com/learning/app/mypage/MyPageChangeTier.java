@@ -27,6 +27,7 @@ public class MyPageChangeTier implements Execute {
 
 		System.out.println("티어 업데이트 : " + request.getAttribute("update"));
 		((UserDTO)request.getSession().getAttribute("userDTO")).setUserTier(request.getParameter("tier"));
+		
 		System.out.println("userDTO : " + request.getSession().getAttribute("userDTO"));
 		rs.setPath(request.getContextPath() + "/app/myPage/myPageMain.jsp");
 		rs.setRedirect(true);

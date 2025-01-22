@@ -32,37 +32,46 @@ public class LoginOkController implements Execute {
 		dto = dao.login(userId, userPw);
 		System.out.println(dto);
 
-		 if (dto != null) { // 로그인 성공
-	            System.out.println("로그인 성공");
-	            HttpSession session = request.getSession();
-	            session.setAttribute("userDTO", dto);
-	            session.setMaxInactiveInterval(60 * 60 * 24); // 세션 유지 시간 설정
-	            session.setAttribute("userNickname", dto.getUserNickname());
+		if (dto != null) { // 로그인 성공
+			// 밴 테이블에 올라가있는지 확인
+			if (dao.checkBen(dto.getUserNumber()) != 0) {
+				System.out.println("밴 유저");
+				request.setAttribute("loginMessage", "밴 유저");
+				result.setPath("/app/user/login/login.jsp");
+				result.setRedirect(false);
+				return result;
+			}
 
-	            // 로그인 성공 메시지 전달
-	            
+			System.out.println("로그인 성공");
+			HttpSession session = request.getSession();
+			session.setAttribute("userDTO", dto);
+			session.setMaxInactiveInterval(60 * 60 * 24); // 세션 유지 시간 설정
+			session.setAttribute("userNickname", dto.getUserNickname());
+
+			// 로그인 성공 메시지 전달
+
 //	            //포워드 방식
 //	            request.setAttribute("loginMessage", "로그인 성공!");
 //	            result.setPath("/app/preset/main.jsp"); // forward 방식으로 main.jsp로 이동
 //	            result.setRedirect(false);
-	            //리다이렉트 방식
-	            session.setAttribute("loginMessage", "로그인 성공!");
-	            result.setPath(request.getContextPath() + "/app/preset/main.jsp");
-	            result.setRedirect(true);
-	        } else { // 로그인 실패
-	        	//포워드 방식
-	            System.out.println("로그인 실패");
-	            request.setAttribute("loginMessage", "아이디 또는 비밀번호가 올바르지 않습니다.");
-	            result.setPath("/app/user/login/login.jsp");
-	            result.setRedirect(false);
-	            
-	            //리다이렉트 방식
+			// 리다이렉트 방식
+			session.setAttribute("loginMessage", "로그인 성공!");
+			result.setPath(request.getContextPath() + "/app/preset/main.jsp");
+			result.setRedirect(true);
+		} else { // 로그인 실패
+			// 포워드 방식
+			System.out.println("로그인 실패");
+			request.setAttribute("loginMessage", "아이디 또는 비밀번호가 올바르지 않습니다.");
+			result.setPath("/app/user/login/login.jsp");
+			result.setRedirect(false);
+
+			// 리다이렉트 방식
 //	            System.out.println("로그인 실패");
 //	            HttpSession session = request.getSession();
 //	            session.setAttribute("loginMessage", "아이디 또는 비밀번호가 올바르지 않습니다."); // 메시지 전달
 //	            result.setPath(request.getContextPath() + "/app/user/login/login.jsp"); // 리다이렉트
 //	            result.setRedirect(true);
-	        }
+		}
 
 		return result;
 	}

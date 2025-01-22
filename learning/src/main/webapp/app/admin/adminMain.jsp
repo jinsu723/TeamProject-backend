@@ -99,5 +99,17 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7"></script>
   <script src="${pageContext.request.contextPath}/assets/js/admin/adminMain.js"></script>
 </body>
-
+<script type="text/javascript">
+	let postsDataArray = <%=request.getAttribute("postCount")%>;
+	let userTierValue = <%=request.getAttribute("tierList")%>;
+	let postCategotyValue = <%=request.getAttribute("categoryList")%>;
+	
+	console.log(postsDataArray);
+	console.log(userTierValue);
+	console.log(postCategotyValue);
+	
+	mainChart(postsDataArray);
+	subChartTier(userTierValue);
+	subChartCategory(postCategotyValue);
+</script>
 </html>

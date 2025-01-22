@@ -20,7 +20,7 @@
         
         <form action="${pageContext.request.contextPath}/signUp4.us" method="post">
           <div class="signup4-input-container1">
-            <input type="text" name="userId" id="id" placeholder="아이디를 입력해주세요(1~12자리 특수문자 제외)" maxlength="12" pattern="^[a-zA-Z0-9_-]{1,12}$" required>
+            <input type="text" name="userId" id="id" placeholder="아이디를 입력해주세요(5~12자리 특수문자 제외)" maxlength="12" pattern="^[a-zA-Z0-9_-]{5,12}$" required>
             <button type="button" class="signup4-certify-button">중복검사</button>
           </div>
           <p id="id-error" class="signup4-error-message1"></p>

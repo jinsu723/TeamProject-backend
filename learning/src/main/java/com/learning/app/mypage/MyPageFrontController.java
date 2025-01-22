@@ -98,6 +98,7 @@ public class MyPageFrontController extends HttpServlet {
 			case "/myPageRecruitmentBnt.my":
 				result = new MyPageRecruitmentBnt().execute(request, response);
 				break;
+				
 			}
 		}
 
