@@ -24,16 +24,16 @@
       <div class="main-nonLogin-nav">
         <div class="main-nonLogin-logo"><a href="${pageContext.request.contextPath}/app/admin/adminMain.jsp">learning</a></div>
         <ul class="main-nonLogin-contents main-nonLogin-ul">
-            <div class="mng-users-contentes-drop">
-              <div class="mng-users-text"><a href="${pageContext.request.contextPath}/ben.ad">밴 회원 관리</a>  
-                <div id="mng-users-dropText"><a href="${pageContext.request.contextPath}/app.admin/adminUser.jsp">회원 관리</a></div>
-              </div>
+          <div class="mng-users-contentes-drop">
+            <div class="mng-users-text"><a href="${pageContext.request.contextPath}/ben.ad">밴 회원 관리</a>  
+              <div id="mng-users-dropText"><a href="${pageContext.request.contextPath}/app.admin/adminUser.jsp">회원 관리</a></div>
             </div>
+          </div>
           <li id="mng-contents-drop">게시글 관리
-              <div class="mng-header-drop">
-                <div id="mng-header-dropDown1"><a href="${pageContext.request.contextPath}/app/admin/adminParty.jsp">파티 관리</a></div>
-                <div id="mng-header-dropDown2"><a href="${pageContext.request.contextPath}/app/admin/adminCommunity.jsp">커뮤니티</a></div>
-              </div>
+            <div class="mng-header-drop">
+              <div id="mng-header-dropDown1"><a href="${pageContext.request.contextPath}/app/admin/adminParty.jsp">파티 관리</a></div>
+              <div id="mng-header-dropDown2"><a href="${pageContext.request.contextPath}/app/admin/adminCommunity.jsp">커뮤니티</a></div>
+            </div>
           </li>
         </ul>
       </div>
@@ -55,9 +55,6 @@
           <input type="text" name="search" id="manager-ban-user-search" placeholder="내용 검색">
           <i class="icon-down-dir"></i>
         </div>
-        <!-- <div class="manager-ban-user-write-button">
-          <button type="button" class="manager-ban-user-write-btn">글쓰기</button>
-        </div> -->
       </div>
 
       <div class="manager-ban-user-list-header-container">
@@ -122,7 +119,7 @@
 	  		benReason: "${ben.benReason}",
 	  		benStartDate: "${ben.benStartDate}",
 	  		benEndDate: "${ben.benEndDate}",
-	  		benPeriod: "%{ben.benPeriod}"
+	  		benPeriod: "${ben.benPeriod}"
 	  	}<c:if test="${ben ne benList[benList.size()-1]}">,</c:if>
 	  </c:forEach>
 	  ];

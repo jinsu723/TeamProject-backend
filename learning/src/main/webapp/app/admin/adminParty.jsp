@@ -18,17 +18,17 @@
     <header class="main-nonLogin-header">
       <nav>
         <div class="main-nonLogin-nav">
-          <div class="main-nonLogin-logo"><a href="${pageContext.request.contextPath}/app/admin/adminMain.jsp">learning</a></div>
+          <div class="main-nonLogin-logo"><a href="${pageContext.request.contextPath}/adminMain.ad">learning</a></div>
           <ul class="main-nonLogin-contents main-nonLogin-ul">
             <div class="mng-users-contentes-drop">
-              <div class="mng-users-text"><a href="${pageContext.request.contextPath}/app/admin/adminUser.jsp">회원 관리</a>  
+              <div class="mng-users-text"><a href="${pageContext.request.contextPath}/adminUser.ad">회원 관리</a>  
                 <div id="mng-users-dropText"><a href="${pageContext.request.contextPath}/ben.ad">밴 회원 관리</a></div>
               </div>
             </div>
             <li id="mng-contents-drop">게시글 관리
                 <div class="mng-header-drop" onclick="">
-                  <div id="mng-header-dropDown1"><a href="${pageContext.request.contextPath}/app/admin/adminParty.jsp">파티 관리</a></div>
-                  <div id="mng-header-dropDown2"><a href="${pageContext.request.contextPath}/app/admin/adminCommunity.jsp">커뮤니티</a></div>
+                  <div id="mng-header-dropDown1"><a href="${pageContext.request.contextPath}/adminParty.ad">파티 관리</a></div>
+                  <div id="mng-header-dropDown2"><a href="${pageContext.request.contextPath}/adminCommunity.ad">커뮤니티</a></div>
                 </div>
             </li>
           </ul>
@@ -84,19 +84,11 @@
         <hr class="mng-list-line">
         <ul class="mng-list">
           <li class="mng-list-item">
-            <!-- <div class="mng-list-writer"><p>키보드워리어</p></div>
-            <div class="mng-list-category"><p>공략글</p></div>
-            <div class="mng-list-title"><p>1</p></div>
-            <div class="mng-list-write-time"><p>2025-1-10 22:55</p></div>
-          </li>
-          <hr class="mng-list-item-line"> -->
-          <!-- (li.mng-list-item>(div.mng-list-writer>p{키보드워리어})(div.mng-list-category>p{공략글})(div.mng-list-title>p{$})(div.mng-list-write-time>p{2025-1-10 22:55}))hr.mng-list-item-line)*45 -->
-
         </ul>
       </div>
       <div class="mng-box-footer">
         <button class="icon-trash"></button>
-        <div id="mng-totalcount">총 모집 게시글 수 : 00개</div>
+        <div id="mng-totalcount">총 모집 게시글 수 : ${totalPartyForumCount}개</div>
       </div>
     </div>
     

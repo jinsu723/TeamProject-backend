@@ -46,7 +46,7 @@ public class AdminFrontController extends HttpServlet {
 			System.out.println("logout");
 			result = new AdminLogoutOkController().execute(request, response);
 			break;
-
+			
 		case "/adminMain.ad":
 			System.out.println("관리자 메인 페이지");
 			result = new AdminMainController().execute(request, response);
@@ -57,11 +57,32 @@ public class AdminFrontController extends HttpServlet {
 			System.out.println("회원 목록 조회");
 			result = new AdminUserController().execute(request, response);
 			break;
+			
+		case "/adminParty.ad":
+			System.out.println("게시글 목록 조회");
+			result = new AdminPartyController().execute(request, response);
+			break;
+			
+		case "/adminCommunity.ad":
+			System.out.println("커뮤니티 게시글 목록");
+			result = new AdminCommunityController().execute(request, response);
 
-		// 밴 된 회원 목록 조회
+			// 밴 된 회원 목록 조회
 		case "/ben.ad":
 			System.out.println("ben");
 			result = new AdminBenController().execute(request, response);
+			break;
+
+		// 벤 취소
+		case "/cancelBen.ad":
+			System.out.println("cancelBan.ad");
+			new CancelBenController().execute(request, response);
+			break;
+
+		// 밴 먹이기
+		case "/adminDoBen.ad":
+			System.out.println("adminDoBen.ad");
+			result = new AdminDoBenController().execute(request, response);
 			break;
 
 		default:
