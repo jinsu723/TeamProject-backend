@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/preset/adminPreset.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/adminUser.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/deleteFont/fontello.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/adminBanUser.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/adminBanUser.css">
 </head>
 <title>회원 관리</title>
 
@@ -55,7 +55,7 @@
         <div class="mng-options-search">
           <%-- <form action="${pageContext.request.contextPath}/admin/adminUser" method="get"> --%>
              <i class="icon-search"></i>
-             <input type="text" name="nickname" id="manager-ban-user-search" placeholder="내용 검색" maxlength="30" onkeyup="enterKey();">
+             <input type="text" name="nickname" id="manager-ban-user-search" placeholder="내용 검색" maxlength="30">
            <!-- </form> -->
         </div>
       </div>
@@ -119,6 +119,7 @@
 		  UsertNumber: ${totalUserCount}
   };
   
+  console.log("jsp ${adminUser}");
   const userList = [
 	  <c:forEach var="user" items="${adminUser}">
 	  	{

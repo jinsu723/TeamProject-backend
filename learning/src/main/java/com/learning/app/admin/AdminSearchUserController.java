@@ -1,7 +1,7 @@
 package com.learning.app.admin;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -9,35 +9,32 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.learning.app.Execute;
 import com.learning.app.Result;
-import com.learning.app.dao.BenDAO;
+import com.learning.app.dao.AdminDAO;
+import com.learning.app.dto.UserDTO;
 
-public class CancelBenController implements Execute{
+public class AdminSearchUserController implements Execute{
 
 	@Override
 	public Result execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		System.out.println("BenCancelController");
-		
-		BenDAO benDAO = new BenDAO();
+
 		Result result = new Result();
+		AdminDAO adminDAO = new AdminDAO();
 		
 		String userNickname = request.getParameter("userNickname");
-		
 		System.out.println(userNickname);
 		
-		benDAO.cancelBen(userNickname);
+		List<UserDTO> searchResult = adminDAO.getSearchUserResult(userNickname);
+		System.out.println("검색 결과 : " + searchResult);
 		
-		System.out.println("삭제 완료");
+		request.setAttribute("adminUser", searchResult);
 		
-		response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        
-		PrintWriter out = response.getWriter();
-//        out.print(jsonResponse);
-        out.flush();
-        
-		return null;
+		System.out.println("분명 넣어줬음");
+		
+		result.setPath("/app/admin/adminUser.jsp");
+		result.setRedirect(false);
+		
+		return result;
 	}
-
+	
 }

@@ -73,18 +73,23 @@ public class AdminFrontController extends HttpServlet {
 			result = new AdminBenController().execute(request, response);
 			break;
 
-		// 벤 취소
+		// 밴 취소
 		case "/cancelBen.ad":
 			System.out.println("cancelBan.ad");
 			new CancelBenController().execute(request, response);
 			break;
 
-		// 밴 먹이기
+		// 밴
 		case "/adminDoBen.ad":
 			System.out.println("adminDoBen.ad");
 			result = new AdminDoBenController().execute(request, response);
 			break;
-
+			
+		case "/searchUser.ad":
+			System.out.println("searchUser.ad");
+			result = new AdminSearchUserController().execute(request, response);
+			break;
+			
 		default:
 			response.sendError(HttpServletResponse.SC_NOT_FOUND); // 잘못된 URL 처리
 			return;
