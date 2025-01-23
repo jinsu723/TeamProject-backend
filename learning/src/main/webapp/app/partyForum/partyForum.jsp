@@ -1,22 +1,27 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="java.util.List"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/preset/preset.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/partyForum/partyForum.css">
-	<script defer src="${pageContext.request.contextPath}/assets/js/preset/mainLogin.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/preset/preset.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/partyForum/partyForum.css">
+<script defer
+	src="${pageContext.request.contextPath}/assets/js/preset/mainLogin.js"></script>
 
-	<title>파티 모집 게시글 목록</title>
+<title>파티 모집 게시글 목록</title>
 </head>
 
 <body>
 
-<jsp:include page="/app/preset/header.jsp" />
+	<jsp:include page="/app/preset/header.jsp" />
 
 	<main class="partyForum-main">
 		<div class="partyForum-main-container">
@@ -26,14 +31,24 @@
 
 			<div class="partyForum-options-container">
 				<div class="partyForum-options-search">
-					<i class="icon-search"></i> <input type="text" name="search" id="partyForum-search" placeholder="내용 검색">
-					<i class="icon-down-dir"></i>
+					<i class="icon-search"></i> <input type="text" name="search"
+						id="partyForum-search" placeholder="내용 검색"> <i
+						class="icon-down-dir"></i>
 				</div>
-				<form action="partyWriting.fo" method="post">
-					<div class="partyForum-write-button">
-						<button type="submit" class="partyForum-write-btn">글쓰기</button>
-					</div>
-				</form>
+				<c:if test="${sessionScope.userDTO != NULL}">
+					<form action="partyWriting.fo" method="post">
+						<div class="partyForum-write-button">
+							<button type="submit" class="partyForum-write-btn">글쓰기</button>
+						</div>
+					</form>
+				</c:if>
+				<c:if test="${sessionScope.userDTO == NULL}">
+					<form action="partyWriting.fo" method="post">
+						<div class="partyForum-write-button">
+							<button type="submit" class="partyForum-write-btn" disabled>글쓰기</button>
+						</div>
+					</form>
+				</c:if>
 			</div>
 
 
@@ -71,27 +86,29 @@
 	</main>
 
 	<jsp:include page="/app/preset/footer.jsp" />
+
+	<script>	
+	const contextPath = '<%=request.getContextPath()%>';
+	const forumCount = {
+		forumNumber: ${ partyForumCount }	
+	};
 	
-<script>
-const contextPath = '<%= request.getContextPath()%>';
+	const forumList = [
+	  <c:forEach var="forum" items="${forumList}">{
+				forumNumber: "${forum.forumNumber}",
+	 			userNickname: "${forum.userNickname}",
+	 			userTier: "${forum.userTier}",
+	  			forumTitle: "${forum.forumTitle}",
+	  			forumDate: "${forum.forumDate}",
+	  			forumUpdate: "${forum.forumUpdate}",
+		  	}<c:if test="${forum ne forumList[forumList.size()-1]}">,</c:if>
+		  </c:forEach>
+		  ];
+	</script>
+	
 
-const forumCount = {
-	forumNumber: ${ partyForumCount }	
-};
-
-const forumList = [
-  <c:forEach var="forum" items="${forumList}">{
-			forumNumber: "${forum.forumNumber}",
- 			userNickname: "${forum.userNickname}",
- 			userTier: "${forum.userTier}",
-  			forumTitle: "${forum.forumTitle}",
-  			forumDate: "${forum.forumDate}",
-	  	}<c:if test="${forum ne forumList[forumList.size()-1]}">,</c:if>
-	  </c:forEach>
-	  ];
-</script>
-
-	<script src="${pageContext.request.contextPath}/assets/js/partyForum/partyForum.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/assets/js/partyForum/partyForum.js"></script>
 </body>
 
 </html>

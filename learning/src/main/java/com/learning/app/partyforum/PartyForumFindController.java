@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.learning.app.Execute;
 import com.learning.app.Result;
 import com.learning.app.dao.partyForumDAO;
-import com.learning.app.dto.ForumDTO;
 import com.learning.app.dto.partyForumDTO;
 
 public class PartyForumFindController implements Execute {

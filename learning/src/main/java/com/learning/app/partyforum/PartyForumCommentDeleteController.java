@@ -10,21 +10,21 @@ import com.learning.app.Execute;
 import com.learning.app.Result;
 import com.learning.app.dao.partyForumDAO;
 
-public class PartyForumDeleteController implements Execute {
+public class PartyForumCommentDeleteController implements Execute {
 
 	@Override
 	public Result execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Result result = new Result();
 
-//		request.getParameter("postNum");
-//		System.out.println(Integer.parseInt(request.getParameter("postNum")));
+//		System.out.println(request.getParameter("commentNumber"));
+//		System.out.println(request.getParameter("commentNumber").getClass());
 
 		partyForumDAO partyForumDAO = new partyForumDAO();
-		partyForumDAO.PartyDelete(Integer.parseInt(request.getParameter("postNum")));
+		partyForumDAO.CommentDelete(Integer.parseInt(request.getParameter("commentNumber")));
 
-		result.setRedirect(true);
-		result.setPath(request.getContextPath() + "/app/partyForum/partyForum.fo");
+		result.setRedirect(false);
+		result.setPath("/app/partyForum/partyForum.fo");
 
 		return result;
 	}

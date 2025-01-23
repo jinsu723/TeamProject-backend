@@ -50,6 +50,10 @@ body{
   font-family: "Noto Sans KR Black"; 
   cursor: pointer;/* 버튼 글꼴 지정 */
 }
+.partyForum-write-button > button:disabled{
+	background-color: grey;
+	cursor: default;
+}
 .partyForum-options-search { /* 검색관련 div(아이콘과 인풋이 들어가기 떄문에 div로 묶음 */
   height: 30px; /* 높이 30픽셀만 */
   border-radius: 5px; /* div 테두리를 둥글게 */

@@ -156,6 +156,10 @@ body {
   margin-left: 50%;
   transform: translate(-50%, 0);
 }
+.partyForumDetail-userApply-button:disabled {
+	background-color: grey;
+	cursor: default;
+}
 
 /* 댓글 달기 디자인 시작 */
 .partyForumDetail-comment-list-container {
