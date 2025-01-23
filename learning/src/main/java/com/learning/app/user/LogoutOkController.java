@@ -36,7 +36,7 @@ public class LogoutOkController implements Execute {
 
 		result.setRedirect(true);//리다이렉트 방식 성공
 		System.out.println("로그아웃 성공");
-		
+		return result;
 //------------------------------------------------------------------
 //		// 로그아웃 메시지를 요청에 저장(세션 무효화랑 충돌 안나게 forward 방식으로)
 //		request.setAttribute("logoutMessage", "로그아웃되었습니다.");
@@ -49,7 +49,7 @@ public class LogoutOkController implements Execute {
 //		result.setRedirect(false); // forward 방식으로 main.jsp로 이동
 //		System.out.println("로그아웃 성공");
 //----------------------------------------------------------------------
-		return result;
+		
 
 	}
 
