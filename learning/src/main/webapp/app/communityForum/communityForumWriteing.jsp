@@ -36,9 +36,9 @@
 
       <div class="communityForumWriting-category">
         <p class="communityForumWriting-category-text">카테고리</p>
-        <input type="radio" name="writing-category" id="free">
+        <input type="radio" name="writing-category" id="free" value="자유" checked>
         <p class="communityForumWriting-category-free-text">자유</p>
-        <input type="radio" name="writing-category" id="strategy">
+        <input type="radio" name="writing-category" id="strategy" value="공략">
         <p class="communityForumWriting-category-strategy-text">공략</p>
       </div>
       <div class="communityForumWriting-title">
@@ -47,21 +47,29 @@
       </div>
       <div class="communityForumWriting-content">
         <p class="communityForumWriting-content-text">내용</p>
-        <div class="communityForumWriting-content-text-content" contentEditable="true" placeholder="내용을 입력해 주세요."></div>
+        <div id="communityForumWriting-content-text-content" contentEditable="true" placeholder="내용을 입력해 주세요."></div>
       </div>
       <div class="communityForumWriting-file">
-        <input type="file" accept=".gif, .jpg, .png" style="display:none;"
+        <!--  <input type="file" accept=".gif, .jpg, .png" style="display:none;"
           class="communityForumWriting-file-select-button" onchange="selectFile()">
         <i class="icon-file-image"></i>
-        <p class="communityForumWriting-file-select"></p>
-        <button class="communityForumWriting-button">작성</button>
+        <p class="communityForumWriting-file-select"></p> -->
+        
       </div>
+      <button class="communityForumWriting-button">작성</button>
     </div>
   </main>
 
   <jsp:include page="/app/preset/footer.jsp" />
-
-
+  
+  <script type="text/javascript">
+  const loginUserName = {
+			userName: "${loginUserName}"
+	};
+  const loginStatus = {
+			userLoginStatus: ${userCheckLogins}
+	};
+  </script>
   
 </body>
 

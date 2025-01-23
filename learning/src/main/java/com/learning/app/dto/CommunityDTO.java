@@ -2,28 +2,21 @@ package com.learning.app.dto;
 
 import java.util.Date;
 
-
-//comment_number NUMBER,
-//forum_number NUMBER,
-//user_number NUMBER,
-//comment_content VARCHAR2(500) NOT NULL,
-//comment_date DATE,
-
 public class CommunityDTO {
     private int forumNumber;
     private int userNumber;
     private String userNickName;
     private String forumCategory;
     private String forumTitle;
-    private Date forumDate;
-    private Date forumUpdate;
+    private String forumDate;
+    private String forumUpdate;
     private String forumContent;
     private int commentNumber;
     private String commentContent;
-    private  Date commentDate;
-    
-    
-    
+    private String commentDate;
+    private String imageURL;
+    private String imageName;
+    private String finalDate;
     
 	public int getForumNumber() {
 		return forumNumber;
@@ -55,16 +48,16 @@ public class CommunityDTO {
 	public void setForumTitle(String forumTitle) {
 		this.forumTitle = forumTitle;
 	}
-	public Date getForumDate() {
+	public String getForumDate() {
 		return forumDate;
 	}
-	public void setForumDate(Date forumDate) {
+	public void setForumDate(String forumDate) {
 		this.forumDate = forumDate;
 	}
-	public Date getForumUpdate() {
+	public String getForumUpdate() {
 		return forumUpdate;
 	}
-	public void setForumUpdate(Date forumUpdate) {
+	public void setForumUpdate(String forumUpdate) {
 		this.forumUpdate = forumUpdate;
 	}
 	public String getForumContent() {
@@ -85,12 +78,29 @@ public class CommunityDTO {
 	public void setCommentContent(String commentContent) {
 		this.commentContent = commentContent;
 	}
-	public Date getCommentDate() {
+	public String getCommentDate() {
 		return commentDate;
 	}
-	public void setCommentDate(Date commentDate) {
+	public void setCommentDate(String commentDate) {
 		this.commentDate = commentDate;
 	}
-    
-    
+	public String getImageURL() {
+		return imageURL;
+	}
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
+	}
+	public String getImageName() {
+		return imageName;
+	}
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
+	}
+	public String getFinalDate() {
+		return finalDate;
+	}
+	public void setFinalDate(String finalDate) {
+		this.finalDate = finalDate;
+	}
+       
 }

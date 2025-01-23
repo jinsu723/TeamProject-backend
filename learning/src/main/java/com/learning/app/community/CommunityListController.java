@@ -17,25 +17,16 @@ import com.learning.app.dao.CommunityDAO;
 import com.learning.app.dto.CommunityDTO;
 import com.learning.app.dto.UserDTO;
 
-@WebServlet("/postData")
 public class CommunityListController implements Execute {
 	
 	@Override
-	public Result execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("리스트 불러오기 실행");
-	
-		CommunityDAO communityDAO = new CommunityDAO();	//객체 생성
+	public Result execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		CommunityDTO communityDTO = new CommunityDTO();	//객체 생성
 		Result result = new Result();
-//		Gson gson = new Gson();
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		CommunityDAO communityDAO = new CommunityDAO();	//객체 생성
 		int communityPostCount = communityDAO.communityPostCount();
 		
-//		System.out.println("총 게시글: "+communityDAO.communityPostCount()); //DB에 저장된 게시글 가져오기
 		List<CommunityDTO> posts = communityDAO.getCommunityPosts(); //DB에 저장된 tbl_forum 컬럼을 목록화(리스트 사용)
-		
-		System.out.println(gson.toJson(posts));
-		
 		request.setAttribute("communityPostCount", communityPostCount);
 		request.setAttribute("posts", posts);
 		result.setPath("/app/communityForum/communityForum.jsp");
@@ -54,7 +45,6 @@ public class CommunityListController implements Execute {
 		} else {
 			System.out.println("세션 불량입니다.");
 		}
-		
 		return result;
 		
 	}

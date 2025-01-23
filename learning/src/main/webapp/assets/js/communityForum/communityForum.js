@@ -1,137 +1,123 @@
 // JS에서 EL의 ContextPath 사용하기
-let hostIndex = location.href.indexOf( location.host ) + location.host.length;
-let contextPath = location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
-console.log("게시글 총 숫자: "+postCount.postNumber);
-/*console.log("게시글 포스트 리스트: "+postList);*/
-
-const writeBtn = document.querySelector('.communityForum-write-btn');
-const postSearch = document.querySelector('#communityForum-search');
+let hostIndex = location.href.indexOf(location.host) + location.host.length;  //hostIndex: 21
+let contextPath = location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));  //contextPath: /projectName
+const writeBtn = document.querySelector('.communityForum-write-btn'); //글쓰기 버튼
+const postSearch = document.querySelector('#communityForum-search');  //검색창
+const moveFirst = document.querySelector('.icon-angle-double-left');  //첫 페이지로 이동
+const moveLast = document.querySelector('.icon-angle-double-right');  //마지막 페이지로 이동
+const movePrev = document.querySelector('.icon-left-open'); //이전 페이지로 이동
+const moveNext = document.querySelector('.icon-right-open');  //다음 페이지로 이동
 const postSize = 10; //한 페이지당 표시될 게시물 수
 const totalPost = 20; //서버에서 모든 게시물 수 가져오기
-let currentPageNumber = 1;
-const moveFirst = document.querySelector('.icon-angle-double-left');
-const moveLast = document.querySelector('.icon-angle-double-right');
-const movePrev = document.querySelector('.icon-left-open');
-const moveNext = document.querySelector('.icon-right-open');
+let currentPageNumber = 1; //현재 페이지 번호
 
+/* 로그인 유무에따른 "글쓰기" 버튼 활성/비활성화 지정하기 */
+if (loginStatus.userLoginStatus === false) { //로그인 안되어있을 때
+	writeBtn.style.backgroundColor = 'gray';  //버튼 비활성화
+	writeBtn.addEventListener("click", function() {  //버튼 클릭시
+		alert("로그인 후 글쓰기가 가능합니다"); //알림창 띄우기
+	});
+} else {  //로그인 되어있을 때
+	writeBtn.addEventListener("click", function() {  //버튼 클릭시
+		var link = `communityForumWriteing.cf`; //글쓰기 페이지로 이동
+		location.href = link; //페이지 이동
+		window.open(link);  //새창으로 페이지 열기
+	});
+}
 
-//날짜 및 시간 포멧 지정(지금은 현재시간 가져오는데 추후 데베에서 가져오기)
-const upLoadTime = new Date();
-
-
-/*for (let i = 1; i <= postCount.postNumber; i++) { //게시글 총합 가져오기(페이지수에 따라 하단 숫자 바뀜)
-  posts.push({
-    userName: `작성자`,
-    category: `카테고리`,
-    title: `게시물 제목`,
-	time: `게시글 날짜`,
-    postId: `게시글 넘버`
-  });
-}*/
-const posts = postList.map(post => ({
-	userNickName: post.userNickname,
-	title: post.postTitle,
-	category: post.postCategory,
-	time: post.postData,
-	postId: post.postNumber
+const posts = postList.map(post => ({ //게시글 리스트 가져오기
+	userNickName: post.userNickname,  //유저 닉네임
+	title: post.postTitle,  //게시글 제목
+	category: post.postCategory,  //게시글 카테고리
+	time: post.postData,  //게시글 작성시간
+	postId: post.postNumber //게시글 번호
 }));
-const totalPages = Math.ceil(posts.length / postSize);
-const bottomNumber = document.querySelector('.communityForum-page-number-button');
-const postContainer = document.querySelector('.communityForum-list');
-const postBottomNumberContainer = document.querySelector('.communityForum-page-numbers');
+//날짜 및 시간 포멧 지정(지금은 현재시간 데베에서 가져오기)
+function formatDate(dateString) {
+	const date = new Date(dateString); 
+	const year = date.getFullYear();
+	const month = String(date.getMonth() + 1).padStart(2, '0');
+	const day = String(date.getDate()).padStart(2, '0');
+	const hours = String(date.getHours()).padStart(2, '0');
+	const minutes = String(date.getMinutes()).padStart(2, '0');
+	return `${year}-${month}-${day} ${hours}:${minutes}`;
+}
 
+const totalPages = Math.ceil(posts.length / postSize);  //전체 페이지 수
+const bottomNumber = document.querySelector('.communityForum-page-number-button');  //페이지 번호 버튼
+const postContainer = document.querySelector('.communityForum-list'); //게시글 리스트
+const postBottomNumberContainer = document.querySelector('.communityForum-page-numbers'); //페이지 번호 컨테이너
 
-/*postList.forEach(post => {
-    console.log('번호:', post.postNumber);
-    console.log('작성자:', post.userNickname);
-    console.log('카테고리:', post.postCategory);
-    console.log('제목:', post.postTitle);
-    console.log('날짜:', post.postData);
-});*/
-/*      <div class="communityForum-list-write-time">${post.writeTime}</div>*/
+function getPost(page) {  //게시글 가져오기
+	postContainer.innerHTML = ''; //게시글 리스트 초기화
+	const start = (page - 1) * postSize;  //시작 페이지
+	const end = page * postSize;  //끝 페이지
+	const postDisplay = posts.slice(start, end);  //게시글 리스트 가져오기
 
-function getPost(page) {
-  postContainer.innerHTML = '';
-  const start = (page - 1) * postSize;
-  const end = page * postSize;
-  const postDisplay = posts.slice(start, end);
-  
-  postDisplay.forEach(post => {
-	/*console.log(postDisplay.userNickName);*/
-	/*console.log("디버그:", post.userNickName);*/
-	const DateTimeFormat = new Date(post.time);
-	const year = upLoadTime.getFullYear();
-	let month = upLoadTime.getMonth() + 1;
-	month = String(month).padStart(2, '0');
-	let day = upLoadTime.getDate();
-	day = String(day).padStart(2, '0');
-	let hours = upLoadTime.getHours();
-	hours = String(hours).padStart(2, '0');
-	let minutes = upLoadTime.getMinutes();
-	minutes = String(minutes).padStart(2, '0');
-	const dataTime = `${year}-${month}-${day} ${hours}:${minutes}`;
-	
-    const postItem = document.createElement('li');
-    postItem.classList.add('communityForum-list-item');
-    postItem.innerHTML = `
-      <div class="communityForum-list-writer">${post.userNickName}</div>
-      <div class="communityForum-list-category">${post.category}</div>
-      <div class="communityForum-list-title">${post.title}</div>
-      <div class="communityForum-list-write-time">${dataTime}</div>
-    `;
-    const postLine = document.createElement('hr');
-    postLine.classList.add('communityForum-list-item-line');
-    postContainer.appendChild(postItem);
-    postContainer.appendChild(postLine);
-    postItem.addEventListener('click', () => {
-		const postDetails = `${contextPath}/app/communityForum/communityForumDetail.cf?postNum=${post.postId}`;
-		console.log(`http://localhost:8888${postDetails}`);
-		fetch(`http://localhost:8888${contextPath}/app/communityForum/communityForumDetail.jsp?postNum=${post.postId}`, {
-		  method: 'POST',
-		  headers: {
-		    'Content-Type': 'application/json'
-		  },
-		  body: JSON.stringify(`${post.postId}`)
+	postDisplay.forEach(post => { //게시글 리스트 출력
+		const postItem = document.createElement('li');  //게시글 리스트 생성
+		postItem.classList.add('communityForum-list-item'); //게시글 리스트 클래스 추가
+		//게시글 리스트 내용
+		postItem.innerHTML = `  
+    <div class="communityForum-list-writer">${post.userNickName}</div>
+    <div class="communityForum-list-category">${post.category}</div>
+    <div class="communityForum-list-title">${post.title}</div>
+    <div class="communityForum-list-write-time">${formatDate(post.time)}</div>
+  `;
+		const postLine = document.createElement('hr');  //게시글 리스트 구분선 생성
+		postLine.classList.add('communityForum-list-item-line');  //게시글 리스트 구분선 클래스 추가
+		postContainer.appendChild(postItem);  //게시글 리스트 추가
+		postContainer.appendChild(postLine);  //게시글 리스트 구분선 추가
+		postItem.addEventListener('click', () => {  //게시글 클릭시
+			const postDetails = `${contextPath}/app/communityForum/communityForumDetail.cf?postNum=${post.postId}`; //게시글 상세페이지로 이동을 위한 PK값
+			fetch(`http://localhost:8888${contextPath}/app/communityForum/communityForumDetail.jsp?postNum=${post.postId}`, { //게시글 상세페이지로 이동
+				method: 'POST', //통신방식
+				headers: {  //헤더
+					'Content-Type': 'application/json'  //데이터 타입
+				},
+				body: JSON.stringify(`${post.postId}`)  //데이터
+			});
+
+			location.href = postDetails;  //페이지 이동
+			/*window.open(postDetails); //새창으로 페이지 열기*/
 		});
-		
-		location.href = postDetails;
-		window.open(postDetails);
-		console.log(postDetails);
-    });
-  });
-}
-
-function postBottomNumber(num) {
-  postBottomNumberContainer.innerHTML = '';
-  const numberStart = Math.floor((currentPageNumber - 1) / 10) * 10 + 1;
-  const numberEnd = Math.min(numberStart + 9, totalPages);
-
-  for (let i = numberStart; i <= numberEnd; i++) {
-    const numbers = document.createElement('p');
-    numbers.textContent = i;
-
-    if (i === currentPageNumber) {
-      numbers.classList.add('communityForum-page-numbers-selector');
-    } else {
-      numbers.classList.add('communityForum-page-numbers-unSelector');
-    }
-
-    numbers.disabled = i === currentPageNumber;
-    numbers.addEventListener('click', () => movePost(i));
-    postBottomNumberContainer.appendChild(numbers);
-  }
-}
-
-function movePost(post) {
-  if (post < 1 || post > totalPages) return;
-  currentPageNumber = post;
-  getPost(currentPageNumber);
-  postBottomNumber();
+	});
 }
 
 
+postSearch.addEventListener("keydown", function(event) { //검색창 엔터키 입력시
+	if (event.key === 'Enter') {  //엔터키 입력시
+		event.preventDefault(); //기본 이벤트 제거
+		alert(`${postSearch.value}의 내용을 검색합니다`); //검색창에 입력한 내용 알림창으로 출력
+	}
+});
 
+function postBottomNumber(num) {  //페이지 번호
+	postBottomNumberContainer.innerHTML = ''; //페이지 번호 초기화
+	const numberStart = Math.floor((currentPageNumber - 1) / 10) * 10 + 1;  //시작 페이지
+	const numberEnd = Math.min(numberStart + 9, totalPages);  //끝 페이지
 
+	for (let i = numberStart; i <= numberEnd; i++) {  //페이지 번호 출력
+		const numbers = document.createElement('p');  //페이지 번호 생성
+		numbers.textContent = i;  //페이지 번호 내용
+
+		if (i === currentPageNumber) {  //현재 페이지일 때
+			numbers.classList.add('communityForum-page-numbers-selector');  //선택된 페이지 번호 클래스 추가
+		} else {  //현재 페이지가 아닐 때
+			numbers.classList.add('communityForum-page-numbers-unSelector');  //선택되지 않은 페이지 번호 클래스 추가
+		}
+
+		numbers.disabled = i === currentPageNumber; //현재 페이지 비활성화
+		numbers.addEventListener('click', () => movePost(i)); //페이지 번호 클릭시
+		postBottomNumberContainer.appendChild(numbers); //페이지 번호 추가
+	}
+}
+function movePost(post) { //페이지 이동
+	if (post < 1 || post > totalPages) return;  //페이지 범위
+	currentPageNumber = post; //현재 페이지 번호
+	getPost(currentPageNumber); //게시글 가져오기
+	postBottomNumber(); //페이지 번호
+}
 
 // 이전 페이지로 이동
 movePrev.addEventListener('click', () => movePost(currentPageNumber - 1));
@@ -148,61 +134,5 @@ moveLast.addEventListener('click', () => movePost(totalPages));
 
 
 
-getPost(currentPageNumber);
-postBottomNumber();
-
-
-
-
-
-
-
-if(loginStatus.userLoginStatus === false) {
-	writeBtn.style.backgroundColor = 'gray';
-	writeBtn.addEventListener("click", function () {
-		  alert("로그인 후 글쓰기가 가능합니다");
-		});
-} else {
-	writeBtn.addEventListener("click", function () {
-	  var link = contextPath+"/app/communityForum/communityForumWriteing.jsp";
-	  console.log(link);
-	  location.href = link;
-	  // location.replace(link);
-	  window.open(link);
-	});
-}
-
-
-postSearch.addEventListener("keydown", function (event) {
-  if (event.key === 'Enter') {
-    event.preventDefault(); // 기본 동작(새 줄 추가) 방지
-    alert(`${postSearch.value}의 내용을 검색합니다`);
-  }
-});
-
-/*fetch(`http://localhost:8888/${contextPath}/app/communityForum/communityForumDetail.jsp?postNum=${post.postNumber}``, {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'  // 요청의 Content-Type을 JSON으로 설정
-  },
-  body: JSON.stringify(data)  // JavaScript 객체를 JSON 문자열로 변환하여 전송
-})
-.then(response => response.json())  // 응답을 JSON으로 변환
-.then(data => {
-  console.log('서버 응답:', data);
-})
-.catch(error => {
-  console.error('오류 발생:', error);
-});*/
-
-
-/*fetch(`http://localhost:8888/${contextPath}/app/communityForum/communityForumDetail.jsp?postNum=${post.postNumber}`, {
-				    method: 'POST',
-				    headers: {
-				        'Content-Type': 'application/json'
-				    },
-				    body: JSON.stringify(myData)
-				})
-				.then(response => response.json())
-				.then(data => console.log('Success:', data))
-				.catch(error => console.error('오류!!!:', error));*/
+getPost(currentPageNumber); //게시글 가져오기
+postBottomNumber(); //페이지 번호

@@ -89,7 +89,7 @@
 		  		userNickname: "${post.userNickName}",
 		  		postCategory: "${post.forumCategory}",
 		  		postTitle: "${post.forumTitle}",
-		  		postData: "${post.forumDate}"
+		  		postData: "${post.finalDate}"
 		  	}<c:if test="${post ne posts[posts.size()-1]}">,</c:if>
 		  </c:forEach>
 		  ];

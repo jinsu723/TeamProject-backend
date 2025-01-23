@@ -15,7 +15,7 @@
   <script defer src="${pageContext.request.contextPath}/assets/js/preset/mainLogin.js"></script>
   <script defer src="${pageContext.request.contextPath}/assets/js/communityForum/communityForumDetail.js"></script>
 
-  <title>키보드워리어님의 게시글</title>
+  <title>게시글</title>
 </head>
 
 <body>
@@ -41,40 +41,34 @@
 
     <div class="communityForumDetail-content">
       <div class="communityForumDetail-content-text"></div>
-      <img class="communityForumDetail-content-images" alt="사용자 이미지">
+      <img class="communityForumDetail-content-images">
     </div>
     <div class="communityForumDetail-button-container">
       <button class="communityForumDetail-communityForum-index-button">목록</button>
       <button class="communityForumDetail-edit-button">수정</button>
-      <form action="" method=""><button class="communityForumDetail-delete-button" type="submit">삭제</button></form>
+      <button class="communityForumDetail-delete-button">삭제</button>
     </div>
 
     <div class="communityForumDetail-comment-list-container">
-      <div class="communityForumDetail-comment-input"><input type="text" placeholder="댓글을 입력해 주세요"></div>
-      <button>등록</button>
+      <%-- <form class="communityForumDetail-comment-input" action="${pageContext.request.contextPath}/app/communityForum/communityForumDetail.cf" method="post"><input type="text" name="commentText" placeholder="댓글을 입력해 주세요">
+      <button type="submit">등록</button>
+      </form> --%>
+      <div class="communityForumDetail-comment-input"><input type="text" name="commentText" placeholder="댓글을 입력해 주세요"></div>
+      <button type="button" class="addComment">등록</button>
+      
     </div>
     <div class="communityForumDetail-commnet-list-container">
       <ul class="communityForumDetail-comment-list">
         <li class="communityForumDetail-comment-list-item">
           <div class="communityForumDetail-comment-list-details">
-            <p class="communityForumDetail-comment-list-userName"></p>
+             <p class="communityForumDetail-comment-list-userName"></p>
             <p class="communityForumDetail-comment-list-colon"></p>
             <p class="communityForumDetail-comment-list-content"></p>
             <p class="communityForumDetail-comment-list-time"></p>
+            <button class="communityForumDetail-comment-delete"></button> 
           </div>
           <hr class="communityForumDetail-comment-line-line">
         </li>
-
-        <!-- <li class="communityForumDetail-comment-list-item">
-          <div class="communityForumDetail-comment-list-details">
-            <p class="communityForumDetail-comment-list-userName">키보드워리어</p>
-            <p class="communityForumDetail-comment-list-colon">:</p>
-            <p class="communityForumDetail-comment-list-content">브론즈ㅋㅋㅋㅋ 웃기네요</p>
-            <p class="communityForumDetail-comment-list-time">2025-01-11 22:22</p>
-            <button class="communityForumDetail-comment-delete">삭제</button>
-          </div>
-          <hr class="communityForumDetail-comment-line-line">
-        </li> -->
       </ul>
     </div>
   </main>
@@ -88,7 +82,7 @@
   				detailTitle: "${detail.forumTitle}",
   				detailUserNickName: "${detail.userNickName}",
   				detailCategory: "${detail.forumCategory}",
-  				detailData: "${detail.forumDate}",
+  				detailDate: "${detail.finalDate}",
   				detailContent: "${detail.forumContent}"
   			}<c:if test="${detail ne details[details.size()-1]}">,</c:if>
   		</c:forEach>
@@ -96,6 +90,8 @@
   	const detailsComment = [
   		<c:forEach var="comment" items="${comments}">
   			{
+  				commentNumber: "${comment.commentNumber}",
+  				commentUserNumber: "${comment.userNumber}",
   				commentUserNickName: "${comment.userNickName}",
   				commentContent: "${comment.commentContent}",
   				commentDate: "${comment.commentDate}"
@@ -108,6 +104,10 @@
   	const postDetailsNumber = {
   			postNumber: "${postNum}"
   	};
+  	const loginStatus = {
+  			userLoginStatus: ${userCheckLogins}
+  	};
+  	
   </script>
 
 </body>
