@@ -20,7 +20,7 @@ public class MyPageCheckPass implements Execute {
 
 		HttpSession session = request.getSession();
 		UserDTO dto = (UserDTO) session.getAttribute("userDTO");
-		if(dto == null) {
+		if (dto == null) {
 			rs.setPath(request.getContextPath() + "/app/user/login/login.jsp");
 			rs.setRedirect(true);
 			return rs;
@@ -30,12 +30,15 @@ public class MyPageCheckPass implements Execute {
 
 		if ((dto.getUserPasswd().equals(request.getParameter("password")))) {
 			System.out.println("패스워드 true");
-			rs.setPath(request.getContextPath() + "/app/myPage/myPageMain.jsp");
-			rs.setRedirect(true);
+			session.setAttribute("checkPass", "pass");
+
+			rs.setPath("/app/myPage/myPageMain.jsp");
+			rs.setRedirect(false);
 		} else {
 			System.out.println("패스워드 false");
-			rs.setPath("/app/myPage/checkPass.jsp");
-			rs.setRedirect(false);
+
+			rs.setPath(request.getContextPath() + "/app/myPage/checkPass.jsp");
+			rs.setRedirect(true);
 		}
 
 		return rs;

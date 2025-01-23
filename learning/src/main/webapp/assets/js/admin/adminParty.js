@@ -68,20 +68,19 @@ function getban(page) {
       banContainer.appendChild(banLine);
       const banControllButton = banItem.querySelector(".ban-controll");
 
-      const userNickname = document.getElementsByClassName('.manager-ban-user-list-ban-nickName').innerText;
-
       banControllButton.addEventListener('click', () => {
-         const checkUnBan = confirm(`${ban.userNickname} 유저를 바로 밴 해제 하시겠습니까?`);
+      console.log(`${forum.forumTitle}`)
+         const checkUnBan = confirm(`${forum.forumTitle} 게시글을 삭제하시겠습니까?`);
          if (checkUnBan) {
-            const userNickname = ban.userNickname;
+            const forumNumber = forum.forumNumber;
             const contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2)); // contextPath 추출
-            console.log(userNickname);
+            console.log(forumNumber);
 
             // AJAX 요청
-            fetch(`${contextPath}/cancelBen.ad`, {
+            fetch(`${contextPath}/deleteForum.ad`, {
                method: "POST",
                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-               body: `userNickname=${encodeURIComponent(userNickname)}`
+               body: `forumNumber=${encodeURIComponent(forumNumber)}`
             })
             location.reload();
 
@@ -143,78 +142,6 @@ resetButtonSearch.addEventListener("click", function() {
    banSearch.value = '';
 });
 
-
-
-
-
-
-
-
-
-banSearch.addEventListener("keydown", function(event) {
-   if (event.key === 'Enter') {
-      event.preventDefault(); // 기본 동작(새 줄 추가) 방지
-      alert(`${banSearch.value}의 내용을 검색합니다`);
-      let isMatch = false;
-
-      const pageSize = 10;
-      let pageItems = 0;
-      for (let i in forums) {
-         if ((forums[i].userNickname).indexOf(`${banSearch.value}`) >= 0) {
-            if (!isMatch) {
-               banContainer.innerHTML = "";
-            }
-            forum = forums[i];
-
-            const banItem = document.createElement('li');
-            banItem.classList.add('manager-ban-user-list-item');
-            banItem.innerHTML = `
-                  <div class="manager-ban-user-list-ban-userId">${forum.forumNumber}</div>
-                  <div class="manager-ban-user-list-ban-nickName">${forum.userNickname}</div>
-                  <div class="manager-ban-user-list-ban-text">${forum.userTier}</div>
-                  <div class="ban-list-date">
-                  <div class="manager-ban-user-list-ban-start-date">${forum.forumTitle}</div>
-                  <div class="manager-ban-user-list-ban-end-date">${forum.forumCategory}</div>
-                  <div class="manager-ban-user-list-ban-date-count">${timeToString(forum.forumDate)}</div>
-                     </div>
-                     <button type="submit" class="ban-controll">삭제</button>
-                   `;
-
-
-            const banLine = document.createElement('hr');
-            banLine.classList.add('manager-ban-user-list-item-line');
-            banContainer.appendChild(banItem);
-            banContainer.appendChild(banLine);
-            const banControllButton = banItem.querySelector(".ban-controll");
-
-            banControllButton.addEventListener('click', () => {
-               const checkUnBan = prompt(`${forum.userNickname} 유저를 바로 밴 하시겠습니까?`);
-               const checkUnBan2 = prompt(`${forum.userNickname} 일수?`);
-
-               if ((checkUnBan != '' && checkUnBan != null) && (checkUnBan2 != '' && checkUnBan2 != null)) {
-                  console.log(checkUnBan);
-                  console.log(checkUnBan2);
-
-                  const form = document.createElement("form");
-                  form.method = 'post';
-                  form.action = '/learning/adminParty.ad';
-
-                  form.innerHTML = "<input name=reason value='" + checkUnBan + "'>" + "<input name=day value='" + checkUnBan2 + "'>";
-
-                  document.body.appendChild(form);
-                  form.submit();
-               }
-
-            });
-            isMatch = true;
-         }
-
-      }
-      if (isMatch == false) {
-         alert("검색 내역이 없습니다");
-      }
-   }
-});
 
 resetButtonSearch.addEventListener("click", function() {
    banSearch.value = '';

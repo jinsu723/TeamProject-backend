@@ -8,7 +8,7 @@
 		select user_id, user_nickname, ben_reason, ben_start_date, (ben_start_date + ben_period) ben_end_date, ben_period
 		from tbl_user u join tbl_ben b
 		on u.user_number = b.user_num
-		order by ben_number desc
+		order by user_id desc
 	</select>
 	
 	<!-- 벤 된 회원 수 조회 -->

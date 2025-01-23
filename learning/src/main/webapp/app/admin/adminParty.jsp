@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
 <%-- <%@ page import="com.fasterxml.jackson.databind.ObjectMapper" %> --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -142,7 +142,7 @@
            forumTitle: "${forum.forumTitle}",
            forumCategory: "${forum.forumCategory}",
            forumDate: "${forum.forumDate}"
-        }
+        },
         <c:if test="${user ne userList[userList.size()-1]}">,</c:if>
      </c:forEach>
      ];

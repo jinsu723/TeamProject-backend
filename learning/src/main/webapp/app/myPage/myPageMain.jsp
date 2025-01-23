@@ -4,6 +4,13 @@
 <% if(session.getAttribute("userDTO")==null){
 	System.out.println("없음");
 	response.sendRedirect(request.getContextPath()+"/app/user/login/login.jsp");
+}else{
+	if(session.getAttribute("checkPass")!="pass"){
+		System.out.println("checkPass = " + session.getAttribute("checkPass"));
+		response.sendRedirect(request.getContextPath()+"/app/myPage/checkPass.jsp");
+	}else{
+		session.setAttribute("checkPass", "non");
+	}
 }%>
 <% UserDTO dto = (UserDTO) session.getAttribute("userDTO"); %>
 <!DOCTYPE html>

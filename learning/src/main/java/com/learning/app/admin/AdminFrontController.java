@@ -46,7 +46,7 @@ public class AdminFrontController extends HttpServlet {
 			System.out.println("logout");
 			result = new AdminLogoutOkController().execute(request, response);
 			break;
-			
+
 		case "/adminMain.ad":
 			System.out.println("관리자 메인 페이지");
 			result = new AdminMainController().execute(request, response);
@@ -57,12 +57,12 @@ public class AdminFrontController extends HttpServlet {
 			System.out.println("회원 목록 조회");
 			result = new AdminUserController().execute(request, response);
 			break;
-			
+
 		case "/adminParty.ad":
 			System.out.println("게시글 목록 조회");
 			result = new AdminPartyController().execute(request, response);
 			break;
-			
+
 		case "/adminCommunity.ad":
 			System.out.println("커뮤니티 게시글 목록");
 			result = new AdminCommunityController().execute(request, response);
@@ -84,12 +84,17 @@ public class AdminFrontController extends HttpServlet {
 			System.out.println("adminDoBen.ad");
 			result = new AdminDoBenController().execute(request, response);
 			break;
-			
+
 		case "/searchUser.ad":
 			System.out.println("searchUser.ad");
 			result = new AdminSearchUserController().execute(request, response);
 			break;
-			
+
+		case "/deleteForum.ad":
+			System.out.println("deleteForum.ad");
+			new AdminDeleteForumController().execute(request, response);
+			break;
+
 		default:
 			response.sendError(HttpServletResponse.SC_NOT_FOUND); // 잘못된 URL 처리
 			return;

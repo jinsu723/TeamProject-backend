@@ -27,7 +27,7 @@ public class MyPageMyRecruitment implements Execute {
 		list = new MyPageDAO().myRecruitmentList(userNumber);
 		request.setAttribute("posts", list);
 		request.setAttribute("pageType", "신청");
-
+		
 		rs.setPath("/app/myPage/myPageRecruitment.jsp");
 		rs.setRedirect(false);
 		return rs;

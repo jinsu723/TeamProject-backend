@@ -11,6 +11,7 @@ public class MyForumDTO {
 //    forum_content VARCHAR2(2000) NOT NULL,
 
 	private String forumNumber;
+	private String partyNumber;
 	private String userNickname;
 	private String userTier;
 	private String forumCategory;
@@ -21,8 +22,17 @@ public class MyForumDTO {
 
 	@Override
 	public String toString() {
-		return "[" + forumNumber + ", \'" + userNickname + "\', \'" + userTier + "\', \'" + forumCategory + "\'"
-				+ ", \'" + forumTitle + "\', " + commentCount + ", \'" + forumDate + "\', \'" + partyState + "\']";
+		return "[" + forumNumber + ", " + partyNumber + ", \'" + userNickname + "\', \'" + userTier + "\', \'"
+				+ forumCategory + "\'" + ", \'" + forumTitle + "\', " + commentCount + ", \'" + forumDate + "\', \'"
+				+ partyState + "\']";
+	}
+
+	public String getPartyNumber() {
+		return partyNumber;
+	}
+
+	public void setPartyNumber(String partyNumber) {
+		this.partyNumber = partyNumber;
 	}
 
 	public String getForumNumber() {

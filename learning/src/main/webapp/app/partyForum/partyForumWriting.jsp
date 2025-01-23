@@ -30,16 +30,15 @@
 				<h3>신청자가 있다면 게시글 삭제 불가능 합니다!!</h3>
 			</div>
 
-			<form action="WritingEnd.fo" method="post">
+			<form action="WritingEnd.fo" method="post" class="partyForumWriting-form">
 				<div class="partyForumWriting-title">
 					<p class="partyForumWriting-title-text">제목</p>
-					<input type="text" name="forumTitle" id="title"
-						placeholder="제목을 입력하세요(50자)">
+					<input type="text" name="forumTitle" id="title"  	placeholder="제목을 입력하세요(50자)" required="required">
 				</div>
 				<div class="partyForumWriting-content">
 					<p class="partyForumWriting-content-text">내용</p>
-					<div class="partyForumWriting-content-text-content" contentEditable="true"></div>
-					<input type="hidden" name="forumContent" id="hiddenForumContent">
+					<div class="partyForumWriting-content-text-content" contentEditable="true" required="required"></div>
+					<input type="hidden" name="forumContent" id="hiddenForumContent" required="required">
 
 				</div>
 				<div class="partyForumWriting-file">
@@ -59,6 +58,7 @@
 	<jsp:include page="/app/preset/footer.jsp" />
 
 	<script>
+	if()
 		document.querySelector('form').onsubmit = function(event) {
 
 			const content = document.querySelector('.partyForumWriting-content-text-content').innerHTML;

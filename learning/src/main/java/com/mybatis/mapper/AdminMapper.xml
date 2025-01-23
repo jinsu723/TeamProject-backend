@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- 관리자 로그인 쿼리 -->
 <mapper namespace="Admin">
+	<!-- 관리자 로그인 쿼리 -->
 	<select id="login" parameterType="map" resultType="AdminDTO">
 		SELECT
 		admin_number, admin_id, admin_passwd
@@ -33,35 +33,72 @@
 		FROM tbl_forum f INNER JOIN tbl_user u
 		ON f.user_number =
 		u.user_number
-		WHERE f.forum_category LIKE '%모집%'
+		WHERE f.forum_category = '모집'
+		order by f.forum_number desc
 	</select>
 	<!-- 전체 파티 게시글 수 -->
 	<select id="totalPartyForumCount" resultType="int">
 		SELECT count(*)
 		FROM tbl_forum
-		WHERE forum_category LIKE '%모집%'
+		WHERE forum_category = '모집'
 	</select>
 
+
+	<!-- 커뮤니티 게시글 목록 -->
+	<select id="adminCommunity" resultType="AdminPartyDTO">
+		SELECT f.forum_number,
+		f.forum_category, f.forum_title, f.forum_date,
+		u.user_nickname,
+		u.user_tier
+		FROM tbl_forum f INNER JOIN tbl_user u
+		ON f.user_number =
+		u.user_number
+		WHERE f.forum_category NOT LIKE '모집'
+	</select>
+
+	<!-- 커뮤니티 게시글 수 -->
+	<select id="totalCommunityCount" resultType="int">
+		select count(*)
+		from
+		tbl_forum
+		where forum_category = '자유'
+	</select>
+
+	<!-- 최근 n일동안 게시글 수 -->
 	<select id="postCount" parameterType="int" resultType="int">
-		SELECT count(*) FROM TBL_FORUM WHERE TO_CHAR(FORUM_DATE,'YYYY-MM-DD') =
+		SELECT
+		count(*) FROM TBL_FORUM WHERE TO_CHAR(FORUM_DATE,'YYYY-MM-DD') =
 		TO_CHAR(SYSDATE-#{day},'YYYY-MM-DD')
 	</select>
 
-
+	<!-- 티어별 유저 수 -->
 	<select id="tierCount" parameterType="String" resultType="int">
-		SELECT COUNT(USER_TIER) count FROM TBL_USER WHERE USER_TIER = #{tier}
+		SELECT
+		COUNT(USER_TIER) count FROM TBL_USER WHERE USER_TIER = #{tier}
 	</select>
 
 
+	<!-- 카테고리별 게시글 수 -->
 	<select id="categoryCount" parameterType="String"
 		resultType="int">
-		SELECT COUNT(FORUM_CATEGORY) count FROM TBL_FORUM WHERE FORUM_CATEGORY = #{category}
+		SELECT COUNT(FORUM_CATEGORY) count FROM TBL_FORUM WHERE
+		FORUM_CATEGORY = #{category}
 	</select>
-	
-	<select id="searchUser" parameterType="String" resultType="UserDTO">
-		select user_number, user_nickname, user_tier, user_phone, user_join_date, user_ben_cnt
+
+
+	<!-- 닉네임으로 유저 검색 -->
+	<select id="searchUser" parameterType="String"
+		resultType="UserDTO">
+		select user_number, user_nickname, user_tier, user_phone,
+		user_join_date, user_ben_cnt
 		from tbl_user
-		where user_nickname like '%'||#{userNickname}||'%'
+		where user_nickname like
+		'%'||#{userNickname}||'%'
 		order by user_number
 	</select>
+
+	<!-- 파티 게시글 삭제 -->
+	<delete id="deletePartyForum" parameterType="int">
+		delete from tbl_forum where forum_number = #{forumNumber}
+	</delete>
 </mapper>
