@@ -41,7 +41,7 @@ public class AdminLoginOkController implements Execute{
 	        System.out.println("로그인 성공");
 	        HttpSession session = request.getSession();
 	        session.setAttribute("adminDTO", dto);
-	        result.setPath(request.getContextPath() + "/app/admin/adminMain.jsp");
+	        result.setPath(request.getContextPath() + "/adminMain.ad");
 	        result.setRedirect(true);
 	    } else { // 로그인 실패
 	        System.out.println("로그인 실패");

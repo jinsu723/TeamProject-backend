@@ -74,6 +74,11 @@ public class AdminDAO {
 	public int getCategoryCount(String category) {
 		return sqlSession.selectOne("Admin.categoryCount", category);
 	}
+	
+	// 유저 검색
+	public List<UserDTO> getSearchUserResult(String userNickname){
+		return sqlSession.selectList("Admin.searchUser", userNickname);
+	}
    
    
 }

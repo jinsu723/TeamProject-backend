@@ -36,7 +36,8 @@ body{
   height: 50px;
   margin: auto;
   display: none;
-  margin-top: 7px;
+  top: 50px;
+  z-index: 1;
 }
 .mng-users-text:hover #mng-users-dropText{
   display: block;
@@ -55,19 +56,20 @@ body{
   margin: auto;
   margin-left: 30px;
   font-family: "Noto Sans KR ExtraBold";
+  position: relative;
 
 }
 
 .mng-header-drop{
   background-color: darkblue;
   display: none;
-  margin-top: 7px;
   position: absolute;
   border-radius: 8px;
   height: 100px;
   width: 160px;
-  /* margin-top: 1px; */
   align-content:center ;
+  top: 50px;
+  z-index: 1;
 }
 #mng-header-dropDown1{
   border-bottom: solid 1px black;

@@ -108,15 +108,13 @@ function getban(page) {
 
 		const userNickname = document.getElementsByClassName('.manager-ban-user-list-ban-nickName').innerText;
 
-		console.log(userNickname);
-		console.log("야호");
-
 		banControllButton.addEventListener('click', () => {
 			const checkUnBan = confirm(`${ban.userNickname} 유저를 바로 밴 해제 하시겠습니까?`);
 			if (checkUnBan) {
 				const userNickname = ban.userNickname;
 				const contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2)); // contextPath 추출
 				console.log(userNickname);
+				console.log(`${contextPath}/cancelBen.ad`);
 
 				// AJAX 요청
 				fetch(`${contextPath}/cancelBen.ad`, {
@@ -125,6 +123,7 @@ function getban(page) {
 					body: `userNickname=${encodeURIComponent(userNickname)}`
 				})
 				location.reload();
+				console.log("삭제 완료");
 
 			} else {
 				alert('작업이 취소되었습니다');
