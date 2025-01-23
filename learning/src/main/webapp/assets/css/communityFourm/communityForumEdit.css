@@ -1,207 +1,216 @@
 * { /* 해당 페이지 전체 여백들 0으로 시자작 */
-  margin: 0px;
-  padding: 0px;
+	margin: 0px;
+	padding: 0px;
 }
 
-body{
-  height: 100vh;
-  width: 100%;
-  /* background-color: red; */
+body {
+	height: 100vh;
+	width: 100%;
+	/* background-color: red; */
 }
 
 header {
-  width: 100%;
-  height: 10%;
-  background-color: black;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+	width: 100%;
+	height: 10%;
+	background-color: black;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
-nav{
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
-  color: white;
+nav {
+	height: 100%;
+	display: flex;
+	justify-content: space-between;
+	color: white;
 }
 
-nav > div {
-  display: flex;
+nav>div {
+	display: flex;
 }
 
 ul {
-  list-style-type: none;
-  display: flex;
+	list-style-type: none;
+	display: flex;
 }
 
-
 .Login-logo {
-  font-family: "Metal Mania";
-  font: bold;
-  margin: auto 30px;
-  font-size: 40px;
-  color: white;
-  cursor: pointer;
+	font-family: "Metal Mania";
+	font: bold;
+	margin: auto 30px;
+	font-size: 40px;
+	color: white;
+	cursor: pointer;
 }
 
 .Login-contents {
-  margin-left: 30px;
-  text-align: center;
-  color: white;
+	margin-left: 30px;
+	text-align: center;
+	color: white;
 }
 
-.Login-contents > a {
-  width: 160px;
-  height: 50px;
-  margin: auto;
-  margin-right: 40px;
+.Login-contents>a {
+	width: 160px;
+	height: 50px;
+	margin: auto;
+	margin-right: 40px;
 }
 
-.Login-contents > a > li {
-  line-height: 50px;
-  background-color: #2c2c2c;
-  font-size: 24px;
-  border-radius: 8px;
+.Login-contents>a>li {
+	line-height: 50px;
+	background-color: #2c2c2c;
+	font-size: 24px;
+	border-radius: 8px;
 }
 
 .login-dropdown {
-  background-color: #757575;
-  height: 50px;
-  width: 125px;
-  justify-content: center;
-  margin: auto 30px;
-  position: relative;
-  cursor: pointer;
+	background-color: #757575;
+	height: 50px;
+	width: 125px;
+	justify-content: center;
+	margin: auto 30px;
+	position: relative;
+	cursor: pointer;
 }
 
 .login-dropdown-box {
-  display: flex;
+	display: flex;
 }
 
 .login-dropdown-user-box {
-  margin: auto 0;
+	margin: auto 0;
 }
 
 .login-dropdown-user {
-  line-height: 50px;
+	line-height: 50px;
 }
 
 .login-dropdown-icon {
-  margin: auto 0;
+	margin: auto 0;
 }
 
 #login-display {
-  font-size: 15px;
-  position: absolute;
-  flex-direction: column;
-  top : 50px;
-  background-color: #757575;
-  width: 126px;
-  display: none;
+	font-size: 15px;
+	position: absolute;
+	flex-direction: column;
+	top: 50px;
+	background-color: #757575;
+	width: 126px;
+	display: none;
 }
 
-.login-dropdown > ul > a > li {
-  border: 1px solid black;
-  height: 50px;
-  line-height: 50px;
+.login-dropdown>ul>a>li {
+	border: 1px solid black;
+	height: 50px;
+	line-height: 50px;
 }
 
 .login-dropdown-up {
-  background-color: #757575;
-  height: 50px;
-  margin: auto 30px;
-  display: none;
-  width: 120px;
-  justify-content: center;
+	background-color: #757575;
+	height: 50px;
+	margin: auto 30px;
+	display: none;
+	width: 120px;
+	justify-content: center;
 }
 
 .login-togle {
-  margin:auto 0;
+	margin: auto 0;
 }
 
 .login-user {
-  cursor: pointer;
-  margin: auto 0;
+	cursor: pointer;
+	margin: auto 0;
 }
 
 .login-user-icon {
-  cursor: pointer;
-  margin: auto 0;
+	cursor: pointer;
+	margin: auto 0;
 }
 
-
-
-
-.communityForumEdit-main{
-  display: flex;
-  flex-direction: column;
-  height: 80%;
-  /* background-color: blue; */
-}
-.communityForumEdit-container{
-  width: 100%;
-  height: 100%;
-}
-.communityForumEdit-main-container { /* 해당 컨텐츠가 들어갈 모든 요소들(main태그안에 큰 틀) */
-  left: 50%;
-  margin-top: 30px;
-  position: absolute;
-  text-align: center;
-  width: 70%;;
-  transform: translate(-50%, 0%);
-  /* border: 1px solid red; */
-}
-.communityForumEdit-main-title{ /* 커뮤니티 글꼴 적용 */
-  margin-bottom: 30px;
-  font-family: "Noto Sans KR ExtraBold";
+.communityForumEdit-main {
+	display: flex;
+	flex-direction: column;
+	height: 80%;
+	/* background-color: blue; */
 }
 
-.communityForumEdit-category, .communityForumEdit-title, .communityForumEdit-content{
-  display: flex;
-  flex-direction: row;
-  /* border: 1px solid blue; */
+.communityForumEdit-container {
+	width: 100%;
+	height: 100%;
 }
-.communityForumEdit-category-text, .communityForumEdit-title, .communityForumEdit-content{
-  font-family: "Noto Sans KR ExtraBold";
-  font-size: 20px;
-  margin-right: 20px;
+
+.communityForumEdit-main-container {
+	/* 해당 컨텐츠가 들어갈 모든 요소들(main태그안에 큰 틀) */
+	left: 50%;
+	margin-top: 30px;
+	position: absolute;
+	text-align: center;
+	width: 70%;;
+	transform: translate(-50%, 0%);
+	/* border: 1px solid red; */
 }
-.communityForumEdit-category-strategy-text, .communityForumEdit-category-free-text {
-  font-family: "Noto Sans KR Medium";
-  margin: 0px 15px 0px 5px;
+
+.communityForumEdit-main-title { /* 커뮤니티 글꼴 적용 */
+	margin-bottom: 30px;
+	font-family: "Noto Sans KR ExtraBold";
 }
-.communityForumEdit-title-text, .communityForumEdit-content-text{
-  margin-left: 35px;
-  margin-right: 20px;
-  line-height: 40px;
+
+.communityForumEdit-category, .communityForumEdit-title,
+	.communityForumEdit-content {
+	display: flex;
+	flex-direction: row;
+	/* border: 1px solid blue; */
 }
-.communityForumEdit-title>input{
-  background-color: #F5F5F5;
-  border-radius: 10px;
-  padding: 0px 10px;
-  width: 85%;
-  height: 4vh;
-  border: 1px solid black;
-  /* border: 0; */
-  color: black;
+
+.communityForumEdit-category-text, .communityForumEdit-title,
+	.communityForumEdit-content {
+	font-family: "Noto Sans KR ExtraBold";
+	font-size: 20px;
+	margin-right: 20px;
 }
-.communityForumEdit-content-text-content{
-  width: 80%;
-  background-color: #F5F5F5;
-  border-radius: 10px;
-  padding: 10px;
-  min-width: 85%;
-  overflow-y: auto;
-  height: auto;
-  font-size: 16px;
-  height: 377px;
-  border: 1px solid black;
-  text-align: left;
-  color: black;
-  font-family: "Noto Sans KR Regular";
+
+.communityForumEdit-category-strategy-text,
+	.communityForumEdit-category-free-text {
+	font-family: "Noto Sans KR Medium";
+	margin: 0px 15px 0px 5px;
 }
+
+.communityForumEdit-title-text, .communityForumEdit-content-text {
+	margin-left: 35px;
+	margin-right: 20px;
+	line-height: 40px;
+}
+
+.communityForumEdit-title>input {
+	background-color: #F5F5F5;
+	border-radius: 10px;
+	padding: 0px 10px;
+	width: 85%;
+	height: 4vh;
+	border: 1px solid black;
+	/* border: 0; */
+	color: black;
+}
+
+#communityForumEdit-content-text-content {
+	width: 80%;
+	background-color: #F5F5F5;
+	border-radius: 10px;
+	padding: 10px;
+	min-width: 85%;
+	overflow-y: auto;
+	height: auto;
+	font-size: 16px;
+	height: 377px;
+	border: 1px solid black;
+	text-align: left;
+	color: black;
+	font-family: "Noto Sans KR Regular";
+}
+
 [contenteditable="true"]:empty:before {
-  content: attr(placeholder);
+	content: attr(placeholder);
 }
 /* .communityForumEdit-content-text-content>textarea{
   width: 100%;
@@ -229,92 +238,94 @@ ul {
 .communityForumEdit-content > textarea::placeholder{
   margin-top: 20px;
 } */
-
-.communityForumEdit-content{
-  margin-top: 20px;
-}
-.communityForumEdit-file{
-  margin-top: 10px;
-  position: relative;
-  display: flex;
-  width: 85%;
-  margin-left: 7%; 
-  /* border: 1px solid green; */
-}
-.communityForumEdit-content-text-content-image{
-  height: 173px;
-  width: 235px;
-  border: 1px solid red;
+.communityForumEdit-content {
+	margin-top: 20px;
 }
 
-.icon-file-image{
-  font-size: 35px;
-}
-.communityForumEdit-file-select{
-  padding-top: 5px;
-  padding-left: 5px;
-  background-color: #F5F5F5;
-  width: 35%;
-  text-align: left;
-  margin-top: 10px;
-  border: 1px solid black;
-}
-.communityForumEdit-editCancel-button{
-  margin-top: 10px;
-  border: 0;
-  background-color: #595959;
-  color: white;
-  position: absolute;
-  border-radius: 5px;
-  width: 10%;
-  height: 100%;
-  font-size: 20px;
-  right: 12%;
-}
-.communityForumEdit-editComplete-button{
-  margin-top: 10px;
-  border: 0;
-  background-color: #595959;
-  color: white;
-  position: absolute;
-  border-radius: 5px;
-  width: 10%;
-  height: 100%;
-  font-size: 20px;
-  right: 0%;
+.communityForumEdit-file {
+	margin-top: 10px;
+	position: relative;
+	display: flex;
+	width: 85%;
+	margin-left: 7%;
+	/* border: 1px solid green; */
 }
 
+.communityForumEdit-content-text-content-image {
+	height: 173px;
+	width: 235px;
+	border: 1px solid red;
+}
 
+.icon-file-image {
+	font-size: 35px;
+}
 
+.communityForumEdit-file-select {
+	padding-top: 5px;
+	padding-left: 5px;
+	background-color: #F5F5F5;
+	width: 35%;
+	text-align: left;
+	margin-top: 10px;
+	border: 1px solid black;
+}
 
+.communityForumEdit-editCancel-button {
+	margin-top: 10px;
+	border: 0;
+	background-color: #595959;
+	color: white;
+	border-radius: 5px;
+	margin-right: 10px; width : 10%;
+	height: 100%;
+	font-size: 20px;
+	width: 10%;
+}
 
- 
+.communityForumEdit-editComplete-button {
+	margin-top: 10px;
+	border: 0;
+	background-color: #595959;
+	color: white;
+	border-radius: 5px;
+	width: 10%;
+	height: 100%;
+	font-size: 20px;
+}
 
-
+.communityForumEdit-button-layout {
+	width: 95%;
+	height: 5vh;
+	display: flex;
+	position: absolute;
+	right: 10%;
+	justify-content: end;
+}
 
 footer {
-  height: 10%;
-  width:  100%;
-  background-color: black;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  text-align: center;
-  font-size: 14px;
+	height: 10%;
+	width: 100%;
+	background-color: black;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	text-align: center;
+	font-size: 14px;
 }
 
-.nonLogin-footer-text{
-  padding-bottom: 10px;
-  color: white;
-  justify-items: center;
+.nonLogin-footer-text {
+	padding-bottom: 10px;
+	color: white;
+	justify-items: center;
 }
 
 .nonLogin-footer-text span {
-  margin: 0px 20px;
-  cursor: pointer;
+	margin: 0px 20px;
+	cursor: pointer;
 }
 
 a {
-  color: white;
-  text-decoration-line: none;
+	color: white;
+	text-decoration-line: none;
 }

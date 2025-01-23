@@ -257,7 +257,7 @@ nav > .nonLogin-nav {
   line-height: 25px;
   font-family: "Noto Sans KR Medium";
 }
-.communityForumDetail-comment-list-details>button{
+.communityForumDetail-comment-delete{
   position: absolute;
   right: -7%;
   margin-top: 5px;

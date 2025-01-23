@@ -1,41 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Community">
-    <!-- 게시글 목록(게시글 가져오기) -->
-    <select id="list" resultType="com.learning.app.dto.CommunityDTO">
-        SELECT post.FORUM_NUMBER, u.user_nickname AS userNickName, post.forum_category, post.forum_title, post.forum_date FROM tbl_forum post JOIN tbl_user u ON post.user_number = u.user_number ORDER BY post.FORUM_NUMBER DESC
-    </select>
-    <!-- 외래키 같이 데이터를 참조하는건 AS를 이용하여 Mybatis가 인식할 수 있게 해줘야 함 -->
-    <!-- 이는 MyBatis의 매핑 규칙에 의해 코드작업이 필요함. MyBatis는 DTO와 1:1매핑의 규칙을 따르고, DTO에서는 유저 테이블에 대한 매핑이 없기에
-    	 규칙에 의해서 SQL매핑 파일에서 DTO에 맞게 따라가야 MyBatis의 매핑 규칙이 적용됨 -->
-    
-    <select id="count" resultType="int">
-    	SELECT COUNT(*) AS postCount FROM tbl_forum
-    </select>
-    
-    <select id="postDetails" resultType="com.learning.app.dto.CommunityDTO">
-    	SELECT f.forum_number, f.forum_category, f.forum_title, f.forum_date, f.forum_content, u1.user_nickname AS userNickName
-    FROM tbl_forum f 
-    LEFT JOIN tbl_user u1 ON f.user_number = u1.user_number
-	WHERE f.forum_number = #{postNumber}
-	ORDER BY f.forum_number DESC
-    </select>
-    
-    <select id="getComment" resultType="com.learning.app.dto.CommunityDTO">
-    SELECT c.comment_number, c.comment_content, c.comment_date, u2.user_nickname AS userNickName
-    FROM tbl_comment c 
-    LEFT JOIN tbl_user u2 ON c.user_number = u2.user_number
-    WHERE c.forum_number = #{postNumber}
-    ORDER BY c.comment_date ASC
-    </select>
-    
-    <delete id="deletePost">
-    	DELETE FROM TBL_FORUM WHERE FORUM_NUMBER = #{postNumber}
-    </delete>
-    
-    <!-- 회원가입 쿼리 -->
-    <!-- <insert id="signUp" parameterType="UserDTO">
-        INSERT INTO tbl_user (user_number, user_id, user_passwd, user_nickname, user_tier, user_phone, user_join_date, user_ben_ctn)
-        VALUES (seq_user.nextVal, #{userId}, #{userPasswd}, #{userNickname}, #{userTier}, #{userPhone}, SYSDATE, #{userBenCtn})
-    </insert> -->
+	<!-- 게시글 목록(게시글 가져오기) -->
+	<select id="list" resultType="com.learning.app.dto.CommunityDTO">
+		SELECT
+		post.FORUM_NUMBER,
+		u.user_nickname AS userNickName,
+		post.forum_category,
+		post.forum_title,
+		CASE
+		WHEN post.forum_update IS NOT NULL THEN post.forum_update
+		ELSE post.forum_date
+		END AS final_date
+		FROM tbl_forum post
+		JOIN tbl_user u ON post.user_number = u.user_number
+		WHERE post.forum_category != '모집'
+		ORDER BY post.FORUM_NUMBER DESC
+	</select>
+	<!-- 외래키 같이 데이터를 참조하는건 AS를 이용하여 Mybatis가 인식할 수 있게 해줘야 함 -->
+	<!-- 이는 MyBatis의 매핑 규칙에 의해 코드작업이 필요함. MyBatis는 DTO와 1:1매핑의 규칙을 따르고, DTO에서는 
+		유저 테이블에 대한 매핑이 없기에 규칙에 의해서 SQL매핑 파일에서 DTO에 맞게 따라가야 MyBatis의 매핑 규칙이 적용됨 -->
+
+	<select id="count" resultType="int">
+		SELECT COUNT(*) AS postCount FROM
+		tbl_forum
+	</select>
+
+	<select id="postDetails"
+		resultType="com.learning.app.dto.CommunityDTO">
+		SELECT
+		f.forum_number,
+		f.forum_category,
+		f.forum_title,
+		CASE
+		WHEN f.forum_update IS NOT NULL THEN f.forum_update
+		ELSE f.forum_date
+		END AS final_date,
+		f.forum_content,
+		u1.user_nickname AS userNickName
+		FROM tbl_forum f
+		LEFT JOIN tbl_user u1 ON f.user_number =
+		u1.user_number
+		WHERE f.forum_number = #{postNumber}
+		ORDER BY
+		f.forum_number DESC
+	</select>
+
+	<update id="editMyPost"
+		parameterType="com.learning.app.dto.CommunityDTO">
+		UPDATE tbl_forum SET forum_category = #{forumCategory},
+		forum_title = #{forumTitle}, forum_update = SYSDATE, forum_content =
+		#{forumContent}
+		WHERE forum_number = #{forumNumber} AND user_number =
+		(SELECT user_number
+		FROM tbl_user WHERE user_nickname =
+		#{userNickName})
+	</update>
+	<!-- <select id="editMyPost" resultType="com.learning.app.dto.CommunityDTO"> 
+		SELECT forum_number, user_number, forum_category, forum_title, forum_date, 
+		forum_update, forum_content FROM tbl_forum WHERE forum_number = #{forumNumber} 
+		AND user_number = (SELECT user_number FROM tbl_user WHERE user_nickname = 
+		#{userNickName}) </select> -->
+
+	<select id="getComment"
+		resultType="com.learning.app.dto.CommunityDTO">
+		SELECT c.comment_number, c.user_number, c.comment_content,
+		c.comment_date,
+		u2.user_nickname AS userNickName
+		FROM tbl_comment c
+		LEFT
+		JOIN tbl_user u2 ON c.user_number = u2.user_number
+		WHERE c.forum_number
+		= #{postNumber}
+		ORDER BY c.comment_date ASC
+	</select>
+
+	<delete id="deletePost">
+		DELETE FROM TBL_FORUM WHERE FORUM_NUMBER =
+		#{postNumber}
+	</delete>
+
+	<delete id="deleteComment">
+		DELETE FROM TBL_COMMENT WHERE COMMENT_NUMBER =
+		#{commentNumber}
+	</delete>
+
+	<insert id="addComment">
+		INSERT INTO tbl_comment (comment_number,
+		forum_number, user_number,
+		comment_content, comment_date)
+		VALUES
+		(seq_comment.NEXTVAL, #{forumNumber}, (SELECT user_number FROM
+		tbl_user WHERE user_nickname = #{userNickName} AND ROWNUM = 1),
+		#{commentContent}, SYSDATE)
+	</insert>
+
+	<insert id="addPost">
+		INSERT INTO TBL_FORUM (forum_number, user_number,
+		forum_category,
+		forum_title, forum_date, forum_update, forum_content)
+		VALUES (seq_forum.NEXTVAL, (SELECT user_number FROM tbl_user WHERE
+		user_nickname = #{userNickName} AND ROWNUM = 1), #{forumCategory},
+		#{forumTitle}, SYSDATE, NULL, #{forumContent})
+	</insert>
 </mapper>
