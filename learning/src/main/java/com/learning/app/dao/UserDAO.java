@@ -15,14 +15,7 @@ public class UserDAO {
 		sqlSession = MyBatisConfig.getSqlSessionFactory().openSession(true); // Auto-commit 활성화
 	}
 
-	// 로그인 검증
-//	public UserDTO login(String userId, String userPw) {
-//		Map<String, String> map = new HashMap<String, String>();
-//		map.put("id", userId);
-//		map.put("pw", userPw);
-//		System.out.println("map : " + map);
-//		return sqlSession.selectOne("User.login", map);
-//	}
+
 	// 로그인
 	public UserDTO login(String userId, String userPw) {
 		try {
