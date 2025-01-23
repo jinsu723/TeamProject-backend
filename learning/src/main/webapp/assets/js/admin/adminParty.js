@@ -53,11 +53,11 @@ function getban(page) {
       banItem.innerHTML = `
                         <div class="manager-ban-user-list-ban-userId">${forum.forumNumber}</div>
                         <div class="manager-ban-user-list-ban-nickName">${forum.userNickname}</div>
-                        <div class="manager-ban-user-list-ban-text">${forum.userTier}</div>
+                        <div class="manager-ban-user-list-ban-content">${forum.userTier}</div>
                         <div class="ban-list-date">
                         <div class="manager-ban-user-list-ban-start-date">${forum.forumTitle}</div>
                         <div class="manager-ban-user-list-ban-end-date">${forum.forumCategory}</div>
-                        <div class="manager-ban-user-list-ban-date-count">${timeToString(forum.forumDate)}</div>
+                        <div class="manager-ban-user-list-ban-date">${timeToString(forum.forumDate)}</div>
                            </div>
                            <button type="submit" class="ban-controll">삭제</button>
                          `;
@@ -69,7 +69,7 @@ function getban(page) {
       const banControllButton = banItem.querySelector(".ban-controll");
 
       banControllButton.addEventListener('click', () => {
-      console.log(`${forum.forumTitle}`)
+		console.log(`${forum.forumTitle}`)
          const checkUnBan = confirm(`${forum.forumTitle} 게시글을 삭제하시겠습니까?`);
          if (checkUnBan) {
             const forumNumber = forum.forumNumber;
