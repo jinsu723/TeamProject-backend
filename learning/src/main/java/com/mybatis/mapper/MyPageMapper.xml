@@ -42,7 +42,8 @@
 	
 	
 	<resultMap type="MyForumDTO" id="RecruitmentList">
-		<result property="forumNumber" column="PARTY_NUMBER"/>
+		<result property="forumNumber" column="FORUM_NUMBER"/>
+		<result property="partyNumber" column="PARTY_NUMBER"/>
 		<result property="userNickname" column="USER_NICKNAME"/>
 		<result property="userTier" column="USER_TIER"/>
 		<result property="forumCategory" column="FORUM_CATEGORY"/>
@@ -52,33 +53,37 @@
 		<result property="partyState" column="PARTY_STATE"/>
 	</resultMap>
 	<select id="myRecruitmentList" parameterType="int" resultMap="RecruitmentList">
-		SELECT sub.party_number, sub.USER_NICKNAME, sub.USER_TIER, tf.FORUM_TITLE, tf.FORUM_DATE, sub.party_state
+		SELECT sub.FORUM_NUMBER, sub.party_number, sub.USER_NICKNAME, sub.USER_TIER, tf.FORUM_CATEGORY, tf.FORUM_TITLE, tf.FORUM_DATE, sub.party_state
 		FROM TBL_FORUM tf 
 		join(SELECT tp.party_number, USER_NICKNAME, USER_TIER, tp.forum_number, tp.party_state
 			FROM TBL_USER tu 
 			JOIN (SELECT * FROM TBL_PARTY WHERE USER_NUMBER = #{num}) tp
 			ON tu.USER_NUMBER = tp.user_number) sub
 		ON tf.FORUM_NUMBER = sub.FORUM_NUMBER
+		ORDER BY sub.party_number DESC
 	</select>
 	
 	
 	<resultMap type="MyForumDTO" id="checkingRecruite">
-		<result property="forumNumber" column="PARTY_NUMBER"/>
+		<result property="forumNumber" column="FORUM_NUMBER"/>
+		<result property="partyNumber" column="PARTY_NUMBER"/>
 		<result property="userNickname" column="USER_NICKNAME"/>
 		<result property="userTier" column="USER_TIER"/>
+		<result property="forumCategory" column="FORUM_CATEGORY"/>
 		<result property="forumTitle" column="FORUM_TITLE"/>
 		<result property="forumDate" column="FORUM_DATE"/>
 		<result property="commentCount" column="COMMENT_COUNT"/>
 		<result property="partyState" column="PARTY_STATE"/>
 	</resultMap>
 	<select id="checkRecruiting" parameterType="int" resultMap="checkingRecruite">
-		SELECT sub.PARTY_NUMBER, tu.USER_NICKNAME,tu.USER_TIER, sub.forum_title, sub.FORUM_DATE, sub.PARTY_STATE
+		SELECT sub.FORUM_NUMBER, sub.PARTY_NUMBER, tu.USER_NICKNAME,tu.USER_TIER, sub.forum_category, sub.forum_title, sub.FORUM_DATE, sub.PARTY_STATE
 		FROM TBL_USER tu 
-		JOIN (SELECT tp.PARTY_NUMBER, tp.USER_NUMBER,tf.forum_title, tf.FORUM_DATE, tp.PARTY_STATE
+		JOIN (SELECT tp.PARTY_NUMBER, tp.USER_NUMBER,tf.forum_title, tf.FORUM_DATE, tp.PARTY_STATE, tf.FORUM_NUMBER, tf.FORUM_CATEGORY
 			FROM TBL_PARTY tp 
-			JOIN (SELECT FORUM_NUMBER, USER_NUMBER, FORUM_title, FORUM_DATE FROM TBL_FORUM WHERE FORUM_CATEGORY = '모집' AND USER_NUMBER = #{num}) tf
+			JOIN (SELECT FORUM_NUMBER, USER_NUMBER, FORUM_title, FORUM_DATE, FORUM_CATEGORY FROM TBL_FORUM WHERE FORUM_CATEGORY = '모집' AND USER_NUMBER = #{num}) tf
 			ON tp.FORUM_NUMBER = tf.forum_number) sub
 		ON tu.USER_NUMBER = sub.USER_NUMBER
+		ORDER BY sub.party_number DESC
 	</select>
 	
 	

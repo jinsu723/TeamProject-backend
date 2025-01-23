@@ -61,7 +61,7 @@ function getban(page) {
       </div>
       <button type="submit" class="ban-controll">밴</button>
     `;
-	
+
 		const banLine = document.createElement('hr');
 		banLine.classList.add('manager-ban-user-list-item-line');
 		banContainer.appendChild(banItem);
@@ -71,7 +71,7 @@ function getban(page) {
 		const userNickname = document.getElementsByClassName('.manager-ban-user-list-ban-nickName').innerText;
 
 		banControllButton.addEventListener('click', (e) => {
-			const checkUnBan = prompt(`${user.userNickname} 유저를 밴 하시겠습니까?`);
+			const checkUnBan = prompt(`${user.userNickname} 유저의 밴 사유`);
 			const checkUnBan2 = prompt(`기간 입력`);
 
 			if ((checkUnBan != '' && checkUnBan != null) && (checkUnBan2 != '' && checkUnBan2 != null)) {
@@ -156,23 +156,23 @@ resetButtonSearch.addEventListener("click", function() {
 
 
 banSearch.addEventListener("keydown", function(event) {
-   if (event.key === 'Enter') {
-      event.preventDefault(); // 기본 동작(새 줄 추가) 방지
-      alert(`${banSearch.value}의 내용을 검색합니다`);
-      let isMatch = false;
+	if (event.key === 'Enter' && `${banSearch.value}` != "") {
+		event.preventDefault(); // 기본 동작(새 줄 추가) 방지
+		alert(`${banSearch.value}의 내용을 검색합니다`);
+		let isMatch = false;
 
-      const pageSize = 10;
-      let pageItems = 0;
-      for (let i in users) {
-         if ((users[i].userNickname).indexOf(`${banSearch.value}`) >= 0) {
-            if (!isMatch) {
-               banContainer.innerHTML = "";
-            }
-            user = users[i];
+		const pageSize = 10;
+		let pageItems = 0;
+		for (let i in users) {
+			if ((users[i].userNickname).indexOf(`${banSearch.value}`) >= 0) {
+				if (!isMatch) {
+					banContainer.innerHTML = "";
+				}
+				user = users[i];
 
-            const banItem = document.createElement('li');
-            banItem.classList.add('manager-ban-user-list-item');
-            banItem.innerHTML = `
+				const banItem = document.createElement('li');
+				banItem.classList.add('manager-ban-user-list-item');
+				banItem.innerHTML = `
                   <div class="manager-ban-user-list-ban-userId">${user.userNumber}</div>
                   <div class="manager-ban-user-list-ban-nickName">${user.userNickname}</div>
                   <div class="manager-ban-user-list-ban-text">${user.userTier}</div>
@@ -184,44 +184,43 @@ banSearch.addEventListener("keydown", function(event) {
                      <button type="submit" class="ban-controll">밴</button>
                    `;
 
+				const banLine = document.createElement('hr');
+				banLine.classList.add('manager-ban-user-list-item-line');
+				banContainer.appendChild(banItem);
+				banContainer.appendChild(banLine);
+				const banControllButton = banItem.querySelector(".ban-controll");
 
-            const banLine = document.createElement('hr');
-            banLine.classList.add('manager-ban-user-list-item-line');
-            banContainer.appendChild(banItem);
-            banContainer.appendChild(banLine);
-            const banControllButton = banItem.querySelector(".ban-controll");
+				banControllButton.addEventListener('click', () => {
+					const checkUnBan = prompt(`${user.userNickname} 유저의 밴 사유`);
+					const checkUnBan2 = prompt(`기간 입력`);
 
-            banControllButton.addEventListener('click', () => {
-               const checkUnBan = prompt(`${user.userNickname} 유저를 바로 밴 하시겠습니까?`);
-               const checkUnBan2 = prompt(`${user.userNickname} 일수?`);
+					if ((checkUnBan != '' && checkUnBan != null) && (checkUnBan2 != '' && checkUnBan2 != null)) {
+						console.log(checkUnBan);
+						console.log(checkUnBan2);
 
-               if ((checkUnBan != '' && checkUnBan != null) && (checkUnBan2 != '' && checkUnBan2 != null)) {
-                  console.log(checkUnBan);
-                  console.log(checkUnBan2);
+						const form = document.createElement("form");
+						form.method = 'post';
+						form.action = '/learning/adminBen.ad';
 
-                  const form = document.createElement("form");
-                  form.method = 'post';
-                  form.action = '/learning/adminBen.ad';
+						form.innerHTML = "<input name=reason value='" + checkUnBan + "'>" + "<input name=day value='" + checkUnBan2 + "'>";
 
-                  form.innerHTML = "<input name=reason value='" + checkUnBan + "'>" + "<input name=day value='" + checkUnBan2 + "'>";
+						document.body.appendChild(form);
+						form.submit();
+					}
 
-                  document.body.appendChild(form);
-                  form.submit();
-               }
+				});
+				isMatch = true;
+			}
 
-            });
-            isMatch = true;
-         }
-
-      }
-      if (isMatch == false) {
-         alert("검색 내역이 없습니다");
-      }
-   }
+		}
+		if (isMatch == false) {
+			alert("검색 내역이 없습니다");
+		}
+	}
 });
 
 resetButtonSearch.addEventListener("click", function() {
-   banSearch.value = '';
+	banSearch.value = '';
 });
 
 

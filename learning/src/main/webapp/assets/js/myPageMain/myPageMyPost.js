@@ -25,41 +25,45 @@ function addList(idx, arr) {
 	// 닉네임 추가
 	newData = document.createElement("span");
 	newData.classList.add("nick");
-	newData.innerText = arr[idx][1];
+	newData.innerText = arr[idx][2];
 	newContent.appendChild(newData);
 
 	// 티어 추가
 	newData = document.createElement("span");
 	newData.classList.add("tear");
-	newData.innerText = arr[idx][2];
+	newData.innerText = arr[idx][3];
 	newContent.appendChild(newData);
 
 	// 카타고리 추가
 	newData = document.createElement("span");
 	newData.classList.add("categori");
-	newData.innerText = arr[idx][3];
+	newData.innerText = arr[idx][4];
 	newContent.appendChild(newData);
 
 	// 제목 추가
 	newData = document.createElement("span");
 	newData.classList.add("title");
-	newData.innerText = arr[idx][4];
+	newData.innerText = arr[idx][5];
 	newContent.appendChild(newData);
 
 	// 댓글 수 추가
 	newData = document.createElement("span");
 	newData.classList.add("comment");
-	newData.innerText = arr[idx][5];
+	newData.innerText = arr[idx][6];
 	newContent.appendChild(newData);
 
 	// 작성시간 추가
 	newData = document.createElement("span");
 	newData.classList.add("date");
-	newData.innerText = arr[idx][6];
+	newData.innerText = arr[idx][7];
 	newContent.appendChild(newData);
 
 	newContent.addEventListener("click", () => {
-		location.href = contextPath + '/app/communityForum/communityForumDetail.cf?postNum=' + arr[idx][0];
+		if (arr[idx][4] == '모집') {
+			location.href = contextPath + '/app/partyForum/partyForumDetail.fo?postNum=' + arr[idx][0];
+		} else {
+			location.href = contextPath + '/app/communityForum/communityForumDetail.cf?postNum=' + arr[idx][0];
+		}
 	});
 	pageList.appendChild(newContent);
 	pageList.appendChild(document.createElement("hr"));

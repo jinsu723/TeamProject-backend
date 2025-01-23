@@ -39,6 +39,7 @@
       </ul>
     </nav>
   </header>
+  
   <main class="manager-dashboard-main">
     <div class="manager-monitoring-container">
       <div class="manager-monitoring-title">
@@ -52,7 +53,7 @@
               <p class="post-chart-line-text">오늘기준 7일동안 일별로 게시글의 추이를 나타냅니다.</p>
             </div>
             <!-- <canvas id="line-chart" width="350" height="150"></canvas> -->
-            <canvas id="line-chart" width="1500" height="340"></canvas>
+            <canvas id="line-chart" width="1100" height="300"></canvas>
           </div>
         </div>
         <div class="manager-monitoring-users-cart-container">

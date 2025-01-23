@@ -36,30 +36,33 @@ function addList(idx, arr) {
 	// 닉네임 추가
 	newData = document.createElement("span");
 	newData.classList.add("nick");
-	newData.innerText = arr[idx][1];
+	newData.innerText = arr[idx][2];
 	newContent.appendChild(newData);
 
 	// 티어 추가
 	newData = document.createElement("span");
 	newData.classList.add("tear");
-	newData.innerText = arr[idx][2];
+	newData.innerText = arr[idx][3];
 	newContent.appendChild(newData);
 
 	// 제목 추가
 	newData = document.createElement("span");
 	newData.classList.add("title");
-	newData.innerText = arr[idx][4];
+	newData.innerText = arr[idx][5];
 	newContent.appendChild(newData);
 
 	//클릭 이벤트 추가
 	newData.addEventListener('click', () => {
-		location.href = contextPath + '/app/communityForum/communityForumDetail.cf?postNum=' + arr[idx][0];
+		if (arr[idx][4] == '모집') {
+			location.href = contextPath + '/app/partyForum/partyForumDetail.fo?postNum=' + arr[idx][0];
+		} else {
+			location.href = contextPath + '/app/communityForum/communityForumDetail.cf?postNum=' + arr[idx][0];
+		}
 	});
-
 	// 작성시간 추가
 	newData = document.createElement("span");
 	newData.classList.add("date");
-	newData.innerText = arr[idx][6];
+	newData.innerText = arr[idx][7];
 	newContent.appendChild(newData);
 
 
@@ -69,7 +72,7 @@ function addList(idx, arr) {
 		newData = document.createElement("span");
 		newData.classList.add("approve");
 
-		if (arr[idx][7] == '대기중') {
+		if (arr[idx][8] == '대기중') {
 
 			let newDataBtn = document.createElement("button");
 			newDataBtn.classList.add("approve-true");
@@ -78,7 +81,7 @@ function addList(idx, arr) {
 				alert("모집 신청을 수락합니다");
 				const form = document.createElement("form");
 				form.method = "post";
-				form.action = contextPath + "/myPageRecruitmentBnt.my?partyNum=" + arr[idx][0] + "&isAgree=true";;
+				form.action = contextPath + "/myPageRecruitmentBnt.my?partyNum=" + arr[idx][1] + "&isAgree=true";;
 				document.body.appendChild(form);
 				form.submit();
 			});
@@ -91,14 +94,14 @@ function addList(idx, arr) {
 				alert("모집 신청을 거절합니다");
 				const form = document.createElement("form");
 				form.method = "post";
-				form.action = contextPath + "/myPageRecruitmentBnt.my?partyNum=" + arr[idx][0] + "&isAgree=false";
+				form.action = contextPath + "/myPageRecruitmentBnt.my?partyNum=" + arr[idx][1] + "&isAgree=false";
 				document.body.appendChild(form);
 				form.submit();
 			});
 			newData.appendChild(newDataBtn);
 			newContent.appendChild(newData);
 		} else {
-			if (arr[idx][7] == '수락') {
+			if (arr[idx][8] == '수락') {
 				newData.innerText = '수락'
 				newData.classList.add("text-color-green");
 			} else {
@@ -111,7 +114,7 @@ function addList(idx, arr) {
 		document.querySelector(".myPage-forum-text").innerText = '신청 현황';
 		newData = document.createElement("span");
 		newData.classList.add("approve");
-		newData.innerText = arr[idx][7];
+		newData.innerText = arr[idx][8];
 		if (newData.innerText == '수락') {
 			newData.classList.add("text-color-green");
 		} else if (newData.innerText == '거절' || newData.innerText == '삭제됨') {

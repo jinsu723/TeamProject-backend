@@ -33,24 +33,6 @@ form.addEventListener('submit', function () {
     hiddenInput.value = contentDiv.innerHTML; // contentEditable 내용을 hidden input에 복사
 });*/
 
-
-writingPost.addEventListener("click", function () {
-	;	
-	checkInput();
-});
-
-function checkInput() {
-	const inputTitle = writingTitle.value.trim();
-	const inputContent = writingContent.textContent.trim();
-	if (inputTitle === '') {
-		alert('제목을 입력해 주세요.');
-	} else if (inputContent === '') {
-		alert('내용을 입력해 주세요.');
-	} else {
-		// 서버에 전송
-	}
-}
-
 writingSelectFile.addEventListener("click", function () {
 	document.querySelector('.partyForumWriting-file-select-button').click();
 });

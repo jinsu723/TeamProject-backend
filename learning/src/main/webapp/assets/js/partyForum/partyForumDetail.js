@@ -65,7 +65,7 @@ partyForumDeleteButton.addEventListener("click", function() {
 		// 서버에 삭제 요청 보내기
 		fetch(deletePageLink, { method: "POST" })
 			.finally(() => {
-				
+
 				window.location.href = contextPath + "/app/preset/main.jsp";
 			});
 	}
@@ -77,9 +77,9 @@ commentAddButton.addEventListener("click", function() {
 	if (input === '') {
 		alert('댓글을 입력해 주세요.');
 	} else {
-/*		console.log(`${postNum}`);
-		console.log(`${input}`);
-		console.log(`${userId}`);*/
+		/*		console.log(`${postNum}`);
+				console.log(`${input}`);
+				console.log(`${userId}`);*/
 		const commentAddLink = contextPath + `/app/partyForum/partyForumCommentAdd.fo?commentContent=${input}&postNum=${postNum}&userId=${userId}`;
 
 		// 댓글을 등록하기 위해 GET 방식으로 서버로 데이터를 전송
@@ -109,7 +109,10 @@ document.querySelector('.partyForumDetail-comment-list').addEventListener('click
 	}
 });
 
-
+partyForumIndexButton.addEventListener("click", function() {
+	const IndexPageLink = contextPath + `/app/partyForum/partyForum.fo`;
+	location.href = IndexPageLink
+});
 
 
 // 정의한 함수나 기능 호출하기
