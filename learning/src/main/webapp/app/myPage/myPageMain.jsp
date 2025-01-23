@@ -8,8 +8,6 @@
 	if(session.getAttribute("checkPass")!="pass"){
 		System.out.println("checkPass = " + session.getAttribute("checkPass"));
 		response.sendRedirect(request.getContextPath()+"/app/myPage/checkPass.jsp");
-	}else{
-		session.setAttribute("checkPass", "non");
 	}
 }%>
 <% UserDTO dto = (UserDTO) session.getAttribute("userDTO"); %>
