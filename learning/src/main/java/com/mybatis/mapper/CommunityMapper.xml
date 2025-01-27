@@ -15,7 +15,7 @@
 		FROM tbl_forum post
 		JOIN tbl_user u ON post.user_number = u.user_number
 		WHERE post.forum_category != '모집'
-		ORDER BY post.FORUM_NUMBER DESC
+		ORDER BY final_date DESC
 	</select>
 	<!-- 외래키 같이 데이터를 참조하는건 AS를 이용하여 Mybatis가 인식할 수 있게 해줘야 함 -->
 	<!-- 이는 MyBatis의 매핑 규칙에 의해 코드작업이 필요함. MyBatis는 DTO와 1:1매핑의 규칙을 따르고, DTO에서는 

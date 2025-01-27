@@ -41,8 +41,12 @@ public class WritingEndController implements Execute {
 		partyforumDTO.setUserTier(userDTO.getUserTier());
 		partyforumDTO.setForumCategory("모집");
 		partyforumDTO.setForumTitle(request.getParameter("forumTitle"));
-		partyforumDTO.setForumContent(request.getParameter("forumContent"));
-		
+		if (request.getParameter("forumContent") == "") {
+			partyforumDTO.setForumContent(" ");
+		} else {
+			partyforumDTO.setForumContent(request.getParameter("forumContent"));
+		}
+
 		partyforumDAO.WritingEnd(partyforumDTO);
 
 		result.setRedirect(true); // ++++ Result 객체 추가 후 작성

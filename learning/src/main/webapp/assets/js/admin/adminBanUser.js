@@ -117,16 +117,17 @@ function getban(page) {
 				console.log(`${contextPath}/cancelBen.ad`);
 
 				// AJAX 요청
-				fetch(`${contextPath}/cancelBen.ad`, { 
-				    method: "POST",
-				    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-				    body: `userNickname=${encodeURIComponent(userNickname)}`
+				fetch(`${contextPath}/cancelBen.ad`, {
+					method: "POST",
+					headers: { "Content-Type": "application/x-www-form-urlencoded" },
+					body: `userNickname=${encodeURIComponent(userNickname)}`
 				}).then(response => {
-				    if (!response.ok) {
-				        console.log("Request failed with status:", response.status);
-				    }
+					if (!response.ok) {
+						console.log("Request failed with status:", response.status);
+					}
 				});
 				location.reload();
+				console.log("삭제 완료");
 
 			} else {
 				alert('작업이 취소되었습니다');

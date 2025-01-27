@@ -22,7 +22,6 @@ public class MyPageCheckPass implements Execute {
 		UserDTO dto = (UserDTO) session.getAttribute("userDTO");
 		if (dto == null) {
 			rs.setPath(request.getContextPath() + "/app/user/login/login.jsp");
-			rs.setRedirect(true);
 			return rs;
 		}
 		session.setMaxInactiveInterval(60 * 60 * 24);
@@ -31,16 +30,13 @@ public class MyPageCheckPass implements Execute {
 		if ((dto.getUserPasswd().equals(request.getParameter("password")))) {
 			System.out.println("패스워드 true");
 			session.setAttribute("checkPass", "pass");
-
-			rs.setPath("/app/myPage/myPageMain.jsp");
-			rs.setRedirect(false);
+			rs.setPath(request.getContextPath() + "/app/myPage/myPageMain.jsp");
 		} else {
 			System.out.println("패스워드 false");
-
 			rs.setPath(request.getContextPath() + "/app/myPage/checkPass.jsp");
-			rs.setRedirect(true);
 		}
 
+		rs.setRedirect(true);
 		return rs;
 	}
 

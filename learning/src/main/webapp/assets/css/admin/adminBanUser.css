@@ -209,7 +209,7 @@ a {
 }
 .manager-ban-user-main-list-ban-nickname, 
 .manager-ban-user-main-list-ban-content{
-  margin-left: 15%;
+  margin-left: 10%;
 }
 .manager-ban-user-main-list-ban-controll-button{
   position: relative;
@@ -261,12 +261,12 @@ a {
 .manager-ban-user-list-ban-nickName{
   position: absolute;
   font-family: "Noto Sans KR Medium";
-  left: 230px;
+  left: 130px;
 }
 .manager-ban-user-list-ban-text{
   position: absolute;
   font-family: "Noto Sans KR Medium";
-  left: 520px;
+  left: 280px;
 }
 .ban-list-date{
   position: absolute;
