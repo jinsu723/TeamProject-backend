@@ -15,7 +15,8 @@
    href="${pageContext.request.contextPath}/assets/css/admin/adminParty.css">
 <link rel="stylesheet"
    href="${pageContext.request.contextPath}/assets/deleteFont/fontello.css">
-
+<link rel="stylesheet"
+   href="${pageContext.request.contextPath}/assets/css/admin/adminBanUser.css">
 </head>
 <title>파티 모집 관리</title>
 
@@ -94,7 +95,7 @@
                   <div class="manager-ban-user-main-list-ban-end-date">
                      <p>카테고리</p>
                   </div>
-                  <div class="manager-ban-user-main-list-ban-date">
+                  <div class="manager-ban-user-main-list-ban-end-date">
                      <p>작성시간</p>
                   </div>
                </div>

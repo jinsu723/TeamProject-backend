@@ -15,7 +15,6 @@ public class UserDAO {
 		sqlSession = MyBatisConfig.getSqlSessionFactory().openSession(true); // Auto-commit 활성화
 	}
 
-
 	// 로그인
 	public UserDTO login(String userId, String userPw) {
 		try {

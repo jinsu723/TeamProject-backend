@@ -2,12 +2,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% if(session.getAttribute("userDTO")==null){
-	System.out.println("없음");
 	response.sendRedirect(request.getContextPath()+"/app/user/login/login.jsp");
 }else{
+	System.out.println("checkPass : "+session.getAttribute("checkPass"));
 	if(session.getAttribute("checkPass")!="pass"){
-		System.out.println("checkPass = " + session.getAttribute("checkPass"));
 		response.sendRedirect(request.getContextPath()+"/app/myPage/checkPass.jsp");
+	}else{
+		session.setAttribute("checkPass", "none");
 	}
 }%>
 <% UserDTO dto = (UserDTO) session.getAttribute("userDTO"); %>
@@ -132,6 +133,10 @@
   }
   const contextPath = '<%= request.getContextPath() %>';
   let isChangeNickName = "<%= request.getAttribute("nickChanged") %>";
+  <% if(request.getAttribute("nickChanged")!=null){
+	  session.setAttribute("checkPass", "pass");
+  }
+  request.removeAttribute("nickChanged"); %>
   if(isChangeNickName==="true"){
 	  alert("닉네임이 변경되었습니다");
 	  location.href = '<%= request.getContextPath() %>/app/myPage/myPageMain.jsp';
@@ -140,6 +145,5 @@
 	  location.href = '<%= request.getContextPath() %>/app/myPage/myPageMain.jsp';
   }
   isChangeNickName = "";
-  <% request.removeAttribute("nickChanged"); %>
 </script>
 </html>

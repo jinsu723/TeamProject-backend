@@ -32,9 +32,6 @@ public Result execute(HttpServletRequest request, HttpServletResponse response)
       //result 객체 생성
       Result result = new Result();
       
-      result.setPath(request.getContextPath() + "/app/admin/adminCommunity.jsp");
-      result.setRedirect(true);
-      
    return result;
 }
 }

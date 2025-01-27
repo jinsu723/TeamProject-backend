@@ -36,10 +36,10 @@ public class MyPageNickName implements Execute {
 			nick.put("nick", dto.getUserNickname());
 			nick.put("newNick", request.getParameter("newNick"));
 			dao.changeNick(nick);
-			System.out.println("닉네임 변경 완료");
 			dto.setUserNickname(request.getParameter("newNick"));
 		}
 
+		session.setAttribute("checkPass", "pass");
 		rs.setPath("/app/myPage/myPageMain.jsp");
 		rs.setRedirect(false);
 		return rs;

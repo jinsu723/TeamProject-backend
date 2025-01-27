@@ -88,10 +88,10 @@ function getCommunityForumComment() { //댓글 가져오기
 		content.textContent = comment.content;	//댓글 내용 텍스트 추가
 		commentDetails.appendChild(content);	//댓글 내용 추가
 
-		/*const time = document.createElement("p");	//댓글 작성시간
+		const time = document.createElement("p");	//댓글 작성시간
 		time.classList.add("communityForumDetail-comment-list-time");	//댓글 작성시간 클래스 추가
 		time.textContent = `${dataTime}`;	//댓글 작성시간 텍스트 추가
-		commentDetails.appendChild(time);*/	//댓글 작성시간 추가
+		commentDetails.appendChild(time);	//댓글 작성시간 추가
 
 		const deleteButton = document.createElement("button");	//댓글 삭제 버튼
 		deleteButton.classList.add("communityForumDetail-comment-delete");	//댓글 삭제 버튼 클래스 추가
