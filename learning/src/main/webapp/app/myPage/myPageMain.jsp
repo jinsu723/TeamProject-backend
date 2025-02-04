@@ -8,7 +8,7 @@
 	if(session.getAttribute("checkPass")!="pass"){
 		response.sendRedirect(request.getContextPath()+"/app/myPage/checkPass.jsp");
 	}else{
-		session.setAttribute("checkPass", "none");
+		session.setAttribute("checkPass", "pass");
 	}
 }%>
 <% UserDTO dto = (UserDTO) session.getAttribute("userDTO"); %>
@@ -94,6 +94,7 @@
          <div class="myPage-container-box">
             <h2>전화번호</h2>
             <div class="myPage-box-text">
+               현재 전화번호 : <% if(session.getAttribute("userDTO")!=null){%><%= dto.getUserPhone() %><%} %><br>
                전화번호를 변경합니다. 새로 입력하는 전화번호로 본인인증이 진행됩니다.
             </div>
             <div>

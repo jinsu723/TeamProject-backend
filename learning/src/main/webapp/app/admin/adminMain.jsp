@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% if(session.getAttribute("adminDTO")==null){
+	response.sendRedirect(request.getContextPath()+"/app/admin/adminLogin.jsp");
+}%>
 <!DOCTYPE html>
 <html lang="ko">
 

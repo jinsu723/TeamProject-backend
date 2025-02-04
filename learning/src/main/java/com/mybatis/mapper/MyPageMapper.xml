@@ -36,8 +36,12 @@
 	</select>
 	
 	
-	<update id="changeNick" parameterType="String">
+	<update id="changeNick" parameterType="map">
 		UPDATE TBL_USER SET USER_NICKNAME = #{newNick} WHERE USER_NICKNAME = #{nick}
+	</update>
+	
+	<update id="changePhoneNumber" parameterType="map">
+		UPDATE TBL_USER SET USER_PHONE = #{newPhone} WHERE USER_PHONE = #{Phone}
 	</update>
 	
 	
