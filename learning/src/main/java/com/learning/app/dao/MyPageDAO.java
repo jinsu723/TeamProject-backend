@@ -31,6 +31,11 @@ public class MyPageDAO {
 		sql.update("mypage.changeNick", nick);
 	}
 
+	public void changePhoneNumber(Map<String, String> phone) {
+		System.out.println("폰번 변경");
+		sql.update("mypage.changePhoneNumber", phone);
+	}
+
 	public int deleteUser(int num) {
 		System.out.println("DAO 유저 삭제");
 		System.out.println(num);

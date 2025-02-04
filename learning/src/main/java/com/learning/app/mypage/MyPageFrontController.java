@@ -98,7 +98,18 @@ public class MyPageFrontController extends HttpServlet {
 			case "/myPageRecruitmentBnt.my":
 				result = new MyPageRecruitmentBnt().execute(request, response);
 				break;
-				
+
+			case "/sendSMS.my":
+				result = new MyPageSendSMS().execute(request, response);
+				break;
+
+			case "/verifyCode.my":
+				result = new MyPageCheckVerifyCode().execute(request, response);
+				break;
+
+			case "/changePhoneNumber.my":
+				result = new MyPageChangePhoneNumber().execute(request, response);
+				break;
 			}
 		}
 

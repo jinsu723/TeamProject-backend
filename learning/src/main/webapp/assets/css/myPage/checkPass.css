@@ -49,7 +49,7 @@ main {
 }
 
 
-input[type="password"]{
+input{
   flex: 1;
   padding: 10px;
   font-size: 14px;
