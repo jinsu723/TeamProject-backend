@@ -25,15 +25,14 @@ public class MyPageChangePhoneNumber implements Execute {
 		String phoneNumber = request.getParameter("phoneNumber");
 		System.out.println("phoneNumber : " + phoneNumber);
 
-		String phoneNumberFormat = phoneNumber.substring(0, 3) + "-" + phoneNumber.substring(3, 7) + "-" + phoneNumber.substring(7);
 
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("Phone", ((UserDTO) session.getAttribute("userDTO")).getUserPhone());
-		map.put("newPhone", phoneNumberFormat);
+		map.put("newPhone", phoneNumber);
 
 		System.out.println(map);
 		dao.changePhoneNumber(map);
-		((UserDTO) session.getAttribute("userDTO")).setUserPhone(phoneNumberFormat);
+		((UserDTO) session.getAttribute("userDTO")).setUserPhone(phoneNumber);
 
 		session.setAttribute("checkPass", "pass");
 		rs.setPath(request.getContextPath() + "/app/myPage/myPageMain.jsp");

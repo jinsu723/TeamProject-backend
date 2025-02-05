@@ -46,9 +46,10 @@ public class UserDAO {
 
 	// 전화번호 중복 확인
 	// 중복 있으면 1 반환 중복 없으면 0 반환
-	public int checkPhone(UserDTO userDTO) {
-		return sqlSession.selectOne("User.checkPhone", userDTO);
+	public int checkPhone(String userPhone) {
+	    return sqlSession.selectOne("User.checkPhone", userPhone);
 	}
+
 
 	// 아이디 중복 검사
 	public boolean isIdDuplicate(String userId) {

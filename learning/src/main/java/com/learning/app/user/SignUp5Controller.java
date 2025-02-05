@@ -33,6 +33,7 @@ public class SignUp5Controller implements Execute {
 		String userTier = request.getParameter("userTier");
 
 		// DTO에 모든 데이터 설정
+//		userPhone = userPhone.substring(0,3)+"-"+userPhone.substring(3,7) + "-"
 		dto.setUserPhone(userPhone);
 		dto.setUserNickname(userNickname);
 		dto.setUserId(userId);
