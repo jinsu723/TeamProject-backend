@@ -1,6 +1,7 @@
 package com.learning.app.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class CommunityDTO {
     private int forumNumber;
@@ -14,9 +15,9 @@ public class CommunityDTO {
     private int commentNumber;
     private String commentContent;
     private String commentDate;
-    private String imageURL;
-    private String imageName;
     private String finalDate;
+    private List<FileDTO> files;
+    
     
 	public int getForumNumber() {
 		return forumNumber;
@@ -84,23 +85,27 @@ public class CommunityDTO {
 	public void setCommentDate(String commentDate) {
 		this.commentDate = commentDate;
 	}
-	public String getImageURL() {
-		return imageURL;
-	}
-	public void setImageURL(String imageURL) {
-		this.imageURL = imageURL;
-	}
-	public String getImageName() {
-		return imageName;
-	}
-	public void setImageName(String imageName) {
-		this.imageName = imageName;
-	}
 	public String getFinalDate() {
 		return finalDate;
 	}
 	public void setFinalDate(String finalDate) {
 		this.finalDate = finalDate;
 	}
+	public List<FileDTO> getFiles() {
+		return files;
+	}
+	public void setFiles(List<FileDTO> files) {
+		this.files = files;
+	}
+	@Override
+	public String toString() {
+		return "CommunityDTO [forumNumber=" + forumNumber + ", userNumber=" + userNumber + ", userNickName="
+				+ userNickName + ", forumCategory=" + forumCategory + ", forumTitle=" + forumTitle + ", forumDate="
+				+ forumDate + ", forumUpdate=" + forumUpdate + ", forumContent=" + forumContent + ", commentNumber="
+				+ commentNumber + ", commentContent=" + commentContent + ", commentDate=" + commentDate + ", finalDate="
+				+ finalDate + ", files=" + files + "]";
+	}
+    
+	
        
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="file">
+	<!-- 사진 추가 -->
+	<insert id="communityFileInsert" parameterType="FileDTO">
+		insert into tbl_file(file_system_name, file_original_name, forum_number)
+		values(#{fileSystemName}, #{fileOriginalName}, #{forumNumber})
+	</insert>
+	
+	<!-- 사진 불러오기 -->
+	<select id="communityFileSelect" parameterType="int" resultType="FileDTO">
+	select file_system_name, file_original_name, forum_number from tbl_file where forum_number = #{forumNumber}
+	</select>
+	
+	<!-- 사진 삭제 -->
+	<delete id="communityFileDelete" parameterType="int">
+	delete from tbl_file where forum_number = #{forumNumber}
+	</delete>
+</mapper>

@@ -36,7 +36,7 @@ public class CommunityEditController implements Execute {
 
 		int postNumber = Integer.parseInt(request.getParameter("postNum"));
 
-		List<CommunityDTO> myPost = communityDAO.communityDetils(postNumber);
+		List<CommunityDTO> myPost = (List<CommunityDTO>) communityDAO.communityDetils(postNumber); //최근 수정
 
 		request.setAttribute("details", myPost);
 

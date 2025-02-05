@@ -28,6 +28,8 @@
 			alias="AdminPartyDTO"></typeAlias>
 		<typeAlias type="com.learning.app.dto.CommunityDTO"
 			alias="CommunityDTO"></typeAlias>
+		<typeAlias type="com.learning.app.dto.FileDTO"
+			alias="FileDTO"></typeAlias>
 
 
 	</typeAliases>
@@ -52,5 +54,6 @@
 		<mapper resource="com/mybatis/mapper/ForumMapper.xml" />
 		<mapper resource="com/mybatis/mapper/CommunityMapper.xml" />
 		<mapper resource="com/mybatis/mapper/BenMapper.xml" />
+		<mapper resource="com/mybatis/mapper/FileMapper.xml" />
 	</mappers>
 </configuration>

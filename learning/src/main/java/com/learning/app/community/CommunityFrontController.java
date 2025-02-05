@@ -14,6 +14,7 @@ import com.learning.app.dto.CommunityDTO;
 
 //JSTL로 값을 HTML에 넘겨주고 그걸 JS로 넘겨준다
 //JAVA>JSTL>HTML>Javscript순으로 적용이 된다 
+//2025-02-05 다른방식으로 값을 넘겨주는걸로 수정 시작
 public class CommunityFrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -42,7 +43,7 @@ public class CommunityFrontController extends HttpServlet {
 
 		switch (target) {
 		case "/app/communityForum/communityForum.cf":
-			System.out.println("커뮤니티 게시글 페이지로 이동");
+			System.out.println("커뮤니티 리스트 컨트롤러 이동");
 			result = new CommunityListController().execute(request, response);
 			break;
 
@@ -70,6 +71,7 @@ public class CommunityFrontController extends HttpServlet {
 			break;
 		case "/app/communityForum/communityForumWritingAdd.cf":
 			System.out.println("게시글 작성 후 추가하는 컨트롤러 이동");
+			System.out.println(request.getParameter("postContent"));
 			result = new CommunityWritingAddController().execute(request, response);
 			break;
 		case "/app/communityForum/communityForumEditMyPost.cf":
