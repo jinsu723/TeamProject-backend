@@ -86,7 +86,15 @@ public class UserFrontController extends HttpServlet {
 //		case "/phoneCheck.us":
 //			System.out.println("전화번호 중복 검사");
 //			new PhoneCheckController().execute(request, response);
-//			break;	
+//			break;
+		case "/sendSMS.us":
+			System.out.println("핸드폰 인증 요청");
+			result = new JoinSMSController().execute(request, response);
+			break;
+		case "/verifyCode.us":
+			System.out.println("인증번호 확인 요청");
+			result = new VerifyCodeController().execute(request, response);
+			break;
 
 		case "/findPass1.us":
 			System.out.println("findPass1");

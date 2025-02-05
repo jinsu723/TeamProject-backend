@@ -1,78 +1,96 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const phoneNumberInput = document.getElementById("phone-number");
-  const certifyCodeInput = document.getElementById("certify-code");
-  const errorMessage = document.createElement("p"); // 인증번호 오류 메시지를 위한 요소 생성
-  errorMessage.className = "error-message"; // 스타일을 위한 클래스 추가
-  certifyCodeInput.parentElement.appendChild(errorMessage); // 입력란 아래에 추가
+	const phoneNumberInput = document.getElementById("phone-number");
+	const certifyCodeInput = document.getElementById("certify-code");
+	const sendSMSBtn = document.querySelector(".signup2-certify-button1");
+	const certifyCheckButton = document.getElementById("certify-check");
+	const certifySection = document.getElementById("signup2-certify-section");
+	const verificationStatus = document.createElement("p"); // 인증 상태 메시지 요소 추가
+	certifySection.appendChild(verificationStatus);
 
-  // 서버에서 전달된 인증 결과 처리
-  if (phone.user === 0) { // 인증 실패
-    alert("등록되지 않은 전화번호입니다.");
-  }
+	// 현재 contextPath 자동 추출
+	const contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2));
 
-  // 전화번호 포맷팅 함수
-  function formatPhoneNumber(value) {
-    const sanitizedValue = value.replace(/[^0-9]/g, "");
-    if (sanitizedValue.length <= 3) {
-      return sanitizedValue;
-    } else if (sanitizedValue.length <= 7) {
-      return `${sanitizedValue.slice(0, 3)}-${sanitizedValue.slice(3)}`;
-    } else {
-      return `${sanitizedValue.slice(0, 3)}-${sanitizedValue.slice(3, 7)}-${sanitizedValue.slice(7, 11)}`;
-    }
-  }
 
-  // 전화번호 입력 이벤트
-  phoneNumberInput.addEventListener("input", (event) => {
-    const value = event.target.value;
-    const formattedValue = formatPhoneNumber(value);
-    event.target.value = formattedValue;
-  });
+	// 사용자 검사
+	if (phone.user === 0) { // 인증 실패
+		alert("등록되지 않은 전화번호입니다.");
+	}
 
-  // 인증번호 입력란 숫자만 허용
-  certifyCodeInput.addEventListener("input", (event) => {
-    const value = event.target.value;
-    const sanitizedValue = value.replace(/[^0-9]/g, "");
-    event.target.value = sanitizedValue;
-  });
+	// 전화번호 입력 시 숫자만 입력 가능하도록 설정
+	phoneNumberInput.addEventListener("input", (event) => {
+		event.target.value = event.target.value.replace(/[^0-9]/g, ""); // 숫자만 입력 가능
+	});
 
-  const certifyRequestButton = document.querySelector(".signup2-certify-button1");
-  const certifySection = document.getElementById("signup2-certify-section");
-  const certifyCheckButton = document.getElementById("certify-check");
-  const nextButton = document.querySelector(".signup2-next-button");
+	// SMS 인증번호 발송
+	sendSMSBtn.addEventListener("click", function() {
+		const phoneNumber = phoneNumberInput.value.trim();
+		console.log("입력된 전화번호:", phoneNumber); // 확인용 로그 추가
 
-  const correctCode = "48484"; // 테스트용 인증번호
+		if (phoneNumber === "") {
+			alert("핸드폰 번호를 입력해주세요.");
+			return;
+		}
 
-  // 인증 요청 버튼 클릭 이벤트
-  certifyRequestButton.addEventListener("click", () => {
-    if (phoneNumberInput.value.trim() === "") {
-      alert("전화번호를 입력해주세요.");
-      return;
-    }
+		fetch(`${contextPath}/sendSMS.us`, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ phoneNumber: phoneNumber })
+		})
+			.then(response => {
+				console.log("fetch 응답 상태:", response.status);
+				return response.json(); // JSON 변환
+			})
+			.then(data => {
+				console.log("서버 응답 데이터:", data);
+				if (data.success) {
+					alert("인증번호가 발송되었습니다.");
+					certifySection.classList.add("signup2-visible"); // 인증번호 입력 필드 보이기
+					certifyCodeInput.disabled = false;
+					certifyCodeInput.style.backgroundColor = "#fff";
+				} else {
+					alert("인증번호 발송 실패: " + data.error);
+				}
+			})
+			.catch(error => {
+				console.error("SMS 발송 오류:", error);
+				alert("인증번호 발송 중 오류가 발생했습니다.");
+			});
+	});
 
-    alert("인증번호가 발송되었습니다.");
-    certifySection.classList.remove("signup2-hidden");
-    certifySection.classList.add("signup2-visible");
-  });
+	// 인증번호 확인
+	certifyCheckButton.addEventListener("click", function() {
+		const verificationCode = certifyCodeInput.value.trim();
+		if (verificationCode === "") {
+			verificationStatus.textContent = "인증번호를 입력해주세요.";
+			verificationStatus.style.color = "red";
+			return;
+		}
 
-  // 인증 확인 버튼 클릭 이벤트
-  certifyCheckButton.addEventListener("click", () => {
-    if (certifyCodeInput.value.trim() === "") {
-      errorMessage.textContent = "인증번호를 입력해주세요.";
-      errorMessage.style.display = "block";
-      return;
-    }
-
-    if (certifyCodeInput.value.trim() !== correctCode) {
-      errorMessage.textContent = "인증번호를 다시 확인해주세요.";
-      errorMessage.style.display = "block";
-      return;
-    }
-
-    alert("인증이 완료되었습니다.");
-    errorMessage.style.display = "none";
-    nextButton.disabled = false;
-    nextButton.classList.add("active");
-  });
+		fetch(`${contextPath}/verifyCode.us`, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ code: verificationCode })
+		})
+			.then(response => response.json())
+			.then(data => {
+				console.log("인증번호 확인 응답:", data);
+				if (data.success) {
+					verificationStatus.textContent = "인증에 성공했습니다.";
+					verificationStatus.style.color = "green";
+					verificationStatus.style.fontSize = "12px";
+					document.querySelector(".signup2-next-button").classList.add("active");
+					document.querySelector(".signup2-next-button").disabled = false;
+				} else {
+					verificationStatus.textContent = "인증번호가 일치하지 않습니다.";
+					verificationStatus.style.color = "red";
+					verificationStatus.style.fontSize = "12px";
+				}
+			})
+			.catch(error => {
+				console.error("인증 확인 오류:", error);
+				verificationStatus.textContent = "인증 처리 중 오류가 발생했습니다.";
+				verificationStatus.style.color = "red";
+				verificationStatus.style.fontSize = "12px";
+			});
+	});
 });
-
