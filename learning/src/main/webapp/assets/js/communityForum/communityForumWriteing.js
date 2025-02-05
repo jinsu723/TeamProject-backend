@@ -16,6 +16,8 @@ writingPost.addEventListener("click", function(event) {
 	const inputTitle = writingTitle.value.trim();
 	const inputContent = writingContent.textContent.trim();
 	
+	
+	
 	let postContent = writingText.innerHTML;
 	let postText = postContent.replace(/<\/?div>/g, "");
 	var categotyType = '';
@@ -95,7 +97,7 @@ writingSelectFile.addEventListener("click", function() {
 });
 
 function selectFile() {
-	const fileSize = 40 * 1204 * 1204;
+	const fileSize = 40 * 1024 * 1024;
 	const imageDisplay = new FileReader();
 	const img = document.createElement('img');
 	const selectFileButton = document.querySelector('.communityForumWriting-file-select-button');

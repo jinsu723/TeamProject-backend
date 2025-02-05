@@ -26,12 +26,14 @@
 		tbl_forum
 	</select>
 
+	<!-- ㅠㅠ -->
 	<select id="postDetails"
 		resultType="com.learning.app.dto.CommunityDTO">
 		SELECT
 		f.forum_number,
 		f.forum_category,
 		f.forum_title,
+		f.user_number,
 		CASE
 		WHEN f.forum_update IS NOT NULL THEN f.forum_update
 		ELSE f.forum_date
@@ -47,7 +49,7 @@
 	</select>
 
 	<update id="editMyPost"
-		parameterType="com.learning.app.dto.CommunityDTO">
+		parameterType="CommunityDTO">
 		UPDATE tbl_forum SET forum_category = #{forumCategory},
 		forum_title = #{forumTitle}, forum_update = SYSDATE, forum_content =
 		#{forumContent}
@@ -95,12 +97,14 @@
 		#{commentContent}, SYSDATE)
 	</insert>
 
-	<insert id="addPost">
-		INSERT INTO TBL_FORUM (forum_number, user_number,
-		forum_category,
-		forum_title, forum_date, forum_update, forum_content)
-		VALUES (seq_forum.NEXTVAL, (SELECT user_number FROM tbl_user WHERE
-		user_nickname = #{userNickName} AND ROWNUM = 1), #{forumCategory},
-		#{forumTitle}, SYSDATE, NULL, #{forumContent})
+	<insert id="addPost" parameterType="CommunityDTO">
+	<selectKey keyProperty="forumNumber" resultType="int" order="BEFORE">
+         SELECT seq_forum.nextVal from dual
+      </selectKey>
+		INSERT INTO TBL_FORUM 
+		(forum_number, user_number, forum_category, forum_title, forum_date, forum_update, forum_content)
+		VALUES (#{forumNumber}, (SELECT user_number FROM tbl_user WHERE user_nickname = #{userNickName} AND ROWNUM = 1), 
+		#{forumCategory}, #{forumTitle}, SYSDATE, NULL, #{forumContent})
 	</insert>
+	
 </mapper>
