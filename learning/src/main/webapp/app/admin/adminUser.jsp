@@ -2,7 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page import="java.util.List"%>
+<% if(session.getAttribute("adminDTO")==null){
+	response.sendRedirect(request.getContextPath()+"/app/admin/adminLogin.jsp");
+}%>
 <!DOCTYPE html>
 <html>
 
@@ -14,35 +18,16 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/adminUser.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/deleteFont/fontello.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/adminBanUser.css">
+  
+  <script defer src="${pageContext.request.contextPath}/assets/js/admin/adminUser.js"></script>
 </head>
 <title>회원 관리</title>
 
 <body>
   <!-- <div class="mng-container"> -->
 
-  <header class="main-nonLogin-header">
-    <nav>
-      <div class="main-nonLogin-nav">
-        <div class="main-nonLogin-logo"><a href="${pageContext.request.contextPath}/adminMain.ad">learning</a></div>
-        <ul class="main-nonLogin-contents main-nonLogin-ul">
-            <div class="mng-users-contentes-drop">
-              <div class="mng-users-text"><a href="${pageContext.request.contextPath}/adminUser.ad">회원 관리</a>  
-                <div id="mng-users-dropText"><a href="${pageContext.request.contextPath}/ben.ad">밴 회원 관리</a></div>
-              </div>
-            </div>
-          <li id="mng-contents-drop">게시글 관리
-              <div class="mng-header-drop">
-                <div id="mng-header-dropDown1"><a href="${pageContext.request.contextPath}/adminParty.ad">파티 관리</a></div>
-                <div id="mng-header-dropDown2"><a href="${pageContext.request.contextPath}/adminCommunity.ad">커뮤니티</a></div>
-              </div>
-          </li>
-        </ul>
-      </div>
-      <ul class="main-nonLogin-join-box main-nonLogin-ul">
-        <li class="main-nonLogin-join"><a href="${pageContext.request.contextPath}/adminlogoutOk.ad">로그아웃</a></li>
-      </ul>
-    </nav>
-  </header>
+  <jsp:include page="/app/preset/adminHeader.jsp" />
+  
   <main class="mng-main">
     <div class="mng-main-container">
       <div class="mng-main-container-title">
@@ -89,8 +74,79 @@
         </div>
         <hr class="manager-ban-user-list-line">
         <ul class="manager-ban-user-list">
+	      <c:choose>
+	        <c:when test="${not empty adminUser}">
+	          <c:forEach var="users" items="${adminUser}">
+	          	<li class="manager-ban-user-list-item">
+		          <div class="manager-ban-user-list-ban-userId">
+		          	<c:out value="${users.userNumber}" />
+		          </div>
+		          <div class="manager-ban-user-list-ban-nickName">
+		          	<c:out value="${users.userNickname}" />
+		          </div>
+		          <div class="manager-ban-user-list-ban-text">
+		          	<c:out value="${users.userTier }" />
+		          </div>
+			      <div class="ban-list-date">
+			        <div class="manager-ban-user-list-ban-start-date">
+			          <c:out value="${users.userPhone}" />
+			        </div>
+			        <div class="manager-ban-user-list-ban-end-date">
+			          <c:out value="${fn:substring(users.userJoinDate, 0, 10)}" />
+			        </div>
+			        <div class="manager-ban-user-list-ban-date-count">
+			          <c:out value="${users.userBenCnt}" />
+			        </div>
+		          </div>
+		          <button type="submit" class="ban-controll" onclick="banUser('${users.userNickname}')">밴</button>
+	          	</li>
+	          	<hr>
+	          </c:forEach>
+	        </c:when>
+	      </c:choose>
         </ul>
       </div>
+      <div class="pagination">
+			<ul>
+				<!-- ========== 페이징 처리 예시 ============ -->
+				<!-- 				<li><a href="#" class="prev">&lt;</a></li>
+				<li><a href="#" class="active">1</a></li>
+				<li><a href="#">2</a></li>
+				<li><a href="#">3</a></li>
+				<li><a href="#">4</a></li>
+				<li><a href="#">5</a></li>
+				<li><a href="#" class="next">&gt;</a></li> -->
+				<c:if test="${prev}">
+					<li><a
+						href="${pageContext.request.contextPath}/adminUser.ad?page=${startPage - 1}"
+						class="prev">&lt;</a></li>
+				</c:if>
+				<c:set var="realStartPage" value="${startPage < 0 ? 0 : startPage }" />
+				<c:forEach var="i" begin="${realStartPage}" end="${endPage}">
+					<c:choose>
+						<c:when test="${!(i == page)}">
+							<li><a
+								href="${pageContext.request.contextPath}/adminUser.ad?page=${i}">
+									<c:out value="${i}" />
+							</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="#" class="active"> <c:out value="${i}" />
+							</a></li>
+						</c:otherwise>
+					</c:choose>
+
+				</c:forEach>
+				<c:if test="${next}">
+					<li><a
+						href="${pageContext.request.contextPath}/adminUser.ad?page=${endPage + 1}"
+						class="next">&gt;</a></li>
+				</c:if>
+				<!-- ========== /페이징 처리 예시 ============ -->
+			</ul>
+
+
+		</div>
     </div>
       
       <div class="mng-box-footer">
@@ -98,44 +154,11 @@
       </div>
     </div>
     
-    <div class="manager-ban-user-page-number-container">
-      <div class="manager-ban-user-page-number-button">
-        <i class="icon-angle-double-left"></i>
-        <i class="icon-left-open"></i>
-        <div class="manager-ban-user-page-numbers"></div>
-        <i class="icon-right-open"></i>
-        <i class="icon-angle-double-right"></i>
-      </div>
-    </div>
+    
   </main>
-  <footer class="main-footer">
-    <div class="main-nonLogin-footer-text">
-      <span><a href="">이용약관</a></span> | <span><a href="">개인정보 처리 방침</a></span> | <span><a href="">고객센터</a></span>
-    </div>
-  </footer>
-
-    <script type="text/javascript">
-  const UserCount = {
-		  UsertNumber: ${totalUserCount}
-  };
   
-  console.log("jsp ${adminUser}");
-  const userList = [
-	  <c:forEach var="user" items="${adminUser}">
-	  	{
-	  		userNumber: "${user.userNumber}",
-	  		userNickname: "${user.userNickname}",
-	  		userTier: "${user.userTier}",
-	  		userPhone: "${user.userPhone}",
-	  		userJoinDate: "${user.userJoinDate}",
-	  		userBenCnt: "${user.userBenCnt}"
-	  	}
-	  	<c:if test="${user ne userList[userList.size()-1]}">,</c:if>
-	  </c:forEach>
-	  ];
-	//console.log(userList.userNickname);
-  </script>
-  <script defer src="${pageContext.request.contextPath}/assets/js/admin/adminUser.js"></script>
+  <jsp:include page="/app/preset/adminFooter.jsp" />
+
 </body>
 
 </html>

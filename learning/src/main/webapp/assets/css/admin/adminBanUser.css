@@ -243,6 +243,7 @@ a {
   list-style-type: none;
   display: flex;
   /* cursor: pointer; */
+  margin: 10px 0px;
 }
 .manager-ban-user-list-item > div{
   padding: 0px 10px;

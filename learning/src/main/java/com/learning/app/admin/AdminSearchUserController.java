@@ -29,8 +29,6 @@ public class AdminSearchUserController implements Execute{
 		
 		request.setAttribute("adminUser", searchResult);
 		
-		System.out.println("분명 넣어줬음");
-		
 		result.setPath("/app/admin/adminUser.jsp");
 		result.setRedirect(false);
 		

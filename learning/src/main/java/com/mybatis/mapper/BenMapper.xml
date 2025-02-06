@@ -29,12 +29,17 @@
 	<update id="plusBenCnt" parameterType="String">
 		UPDATE tbl_user
 		SET user_ben_cnt = user_ben_cnt + 1
-		WHERE user_number = #{userNumber}
+		WHERE user_nickname = #{userNcikname}
 	</update>
 	
 	<!-- 벤 회원 추가 -->
 	<insert id="ben" parameterType="com.learning.app.dto.BenDTO">
-		INSERT INTO tbl_ben
-		VALUES(seq_ben.nextval, #{userNumber}, sysdate, #{benPeriod}, #{benReason})
+		INSERT INTO tbl_ben b
+		VALUES
+		(seq_ben.nextval, 
+		(SELECT user_number
+		FROM	tbl_user u
+		WHERE	u.user_nickname = #{userNickname})
+		, sysdate, #{benPeriod}, #{benReason})
 	</insert>
 </mapper>
