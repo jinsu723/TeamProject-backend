@@ -34,9 +34,9 @@ public class BenDAO {
 	}
 	
 	// 밴 횟수 1회 증가시키기
-	public void plusBenCnt(String userNumber) {
+	public void plusBenCnt(String userNickname) {
 		System.out.println("밴 횟수 추가");
-		sqlSession.update("Ben.plusBenCnt", userNumber);
+		sqlSession.update("Ben.plusBenCnt", userNickname);
 	}
 	
 	// 밴 시키기

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% if(session.getAttribute("adminDTO")==null){
+	response.sendRedirect(request.getContextPath()+"/app/admin/adminLogin.jsp");
+}%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -15,29 +18,8 @@
 <body>
   <!-- <div class="mng-container"> -->
 
-  <header class="main-nonLogin-header">
-    <nav>
-      <div class="main-nonLogin-nav">
-        <div class="main-nonLogin-logo"><a href="${pageContext.request.contextPath}/adminMain.ad">learning</a></div>
-        <ul class="main-nonLogin-contents main-nonLogin-ul">
-          <div class="mng-users-contentes-drop">
-            <div class="mng-users-text"><a href="${pageContext.request.contextPath}/adminUser.ad">회원 관리</a>  
-              <div id="mng-users-dropText"><a href="${pageContext.request.contextPath}/ben.ad">밴 회원 관리</a></div>
-            </div>
-          </div>
-          <li id="mng-contents-drop">게시글 관리
-              <div class="mng-header-drop" onclick="">
-                <div id="mng-header-dropDown1"><a href="${pageContext.request.contextPath}/adminParty.ad">파티 관리</a></div>
-                <div id="mng-header-dropDown2"><a href="${pageContext.request.contextPath}/adminCommunity.ad">커뮤니티</a></div>
-              </div>
-          </li>
-        </ul>
-      </div>
-      <ul class="main-nonLogin-join-box main-nonLogin-ul">
-        <li class="main-nonLogin-join"><a href="${pageContext.request.contextPath}/adminlogoutOk.ad">로그아웃</a></li>
-      </ul>
-    </nav>
-  </header>
+  <jsp:include page="/app/preset/adminHeader.jsp" />
+  
   <main class="mng-main">
     <div class="mng-main-container">
       <div class="mng-main-container-title">
@@ -107,11 +89,8 @@
       </div>
     </div>
   </main>
-  <footer class="main-footer">
-    <div class="main-nonLogin-footer-text">
-      <span><a href="">이용약관</a></span> | <span><a href="">개인정보 처리 방침</a></span> | <span><a href="">고객센터</a></span>
-    </div>
-  </footer>
+  
+  <jsp:include page="/app/preset/footer.jsp" />
 
   <script defer src="${pageContext.request.contextPath}/assets/js/admin/adminCommunity.js"></script>
 </body>

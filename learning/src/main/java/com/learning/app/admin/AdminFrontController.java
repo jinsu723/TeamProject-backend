@@ -66,6 +66,7 @@ public class AdminFrontController extends HttpServlet {
 		case "/adminCommunity.ad":
 			System.out.println("커뮤니티 게시글 목록");
 			result = new AdminCommunityController().execute(request, response);
+			break;
 
 			// 밴 된 회원 목록 조회
 		case "/ben.ad":
