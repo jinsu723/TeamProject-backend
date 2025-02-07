@@ -13,9 +13,18 @@
 
 	<!-- 전체 회원 조회 -->
 	<select id="adminUser" resultType="UserDTO">
-		SELECT user_number,
-		user_nickname, user_tier, user_phone, user_join_date, user_ben_cnt
-		FROM tbl_user
+		SELECT * FROM (
+        SELECT ROWNUM AS rnum, subquery.*
+        FROM (
+            SELECT user_number,
+				   user_nickname,
+				   user_tier,
+				   user_phone,
+				   user_join_date,
+				   user_ben_cnt
+			FROM tbl_user
+        ) subquery
+    ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
 	</select>
 
 	<!-- 전체 회원 수 조회 -->

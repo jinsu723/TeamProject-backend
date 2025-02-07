@@ -36,8 +36,8 @@ public class AdminDAO {
 	}
 
 	// 전체 회원 목록 조회
-	public List<UserDTO> adminUser() {
-		return sqlSession.selectList("Admin.adminUser");
+	public List<UserDTO> adminUser(Map<String, Integer> adminMap) {
+		return sqlSession.selectList("Admin.adminUser", adminMap);
 	}
 
 	// 전체 파티 게시글 수
