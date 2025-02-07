@@ -19,7 +19,6 @@ function banUser(user) {
 		const isNumber = /^[0-9]+$/.test(period);
 
 		if (isNumber) {
-			alert(user + reason + period);
 			const contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2));
 			fetch(`${contextPath}/adminDoBen.ad`, {
 				method: "POST",

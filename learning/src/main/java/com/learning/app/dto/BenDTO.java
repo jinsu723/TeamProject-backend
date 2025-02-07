@@ -7,6 +7,7 @@ public class BenDTO {
 //		    ben_start_date DATE,
 //		    ben_period NUMBER NOT NULL,
 //		    ben_reason VARCHAR2(50) NOT NULL,
+//			ben_status NUMBER DEFAULT 1,
 //		    CONSTRAINT pk_ben PRIMARY KEY (ben_number),
 //		    CONSTRAINT fk_ben_user FOREIGN KEY (user_num) REFERENCES tbl_user (user_number) ON DELETE CASCADE
 //		);
@@ -15,6 +16,7 @@ public class BenDTO {
 	private String userId;
 	private String userNickname;
 	private String benReason;
+	private int benStatus;
 	private String benStartDate;
 	private String benEndDate;
 	private int benPeriod;
@@ -44,6 +46,12 @@ public class BenDTO {
 	}
 	public void setBenReason(String benReason) {
 		this.benReason = benReason;
+	}
+	public int getBenStatus() {
+		return benStatus;
+	}
+	public void setBenStatus(int benStatus) {
+		this.benStatus = benStatus;
 	}
 	public String getBenStartDate() {
 		return benStartDate;
@@ -79,8 +87,8 @@ public class BenDTO {
 	@Override
 	public String toString() {
 		return "BenDTO [benNumber=" + benNumber + ", userId=" + userId + ", userNickname=" + userNickname
-				+ ", benReason=" + benReason + ", benStartDate=" + benStartDate + ", benEndDate=" + benEndDate
-				+ ", benPeriod=" + benPeriod + ", userNumber=" + userNumber + ", userBenCnt=" + userBenCnt + "]";
+				+ ", benReason=" + benReason + ", benStatus=" + benStatus + ", benStartDate=" + benStartDate
+				+ ", benEndDate=" + benEndDate + ", benPeriod=" + benPeriod + ", userNumber=" + userNumber
+				+ ", userBenCnt=" + userBenCnt + "]";
 	}
-	
 }

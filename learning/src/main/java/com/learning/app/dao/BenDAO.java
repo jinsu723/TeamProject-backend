@@ -1,6 +1,7 @@
 package com.learning.app.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -15,8 +16,8 @@ public class BenDAO {
 	}
 	
 	// 밴 된 회원 목록 가져오기
-	public List<BenDTO> benList() {
-		List<BenDTO> benList = sqlSession.selectList("Ben.viewBen");
+	public List<BenDTO> benList(Map<String, Integer> benMap) {
+		List<BenDTO> benList = sqlSession.selectList("Ben.viewBen", benMap);
 		
 		return benList;
 	}

@@ -34,13 +34,15 @@ public class AdminDoBenController implements Execute{
 		JsonElement jsonElement = JsonParser.parseString(line);
 		JsonObject jsonObject = jsonElement.getAsJsonObject();
 		
+		// 밴 유저 정보 저장
 		String userNickname = jsonObject.get("userNickname").getAsString();
 		String banReason = jsonObject.get("banReason").getAsString();
 		String banPeriod = jsonObject.get("banPeriod").getAsString();
 		
-		System.out.println(userNickname);
-		System.out.println(banReason);
-		System.out.println(banPeriod);
+		// 벤 유저 정보
+		System.out.println("밴 당하는 유저 닉네임 : " + userNickname);
+		System.out.println("밴 사유 : " + banReason);
+		System.out.println("기간 : " + banPeriod);
 		
 		Map<String, String> banUser = new HashMap<>();
 		
