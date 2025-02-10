@@ -14,17 +14,18 @@
 	<!-- 전체 회원 조회 -->
 	<select id="adminUser" resultType="UserDTO">
 		SELECT * FROM (
-        SELECT ROWNUM AS rnum, subquery.*
-        FROM (
-            SELECT user_number,
-				   user_nickname,
-				   user_tier,
-				   user_phone,
-				   user_join_date,
-				   user_ben_cnt
-			FROM tbl_user
-        ) subquery
-    ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+		SELECT ROWNUM AS rnum, subquery.*
+		FROM (SELECT	u.user_number,
+				   		u.user_nickname,
+				   		u.user_tier,
+				   		u.user_phone,
+				   		u.user_join_date,
+				   		u.user_ben_cnt,
+				   		nvl(b.ben_status, 0) as ben_status
+			  FROM		tbl_user u
+			  LEFT JOIN		tbl_ben b
+			  ON		u.user_number = b.user_num) subquery)
+		WHERE rnum BETWEEN #{startRow} AND #{endRow}
 	</select>
 
 	<!-- 전체 회원 수 조회 -->

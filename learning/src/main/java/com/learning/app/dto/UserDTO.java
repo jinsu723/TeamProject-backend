@@ -1,7 +1,7 @@
 package com.learning.app.dto;
 
 public class UserDTO {
-   
+
 //   CREATE TABLE tbl_user (
 //          user_number NUMBER,
 //          user_id VARCHAR2(20) NOT NULL,
@@ -17,73 +17,93 @@ public class UserDTO {
 //          CONSTRAINT uq_user_phone UNIQUE (user_phone)
 //      );
 
-   private int userNumber;
-   private String userId;
-   private String userPasswd;
-   private String userNickname;
-   private String userTier;
-   private String userPhone;
-   private String userJoinDate;
-   private int userBenCnt;
-   
-   
-public int getUserNumber() {
-	return userNumber;
-}
-public void setUserNumber(int userNumber) {
-	this.userNumber = userNumber;
-}
-public String getUserId() {
-	return userId;
-}
-public void setUserId(String userId) {
-	this.userId = userId;
-}
-public String getUserPasswd() {
-	return userPasswd;
-}
-public void setUserPasswd(String userPasswd) {
-	this.userPasswd = userPasswd;
-}
-public String getUserNickname() {
-	return userNickname;
-}
-public void setUserNickname(String useNickname) {
-	this.userNickname = useNickname;
-}
-public String getUserTier() {
-	return userTier;
-}
-public void setUserTier(String userTier) {
-	this.userTier = userTier;
-}
-public String getUserPhone() {
-	return userPhone;
-}
-public void setUserPhone(String userPhone) {
-	this.userPhone = userPhone;
-}
-public String getUserJoinDate() {
-	return userJoinDate;
-}
-public void setUserJoinDate(String userJoinDate) {
-	this.userJoinDate = userJoinDate;
-}
-public int getUserBenCnt() {
-	return userBenCnt;
-}
-public void setUserBenCnt(int userBenCnt) {
-	this.userBenCnt = userBenCnt;
-}
+	private int userNumber;
+	private String userId;
+	private String userPasswd;
+	private String userNickname;
+	private String userTier;
+	private String userPhone;
+	private String userJoinDate;
+	private int userBenCnt;
+	private int benStatus;
 
+	public int getUserNumber() {
+		return userNumber;
+	}
 
-@Override
-public String toString() {
-	return "UserDTO [userNumber=" + userNumber + ", userId=" + userId + ", userPasswd=" + userPasswd + ", userNickname="
-			+ userNickname + ", userTier=" + userTier + ", userPhone=" + userPhone + ", userJoinDate=" + userJoinDate
-			+ ", userBenCnt=" + userBenCnt + "]";
+	public void setUserNumber(int userNumber) {
+		this.userNumber = userNumber;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getUserPasswd() {
+		return userPasswd;
+	}
+
+	public void setUserPasswd(String userPasswd) {
+		this.userPasswd = userPasswd;
+	}
+
+	public String getUserNickname() {
+		return userNickname;
+	}
+
+	public void setUserNickname(String userNickname) {
+		this.userNickname = userNickname;
+	}
+
+	public String getUserTier() {
+		return userTier;
+	}
+
+	public void setUserTier(String userTier) {
+		this.userTier = userTier;
+	}
+
+	public String getUserPhone() {
+		return userPhone;
+	}
+
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
+	}
+
+	public String getUserJoinDate() {
+		return userJoinDate;
+	}
+
+	public void setUserJoinDate(String userJoinDate) {
+		this.userJoinDate = userJoinDate;
+	}
+
+	public int getUserBenCnt() {
+		return userBenCnt;
+	}
+
+	public void setUserBenCnt(int userBenCnt) {
+		this.userBenCnt = userBenCnt;
+	}
+
+	public int getBenStatus() {
+		return benStatus;
+	}
+
+	public void setBenStatus(int benStatus) {
+		this.benStatus = benStatus;
+	}
+
+	@Override
+	public String toString() {
+		return "UserDTO [userNumber=" + userNumber + ", userId=" + userId + ", userPasswd=" + userPasswd
+				+ ", userNickname=" + userNickname + ", userTier=" + userTier + ", userPhone=" + userPhone
+				+ ", userJoinDate=" + userJoinDate + ", userBenCnt=" + userBenCnt + ", benStatus=" + benStatus + "]";
+	}
+
 }
-   
-   
-   
-}  

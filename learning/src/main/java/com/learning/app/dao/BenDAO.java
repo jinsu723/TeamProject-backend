@@ -45,4 +45,10 @@ public class BenDAO {
 		System.out.println("벤시키기");
 		sqlSession.insert("Ben.ben", benDTO);
 	}
+	
+	// 밴 중복검사 메소드
+	public int checkBen(String userNickname) {
+		System.out.println("밴 중복검사 쿼리 실행");
+		return sqlSession.selectOne("Ben.check", userNickname);
+	}
 }

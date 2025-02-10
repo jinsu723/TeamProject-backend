@@ -90,7 +90,7 @@
     </div>
   </main>
   
-  <jsp:include page="/app/preset/adminFooter.jsp" />
+  <jsp:include page="/app/preset/footer.jsp" />
 
   <script defer src="${pageContext.request.contextPath}/assets/js/admin/adminCommunity.js"></script>
 </body>

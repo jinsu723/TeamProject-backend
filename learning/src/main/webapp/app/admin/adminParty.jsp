@@ -93,7 +93,7 @@
       </div>
    </main>
    
-   <jsp:include page="/app/preset/adminFooter.jsp" />
+   <jsp:include page="/app/preset/footer.jsp" />
    
    <script type="text/javascript">
   const UserCount = {
