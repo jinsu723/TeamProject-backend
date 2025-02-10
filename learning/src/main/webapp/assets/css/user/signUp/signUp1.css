@@ -42,7 +42,7 @@ main {
 }
 
 form {
-  margin: 25px 0;
+  margin: 15px 0;
   display: flex;
   flex-direction: column;
   font-size: 15px;
@@ -73,7 +73,7 @@ label {
 }
 
 .signup1-buttons-container{
-  margin: 60px 0 30px;
+  margin: 20px 0 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -81,19 +81,18 @@ label {
 }
 
 .signup1-agreement-button {
-  border: none;
-  background-color: rgb(255, 255, 255);
-  font-size: 18px;
-  cursor: pointer;
-  /* padding: 12px; */
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    transition: color 0.3s ease;
 }
 
 .signup1-agreement-button:hover {
-  border: 1px solid gray;
+  border: 0.1px solid gray;
 }
 
-.signup1-back-button,
-.signup1-next-button {
+.signup1-back-button{
   width: 200px;
   height: 50px;
   border-radius: 8px;
@@ -103,15 +102,42 @@ label {
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;
+  transition: background-color 0.3s ease
 }
 
-.signup1-back-button:hover,
-.signup1-next-button:hover {
-  background-color: #777;
+.signup1-back-button:hover{
+  background-color: #975a5a;
 }
+
+/* 비활성화된 상태 (disabled) - 회색 계열 */
+.signup1-next-button {
+  width: 200px;
+  height: 50px;
+  border-radius: 8px;
+  border: none;
+  background-color: #ccc;  /* 비활성화 상태의 배경색 */
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: not-allowed;
+  transition: background-color 0.3s ease;
+}
+
+/* 활성화된 상태 (active) */
+.signup1-next-button.active {
+  background-color: black;
+  cursor: pointer;
+}
+
+/* 호버 시 (활성화 상태에서만 적용) */
+.signup1-next-button.active:hover {
+  background-color:   #975a5a;
+}
+
+
 
 footer {
-  margin-top: 50px;
+  margin-top: 0px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -127,4 +153,87 @@ footer a {
 
 footer a:hover {
   text-decoration: underline;
+}
+
+/* 모달 창 스타일 추가 */
+.modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 450px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  z-index: 9999;
+}
+
+.hidden {
+  display: none;
+}
+
+/* 모달 내부 스타일 */
+.modal-content {
+  max-height: 80vh; /* 뷰포트 높이의 80%까지 높이 제한 */
+  overflow-y: auto; /* 세로 스크롤 활성화 */
+  padding: 15px;
+  text-align: left; /* 원하는 경우 왼쪽 정렬 */
+}
+
+.modal-content h2 {
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+.modal-content p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* 모달 버튼 컨테이너 */
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* 모달 버튼 */
+.modal-buttons button {
+  width: 48%;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+#modal-close {
+  background: gray;
+  color: white;
+}
+
+#modal-agree {
+  background: black;
+  color: white;
+}
+
+/* 모달 활성화 시 배경 블러 효과 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: none;
+}
+
+.modal-overlay.active,
+.modal.active {
+  display: block;
 }
