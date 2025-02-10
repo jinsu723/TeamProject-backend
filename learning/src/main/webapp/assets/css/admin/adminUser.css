@@ -266,7 +266,9 @@ body{
 }
 
 
-
+.manager-ban-user-ban-status {
+	display: none;
+}
 
 
 

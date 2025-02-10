@@ -63,4 +63,14 @@
 		#{benPeriod},
 		#{benReason})
 	</insert>
+	
+	<!-- 밴 회원 중복 검사 -->
+	<select id="check" parameterType="String" resultType="int">
+		SELECT	count(*)
+		FROM	tbl_ben
+		WHERE 	ben_status = 1
+		AND		user_num = (SELECT	user_number
+							FROM	tbl_user
+							WHERE	user_nickname = #{userNickname})
+	</select>
 </mapper>

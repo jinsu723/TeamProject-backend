@@ -97,8 +97,11 @@
 			        <div class="manager-ban-user-list-ban-date-count">
 			          <c:out value="${users.userBenCnt}" />
 			        </div>
+			        <div class="manager-ban-user-ban-status">
+			          <c:out value="${users.benStatus}" />
+			        </div>
 		          </div>
-		          <button type="submit" class="ban-controll" onclick="banUser('${users.userNickname}')">밴</button>
+		          <button type="submit" class="ban-controll" onclick="banUser('${users.userNickname}, ${users.benStatus}')">밴</button>
 	          	</li>
 	          	<hr>
 	          </c:forEach>
@@ -159,6 +162,11 @@
   
   <jsp:include page="/app/preset/adminFooter.jsp" />
 
+<%-- <script type="text/javascript">
+const benStatus = [
+			isBen: <%= request.getAttribute("adminUser") %>
+	];
+</script> --%>
 </body>
 
 </html>

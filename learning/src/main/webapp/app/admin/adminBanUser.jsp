@@ -157,7 +157,7 @@ if (session.getAttribute("adminDTO") == null) {
 		</div>
 	</main>
 
-	<jsp:include page="/app/preset/footer.jsp" />
+	<jsp:include page="/app/preset/adminFooter.jsp" />
 
 </body>
 

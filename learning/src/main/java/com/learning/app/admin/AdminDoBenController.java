@@ -44,19 +44,38 @@ public class AdminDoBenController implements Execute{
 		System.out.println("밴 사유 : " + banReason);
 		System.out.println("기간 : " + banPeriod);
 		
-		Map<String, String> banUser = new HashMap<>();
+		// 밴 중복검사
+		int checkBen = benDAO.checkBen(userNickname);
+		System.out.println(checkBen);
 		
-		banUser.put("userNickname", userNickname);
-		banUser.put("banReason", banReason);
-		banUser.put("banPeriod", banPeriod);
+		boolean isBen = false;
+		if(checkBen == 1) {  // 중복 있음
+			isBen = true;
+			System.out.println("중복된 밴 유저 있음 : " + checkBen);
+			request.setAttribute("isBen", isBen);
+			System.out.println("확인 =====" + request.getAttribute("isBen"));
+		} else {  // 중복 없음
+			isBen = false;
+			System.out.println("중복된 밴 유저 없음"+ checkBen);
+			request.setAttribute("isBen", isBen);
+			System.out.println("확인 =====" + request.getAttribute("isBen"));
+
+			
+			Map<String, String> banUser = new HashMap<>();
+			
+			banUser.put("userNickname", userNickname);
+			banUser.put("banReason", banReason);
+			banUser.put("banPeriod", banPeriod);
+			
+			benDTO.setUserNickname(userNickname);
+			benDTO.setBenReason(banReason);
+			benDTO.setBenPeriod(Integer.parseInt(banPeriod));
+			
+			benDAO.Ben(benDTO);
+			
+			benDAO.plusBenCnt(userNickname);
+		}
 		
-		benDTO.setUserNickname(userNickname);
-		benDTO.setBenReason(banReason);
-		benDTO.setBenPeriod(Integer.parseInt(banPeriod));
-		
-		benDAO.Ben(benDTO);
-		
-		benDAO.plusBenCnt(userNickname);
 		
 		return null;
 		
