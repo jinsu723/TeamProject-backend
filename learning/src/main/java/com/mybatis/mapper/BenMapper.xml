@@ -6,29 +6,31 @@
 	<!-- 밴 된 회원 조회 -->
 	<select id="viewBen" resultType="com.learning.app.dto.BenDTO">
 		SELECT *
-		FROM (SELECT rownum AS
-		rnum, subquery.*
-		FROM(SELECT user_id
-		, user_nickname
-		, ben_reason
-		,
-		ben_start_date
-		, (ben_start_date + ben_period) AS ben_end_date
-		,
-		ben_period
-		FROM tbl_user u
-		JOIN tbl_ben b
-		ON u.user_number = b.user_num
-		WHERE ben_status = 1)
-		subquery)
-		WHERE rnum between ${startRow} AND #{endRow}
+		FROM (SELECT rownum AS rnum
+				   , subquery.*
+			  FROM	(SELECT user_id
+						  , user_nickname
+						  , ben_reason
+						  , ben_start_date
+						  , (ben_start_date + ben_period) AS ben_end_date
+						  , ben_period
+				 	 FROM tbl_user u
+					 JOIN tbl_ben b
+					 ON u.user_number = b.user_num
+					 WHERE ben_status = 1
+					 AND u.user_nickname LIKE '%'||#{searchedUserNnick}||'%') subquery)
+		WHERE rnum between #{startRow} AND #{endRow}
 	</select>
 
 	<!-- 벤 된 회원 수 조회 -->
 	<select id="benedUserNumber" resultType="int">
-		select count(*) as
-		bendedUsers
-		from tbl_ben
+		SELECT	count(*)
+		FROM	(SELECT	DISTINCT user_nickname
+				 FROM	tbl_ben b
+				 JOIN	tbl_user u
+				 ON		b.USER_num = u.user_number
+				 WHERE	ben_status = 1
+				 AND	u.USER_NICKNAME LIKE '%'||#{searchedUserNnick}||'%')
 	</select>
 
 	<!-- 벤 취소 -->

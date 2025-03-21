@@ -16,15 +16,15 @@ public class BenDAO {
 	}
 	
 	// 밴 된 회원 목록 가져오기
-	public List<BenDTO> benList(Map<String, Integer> benMap) {
+	public List<BenDTO> benList(Map<String, String> benMap) {
 		List<BenDTO> benList = sqlSession.selectList("Ben.viewBen", benMap);
 		
 		return benList;
 	}
 	
 	// 페이지네이션을 위한 밴 된 회원 수 자겨오기
-	public int getBenedUsers() {
-		int benedUserNum = sqlSession.selectOne("Ben.benedUserNumber");
+	public int getBenedUsers(String searchedUserNick) {
+		int benedUserNum = sqlSession.selectOne("Ben.benedUserNumber", searchedUserNick);
 		
 		return benedUserNum;
 	}

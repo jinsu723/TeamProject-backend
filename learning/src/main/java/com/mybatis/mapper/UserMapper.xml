@@ -11,7 +11,9 @@
 
 	<!-- 밴 테이블 확인 쿼리 -->
 	<select id="checkBen" parameterType="int" resultType="int">
-		SELECT COUNT(*) FROM TBL_BEN WHERE USER_NUM = #{userNum}
+		SELECT COUNT(*) FROM TBL_BEN 
+		WHERE USER_NUM = #{userNum}
+		AND benStatus =	1
 	</select>
 
 	<!-- 회원가입 쿼리 -->

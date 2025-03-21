@@ -95,6 +95,11 @@ public class AdminFrontController extends HttpServlet {
 			System.out.println("deleteForum.ad");
 			new AdminDeleteForumController().execute(request, response);
 			break;
+			
+		case "/adminUserSearch.ad":
+			System.out.println("UserSearch.ad");
+			result = new AdminUserSearchController().execute(request, response);
+			break;
 
 		default:
 			response.sendError(HttpServletResponse.SC_NOT_FOUND); // 잘못된 URL 처리
