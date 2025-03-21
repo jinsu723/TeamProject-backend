@@ -26,6 +26,14 @@ public class AdminBenController implements Execute{
 		BenDTO benDTO = new BenDTO();
 		BenDAO benDAO = new BenDAO();
 		
+		String searchedUserNick = request.getParameter("nickname");
+		
+		if(searchedUserNick == null) {
+			searchedUserNick = "";
+		}
+		
+		System.out.println("serchedUserNick : " + searchedUserNick);
+		
 		// 페이징 처리
         String temp = request.getParameter("page");
         
@@ -38,15 +46,19 @@ public class AdminBenController implements Execute{
         int startRow = (page - 1) * rowCount + 1;
         int endRow = startRow + rowCount - 1;
         
-        System.out.println("startRow : " + startRow);
-        System.out.println("endRow : " + endRow);
+        String startRowStr = startRow + "";
+        String endRowStr = endRow + "";
         
-        Map<String, Integer> pageMap = new HashMap<>();
-        pageMap.put("startRow", startRow);
-        pageMap.put("endRow", endRow);
+        System.out.println("startRow : " + startRowStr);
+        System.out.println("endRow : " + endRowStr);
+        
+        Map<String, String> pageMap = new HashMap<>();
+        pageMap.put("startRow", startRowStr);
+        pageMap.put("endRow", endRowStr);
+        pageMap.put("searchedUserNnick", searchedUserNick);
 		
         // 밴 된 유저 수 조회
-		int benedUserNumber = benDAO.getBenedUsers();
+		int benedUserNumber = benDAO.getBenedUsers(searchedUserNick);
 		System.out.println("밴된 유저 수 : " + benedUserNumber);
 		
 		// 밴 된 유저 목록 조회
@@ -72,6 +84,7 @@ public class AdminBenController implements Execute{
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("prev", prev);
 		request.setAttribute("next", next);
+		request.setAttribute("nickname", searchedUserNick);
 		
 		result.setPath("/app/admin/adminBanUser.jsp");
 		result.setRedirect(false);

@@ -15,23 +15,38 @@
 	<select id="adminUser" resultType="UserDTO">
 		SELECT * FROM (
 		SELECT ROWNUM AS rnum, subquery.*
-		FROM (SELECT	u.user_number,
-				   		u.user_nickname,
-				   		u.user_tier,
-				   		u.user_phone,
-				   		u.user_join_date,
-				   		u.user_ben_cnt,
-				   		nvl(b.ben_status, 0) as ben_status
+		FROM (SELECT	DISTINCT u.user_number,
+		   		u.user_nickname,
+		   		u.user_tier,
+		   		u.user_phone,
+		   		u.user_join_date,
+		   		u.user_ben_cnt,
+		   		max(nvl(ben_status, 0)) over(PARTITION  BY u.user_nickname ORDER BY ben_number
+				ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
+				) AS BEN_STatus
 			  FROM		tbl_user u
-			  LEFT JOIN		tbl_ben b
-			  ON		u.user_number = b.user_num) subquery)
-		WHERE rnum BETWEEN #{startRow} AND #{endRow}
+			  LEFT OUTER JOIN	tbl_ben b
+			  ON		u.user_number = b.user_num
+			  WHERE u.user_nickname LIKE '%'||#{searchedUserNick}||'%'
+	 	ORDER BY user_number) subquery)
+ 		WHERE rnum BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<!-- 전체 회원 중 닉네임으로 회원 조회 -->
+	<select id="adminSearchUser" resultType="UserDTO">
+	
+	</select>
+	
+	<!-- 검색된 회원 수 조회 -->
+	<select id="totalSearchedUserCount" resultType="int">
+	
 	</select>
 
 	<!-- 전체 회원 수 조회 -->
 	<select id="totalUserCount" resultType="int">
 		SELECT count(*) FROM
 		tbl_user
+		WHERE user_nickname like '%'||#{searchedUserNick}||'%'
 	</select>
 
 	<!-- 파티 게시글 목록 조회 -->

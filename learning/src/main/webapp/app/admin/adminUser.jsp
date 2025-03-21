@@ -36,12 +36,14 @@
         </div>
       </div>
       <div class="mng-options-container">
-        <button id="reset-search-button"><a href="${pageContext.request.contextPath}/adminUser.ad">초기화</a></button>
+        <button id="reset-search-button">
+        	<a href="${pageContext.request.contextPath}/adminUser.ad">초기화</a>
+        </button>
         <div class="mng-options-search">
-          <%-- <form action="${pageContext.request.contextPath}/admin/adminUser" method="get"> --%>
+           <form action="${pageContext.request.contextPath}/adminUser.ad" method="get">
              <i class="icon-search"></i>
-             <input type="text" name="nickname" id="manager-ban-user-search" placeholder="내용 검색" maxlength="30">
-           <!-- </form> -->
+             <input type="text" name="nickname" id="manager-ban-user-search" placeholder="내용 검색" maxlength="30" value=<%= request.getAttribute("nickname") != null? request.getAttribute("nickname") : "" %>>
+           </form>
         </div>
       </div>
 
@@ -121,7 +123,7 @@
 				<li><a href="#" class="next">&gt;</a></li> -->
 				<c:if test="${prev}">
 					<li><a
-						href="${pageContext.request.contextPath}/adminUser.ad?page=${startPage - 1}"
+						href="${pageContext.request.contextPath}/adminUser.ad?nickname=<%= request.getAttribute("nickname") != null ? request.getAttribute("nickname") : "" %>&page=${startPage - 1}"
 						class="prev">&lt;</a></li>
 				</c:if>
 				<c:set var="realStartPage" value="${startPage < 0 ? 0 : startPage }" />
@@ -129,7 +131,7 @@
 					<c:choose>
 						<c:when test="${!(i == page)}">
 							<li><a
-								href="${pageContext.request.contextPath}/adminUser.ad?page=${i}">
+								href="${pageContext.request.contextPath}/adminUser.ad?nickname=<%= request.getAttribute("nickname") != null ? request.getAttribute("nickname") : "" %>&page=${i}">
 									<c:out value="${i}" />
 							</a></li>
 						</c:when>
@@ -142,7 +144,7 @@
 				</c:forEach>
 				<c:if test="${next}">
 					<li><a
-						href="${pageContext.request.contextPath}/adminUser.ad?page=${endPage + 1}"
+						href="${pageContext.request.contextPath}/adminUser.ad?nickname=<%= request.getAttribute("nickname") != null ? request.getAttribute("nickname") : "" %>&page=${endPage + 1}"
 						class="next">&gt;</a></li>
 				</c:if>
 				<!-- ========== /페이징 처리 예시 ============ -->

@@ -34,7 +34,7 @@ public class LoginOkController implements Execute {
 
 		if (dto != null) { // 로그인 성공
 			// 밴 테이블에 올라가있는지 확인
-			if (dao.checkBen(dto.getUserNumber()) != 0) {
+			if (dao.checkBen(dto.getUserNumber()) > 0) {
 				System.out.println("밴 유저");
 				request.setAttribute("loginMessage", "밴 유저");
 				result.setPath("/app/user/login/login.jsp");

@@ -31,13 +31,23 @@ public class AdminDAO {
 	}
 
 	// 전체 회원 수
-	public int selectCount() {
-		return sqlSession.selectOne("Admin.totalUserCount");
+	public int selectCount(String searchedUserNick) {
+		return sqlSession.selectOne("Admin.totalUserCount", searchedUserNick);
 	}
 
 	// 전체 회원 목록 조회
-	public List<UserDTO> adminUser(Map<String, Integer> adminMap) {
+	public List<UserDTO> adminUser(Map<String, String> adminMap) {
 		return sqlSession.selectList("Admin.adminUser", adminMap);
+	}
+	
+	// 검색된 전체 회원 수
+	public int searchedUserCount() {
+		return sqlSession.selectOne("Admin.totalSearchedUserCount");
+	}
+	
+	// 전체 회원 중 닉네임으로 검색
+	public List<UserDTO> adminSearchUser(Map<String, String> adminMap){
+		return sqlSession.selectList("Admin.adminSearchUser", adminMap);
 	}
 
 	// 전체 파티 게시글 수

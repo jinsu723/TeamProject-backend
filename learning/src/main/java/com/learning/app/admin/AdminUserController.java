@@ -25,6 +25,15 @@ public class AdminUserController implements Execute {
          AdminDAO admindao = new AdminDAO();
          UserDTO userDTO = new UserDTO();
          
+         // 검색된 유저 닉네임 검사
+         String searchedUserNick = request.getParameter("nickname");
+         
+         if(searchedUserNick == null) {
+        	 searchedUserNick = "";
+         }
+         
+         System.out.println("serchedUserNick : " + searchedUserNick);
+         
          // 페이징 처리
          String temp = request.getParameter("page");
          int page = (temp == null) ? 1 : Integer.valueOf(temp);
@@ -34,12 +43,19 @@ public class AdminUserController implements Execute {
          int startRow = (page - 1) * rowCount + 1;
          int endRow = startRow + rowCount - 1;
          
-         Map<String, Integer> pageMap = new HashMap<>();
-         pageMap.put("startRow", startRow);
-         pageMap.put("endRow", endRow);
+         String startRowStr = startRow + "";
+         String endRowStr = endRow + "";
+         
+         System.out.println("startRow : " + startRow);
+         System.out.println("endRow : " + endRow);
+         
+         Map<String, String> pageMap = new HashMap<>();
+         pageMap.put("startRow", startRowStr);
+         pageMap.put("endRow", endRowStr);
+         pageMap.put("searchedUserNick", searchedUserNick);
          
          //전체 회원 수 조회
-         int totalUserCount = admindao.selectCount();
+         int totalUserCount = admindao.selectCount(searchedUserNick);
          System.out.println("전체 회원 수 : " + totalUserCount);
          
          //전체 회원 목록 조회
@@ -63,6 +79,7 @@ public class AdminUserController implements Execute {
          request.setAttribute("endPage", endPage);
          request.setAttribute("prev", prev);
          request.setAttribute("next", next);
+         request.setAttribute("nickname", searchedUserNick);
 
          // result 객체 생성
          Result result = new Result();
