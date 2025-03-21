@@ -13,7 +13,7 @@
 	<select id="checkBen" parameterType="int" resultType="int">
 		SELECT COUNT(*) FROM TBL_BEN 
 		WHERE USER_NUM = #{userNum}
-		AND benStatus =	1
+		AND ben_status =	1
 	</select>
 
 	<!-- 회원가입 쿼리 -->
