@@ -57,9 +57,9 @@ main {
   gap: 10px;
 }
 
-.signup2-visible {
+/* .signup2-visible {
   display: flex;
-}
+} */
 
 /* 입력 필드 */
 input[type="text"],

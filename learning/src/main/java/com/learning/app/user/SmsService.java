@@ -9,13 +9,10 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 public class SmsService {
 	// coolsms 내용 전달
-	private static final String API_KEY = "";
-	private static final String API_SECRET = "";
-	private static final String FROM_NUMBER = "";
+	private static final String API_KEY = "NCSZJ5VK7U34CXOW";
+	private static final String API_SECRET = "D3ASWMFORIMPGV4FNSMDFC65GQJOOBDD";
+	private static final String FROM_NUMBER = "01049396668";
 
-//	private static final String API_KEY = "NCSPNNVBVPVPRTVX";
-//	private static final String API_SECRET = "LSISNFQLHSZJU90NCZRQ2VA7HBK7ASZN";
-//	private static final String FROM_NUMBER = "01075812581";
 
 	public String sendVerificationSms(String to) throws CoolsmsException {
 		System.out.println("smsService ===================" + to);
