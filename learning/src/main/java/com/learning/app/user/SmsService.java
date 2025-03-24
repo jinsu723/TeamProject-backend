@@ -13,9 +13,6 @@ public class SmsService {
 	private static final String API_SECRET = "";
 	private static final String FROM_NUMBER = "";
 
-//	private static final String API_KEY = "NCSPNNVBVPVPRTVX";
-//	private static final String API_SECRET = "LSISNFQLHSZJU90NCZRQ2VA7HBK7ASZN";
-//	private static final String FROM_NUMBER = "01075812581";
 
 	public String sendVerificationSms(String to) throws CoolsmsException {
 		System.out.println("smsService ===================" + to);

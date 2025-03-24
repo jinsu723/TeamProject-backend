@@ -44,7 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log("서버 응답 데이터:", data);
             if (data.success) {
                 alert("인증번호가 발송되었습니다.");
-                certifySection.classList.add("signup2-visible"); // 인증번호 입력 필드 보이기
+                /*certifySection.classList.add("signup2-visible"); // 인증번호 입력 필드 보이기*/
+				certifySection.style.display = "flex";
                 certifyCodeInput.disabled = false;
                 certifyCodeInput.style.backgroundColor = "#fff";
             } else {
