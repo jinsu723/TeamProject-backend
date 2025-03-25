@@ -7,6 +7,10 @@
 		values(#{fileSystemName}, #{fileOriginalName}, #{forumNumber})
 	</insert>
 	
+	<select id="filePk" resultType="Int">
+		SELECT seq_file.nextVal FROM dual
+	</select>
+	
 	<!-- 사진 불러오기 -->
 	<select id="communityFileSelect" parameterType="int" resultType="FileDTO">
 	select file_system_name, file_original_name, forum_number from tbl_file where forum_number = #{forumNumber}

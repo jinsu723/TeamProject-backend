@@ -1,73 +1,60 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const form = document.querySelector('form');
-    if (form) {
-        form.addEventListener('submit', function(event) {
-            const content = document.querySelector('.partyForumWriting-content-text-content').innerHTML;
+document.addEventListener("DOMContentLoaded", function () {
+    let fileInput = document.querySelector('#file');
+    let fileList = document.querySelector('.file-list');
+    let cntElement = document.querySelector('.cnt');
 
-            document.querySelector('#hiddenForumContent').value = content;
+    // 첨부파일 미리보기 처리
+    fileInput?.addEventListener('change', function () {
+        let files = fileInput.files;
+        
+        // 파일 변경 시 기존 미리보기 제거
+        fileList.innerHTML = '';
 
+        // 파일 개수 제한 (1개)
+        if (files.length > 1) {
+            let dt = new DataTransfer();
+            fileInput.files = dt.files;
+            console.log(files);
+            alert("파일은 최대 1개까지만 첨부 가능합니다.");
+            cntElement.textContent = files.length;
+            return;
+        }
+
+        for (let i = 0; i < files.length; i++) {
+            let src = URL.createObjectURL(files[i]);
+            fileList.innerHTML = `<li>
+                <div class="show-img-box">
+                    <img src="${src}">
+                </div>
+                <div class="btn-box">
+                    <button type='button' class='img-cancel-btn' data-name='${files[i].name}'>삭제</button>
+                </div>
+            </li>`;
+        }
+
+        cntElement.textContent = files.length;
+
+        // 첨부파일 삭제 버튼 처리
+        document.querySelector(".img-cancel-btn")?.addEventListener("click", function () {
+            this.closest("li").remove();
+
+            let fileName = this.dataset.name;
+            let dt = new DataTransfer();
+
+            for (let i = 0; i < fileInput.files.length; i++) {
+                if (fileInput.files[i].name !== fileName) {
+                    dt.items.add(fileInput.files[i]);
+                }
+            }
+
+            fileInput.files = dt.files;
+            console.log(fileInput.files);
+            cntElement.textContent = fileInput.files.length;
         });
-    }
+    });
+
+    // 취소 버튼 처리
+    document.querySelector(".cancel-btn")?.addEventListener("click", function () {
+        window.location.href = '/board/boardListOk.bo';
+    });
 });
-
-
-
-const writingPost = document.querySelector('.partyForumWriting-button');
-const writingTitle = document.querySelector('#title');
-const writingContent = document.querySelector('.partyForumWriting-content-text-content');
-const hiddenInput = document.querySelector('#hiddenForumContent');
-
-/*document.querySelector('form').onsubmit = function(event) {
-    // contentEditable 영역의 내용을 가져옴
-    const content = document.querySelector('.partyForumWriting-content-text-content').innerHTML;
-    
-    // hidden input에 내용 할당
-    document.querySelector('#hiddenForumContent').value = content;
-
-    // 디버깅: 값을 콘솔에 출력하여 제대로 복사됐는지 확인
-    console.log('Title:', document.querySelector('#title').value);  // title 값 확인
-    console.log('Content:', document.querySelector('#hiddenForumContent').value);  // content 값 확인
-};
-
-form.addEventListener('submit', function () {
-    hiddenInput.value = contentDiv.innerHTML; // contentEditable 내용을 hidden input에 복사
-});*/
-
-writingSelectFile.addEventListener("click", function () {
-	document.querySelector('.partyForumWriting-file-select-button').click();
-});
-
-function selectFile() {
-	const fileSize = 40 * 1204 * 1204;
-	const imageDisplay = new FileReader();
-	const img = document.createElement('img');
-	const selectFileButton = document.querySelector('.partyForumWriting-file-select-button');
-	const selectFileName = document.querySelector('.partyForumWriting-file-select');
-	const contentDiv = document.querySelector('.partyForumWriting-content-text-content');
-	const replaceImage = contentDiv.querySelector('img');
-	if (replaceImage) {
-		contentDiv.removeChild(replaceImage);
-		selectFileName.textContent = '선택된 파일 없음(40MB 이하)';
-		selectFileButton.value = '';
-	}
-
-
-	if (selectFileButton.files.length > 0) {
-		const fileSeletor = selectFileButton.files[0];
-		selectFileName.textContent = `${selectFileButton.files[0].name}`;
-		if (fileSeletor.size > fileSize) {
-			alert("파일의 용량은 40MB를 넘을 수 없습니다");
-		} else {
-			imageDisplay.onload = function (event) {
-				img.src = event.target.result;
-				img.style.maxWidth = '235px';
-				img.style.maxHeight = '173px';
-				img.alt = '이미지 추가 오류';
-				contentDiv.appendChild(img);
-			};
-			imageDisplay.readAsDataURL(fileSeletor);
-		}
-	} else {
-		selectFileName.textContent = '선택된 파일 없음(40MB 이하)';
-	}
-}

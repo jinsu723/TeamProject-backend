@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.learning.app.dto.partyForumDTO;
+import com.learning.app.dto.PartyForumDTO;
 import com.mybatis.config.MyBatisConfig;
 
 public class partyForumDAO {
@@ -16,19 +16,33 @@ public class partyForumDAO {
 	}
 
 	// 파티 글 작성
-	public void WritingEnd(partyForumDTO partyForumDTO) {
+	public void WritingEnd(PartyForumDTO partyForumDTO) {
 		sqlSession.insert("Forum.partyForumWriting", partyForumDTO);
 	}
 
-	public List<partyForumDTO> getForumList() {
-		return sqlSession.selectList("Forum.partyForumFind");
+	public int getFindAll() {
+		return sqlSession.selectOne("Forum.partyForumFindAll");
 	}
 
-	public List<partyForumDTO> getForumDetail(int forumNumber) {
+	public int getFindUserAll(String FindUserNickname) {
+		return sqlSession.selectOne("Forum.partyForumFindAll", FindUserNickname);
+	}
+
+	public List<PartyForumDTO> getForumList(Map<String, Integer> pageMap) {
+		List<PartyForumDTO> list = sqlSession.selectList("Forum.partyForumFind", pageMap);
+		return list;
+	}
+
+	public List<PartyForumDTO> getForumTitleList(Map<String, Object> pageMap) {
+		List<PartyForumDTO> list = sqlSession.selectList("Forum.partyForumFindUser", pageMap);
+		return list;
+	}
+
+	public List<PartyForumDTO> getForumDetail(int forumNumber) {
 		return sqlSession.selectList("Forum.partyForumDetail", forumNumber);
 	}
 
-	public List<partyForumDTO> getpartyComment(int postNum) {
+	public List<PartyForumDTO> getpartyComment(int postNum) {
 		return sqlSession.selectList("Forum.partyComment", postNum);
 	}
 
@@ -36,16 +50,20 @@ public class partyForumDAO {
 		sqlSession.delete("Forum.partydelete", postNum);
 	}
 
-	public int ApplyUserNum(String UserId) {
-		return sqlSession.selectOne("Forum.ApplyUserNum", UserId);
+	public int FindUserNum(String UserId) {
+		return sqlSession.selectOne("Forum.FindUserNum", UserId);
 	}
 
-	public void partyForumApply(Map<String, Integer> map) {
-		sqlSession.insert("Forum.partyForumApply", map);
+	public int FindUserNum(int forumNumber) {
+		return sqlSession.selectOne("Forum.FindUserNum1", forumNumber);
 	}
 
-	public int ApplyDuplication(Map<String, String> map) {
-		return sqlSession.selectOne("Forum.ApplyDuplication", map);
+	public void partyForumApply(PartyForumDTO partyForumDTO) {
+		sqlSession.insert("Forum.partyForumApply", partyForumDTO);
+	}
+
+	public int ApplyDuplication(PartyForumDTO partyForumDTO) {
+		return sqlSession.selectOne("Forum.ApplyDuplication", partyForumDTO);
 	}
 
 	public int ApplyNum(String postNum) {
@@ -57,12 +75,11 @@ public class partyForumDAO {
 	}
 
 	public void CommentDelete(int commentNumber) {
-    	sqlSession.delete("Forum.commentDelete", commentNumber);
-    }
-	
-	public void commentAdd(Map<String, String> map) {
-		sqlSession.insert("Forum.commentAdd", map);
+		sqlSession.delete("Forum.commentDelete", commentNumber);
 	}
 
+	public void commentAdd(PartyForumDTO partyForumDTO) {
+		sqlSession.insert("Forum.commentAdd", partyForumDTO);
+	}
 
 }

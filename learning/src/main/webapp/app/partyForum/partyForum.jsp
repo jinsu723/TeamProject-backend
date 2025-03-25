@@ -29,12 +29,16 @@
 				<h1 class="partyForum-main-title">파티 모집</h1>
 			</div>
 
+			<!-- 검색 및 글쓰기 버튼 -->
 			<div class="partyForum-options-container">
 				<div class="partyForum-options-search">
-					<i class="icon-search"></i> <input type="text" name="search"
-						id="partyForum-search" placeholder="내용 검색"> <i
-						class="icon-down-dir"></i>
+					<form action="${pageContext.request.contextPath }/app/partyForum/partyForum.fo" method="get">
+						<input type="hidden" name="page" value="1"> 
+						<i class="icon-search"></i>
+						<input type="text" name="FindTitle" id="partyForum-search" placeholder="제목 검색" value="${requestScope.FindTitle}">
+					</form>
 				</div>
+
 				<c:if test="${sessionScope.userDTO != NULL}">
 					<form action="partyWriting.fo" method="post">
 						<div class="partyForum-write-button">
@@ -51,7 +55,7 @@
 				</c:if>
 			</div>
 
-
+			<!-- 게시글 목록 -->
 			<div class="partyForum-list-header-container">
 				<hr class="partyForum-list-line">
 				<div class="partyForum-list-main">
@@ -70,45 +74,70 @@
 				</div>
 				<hr class="partyForum-list-line">
 
-				<!-- 리스트들을 담을 ul 태그 -->
 				<ul class="partyForum-list">
-
+					<c:forEach var="forum" items="${forumList}">
+						<li class="partyForum-list-item"
+							onclick="location.href='${pageContext.request.contextPath}/app/partyForum/partyForumDetail.fo?postNum=${forum.forumNumber}'">
+							<div class="partyForum-list-writer">
+								<c:out value="${forum.userNickname}" />
+							</div>
+							<div class="partyForum-list-userSkill">
+								<c:out value="${forum.userTier}" />
+							</div>
+							<div class="partyForum-list-title">
+								<c:out value="${forum.forumTitle}" />
+							</div>
+							<div class="partyForum-list-write-time">
+								<c:out value="${forum.forumDate}" />
+							</div>
+						</li>
+						<div class="partyForum-list-item-line">
+							<hr>
+						</div>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>
-		<div class="partyForum-page-number-container">
-			<div class="partyForum-page-number-button">
-				<i class="icon-angle-double-left"></i> <i class="icon-left-open"></i>
-				<div class="partyForum-page-numbers"></div>
-				<i class="icon-right-open"></i> <i class="icon-angle-double-right"></i>
-			</div>
+
+		<!-- 페이지네이션 -->
+		<div class="pagination">
+			<ul>
+				<!-- 이전 페이지 버튼 -->
+				<c:if test="${prev}">
+					<li><a
+						href="${pageContext.request.contextPath}/app/partyForum/partyForum.fo?page=${startPage - 1}&FindTitle=${requestScope.FindTitle}"
+						class="prev">&lt;</a></li>
+				</c:if>
+
+				<c:set var="realStartPage" value="${startPage < 1 ? 1 : startPage}" />
+
+				<!-- 페이지 번호 -->
+				<c:forEach var="i" begin="${realStartPage}" end="${endPage}">
+
+					<c:choose>
+						<c:when test="${i == page}">
+							<li><a href="#" class="active">${i}</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a
+								href="${pageContext.request.contextPath}/app/partyForum/partyForum.fo?page=${i}&FindTitle=${requestScope.FindTitle}">
+									<c:out value="${i}" />
+							</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+
+				<!-- 다음 페이지 버튼 -->
+				<c:if test="${next}">
+					<li><a
+						href="${pageContext.request.contextPath}/app/partyForum/partyForum.fo?page=${endPage + 1}&FindTitle=${requestScope.FindTitle}"
+						class="next">&gt;</a></li>
+				</c:if>
+			</ul>
 		</div>
 	</main>
 
 	<jsp:include page="/app/preset/footer.jsp" />
 
-	<script>	
-	const contextPath = '<%=request.getContextPath()%>';
-	const forumCount = {
-		forumNumber: ${ partyForumCount }	
-	};
-	
-	const forumList = [
-	  <c:forEach var="forum" items="${forumList}">{
-				forumNumber: "${forum.forumNumber}",
-	 			userNickname: "${forum.userNickname}",
-	 			userTier: "${forum.userTier}",
-	  			forumTitle: "${forum.forumTitle}",
-	  			forumDate: "${forum.forumDate}",
-	  			forumUpdate: "${forum.forumUpdate}",
-		  	}<c:if test="${forum ne forumList[forumList.size()-1]}">,</c:if>
-		  </c:forEach>
-		  ];
-	</script>
-	
-
-	<script
-		src="${pageContext.request.contextPath}/assets/js/partyForum/partyForum.js"></script>
 </body>
-
 </html>

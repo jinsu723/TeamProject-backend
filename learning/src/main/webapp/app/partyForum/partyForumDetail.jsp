@@ -22,165 +22,128 @@
 <body>
 	<jsp:include page="/app/preset/header.jsp" />
 
-	<main class="partyForumDetail-main">
-		<div class="partyForumDetail-main-container-title">
-			<h1 class="partyForumDetail-main-title">파티 모집 게시판</h1>
-		</div>
-
-		<div class="partyForumDetail-title">
-			<p class="partyForumDetail-title-content">제목</p>
-			<p class="partyForumDetail-title-text">티어</p>
-		</div>
-
-		<div class="partyForumDetail-writer">
-			<p class="partyForumDetail-writer-text">작성자 :</p>
-			<p class="partyForumDetail-writer-userName">닉네임</p>
-			<p class="partyForumDetail-writer-uploadTime">날짜</p>
-		</div>
-
-
-		<div class="partyForumDetail-content">
-			<div class="partyForumDetail-content-text">값</div>
-			<!--       <img class="partyForumDetail-content-images" 
-      alt="사용자 이미지"> -->
-		</div>
+	<div class="container">
 		<c:forEach var="forumDetail" items="${forumDetail}">
-			<div class="partyForumDetail-button-container">
-				<button class="partyForumDetail-partyForum-index-button">목록</button>
-
-				<c:if
-					test="${forumDetail.userId == sessionScope.userDTO.userId and ApplyNum == 0}">
-					<button class="partyForumDetail-edit-button">수정</button>
-					<button class="partyForumDetail-delete-button">삭제</button>
-				</c:if>
-
-				<c:if
-					test="${forumDetail.userId == sessionScope.userDTO.userId and ApplyNum != 0}">
-					<button class="partyForumDetail-edit-button">수정</button>
-					<button class="partyForumDetail-delete-button" disabled
-						style="cursor: default;">삭제</button>
-				</c:if>
-
-				<c:if
-					test="${sessionScope.userDTO == NULL or forumDetail.userId != sessionScope.userDTO.userId}">
-					<button class="partyForumDetail-edit-button" disabled
-						style="display: none;">수정</button>
-					<button class="partyForumDetail-delete-button" disabled
-						style="display: none">삭제</button>
-				</c:if>
-			</div>
-
-
-			<%--    세션에 저장된 userId: ${sessionScope.userDTO.userId} --%>
-			<c:if
-				test="${sessionScope.userDTO != NULL and duplication == 0 and forumDetail.userId != sessionScope.userDTO.userId}">
-				<!-- userDTO가 있을 경우 참가신청 버튼을 활성화 -->
-				<form action="partyForumApply.fo" method="get"
-					onsubmit="return confirm('참가 하시겠습니까??');">
-					<input type="hidden" name="userId"
-						value="${sessionScope.userDTO.userId}"> <input
-						type="hidden" name="postNum" value="${param.postNum}">
-					<div class="partyForumDetail-button-userApply">
-						<button class="partyForumDetail-userApply-button">참가신청</button>
-					</div>
-				</form>
-			</c:if>
-
-			<c:if
-				test="${sessionScope.userDTO == NULL or duplication != 0 or forumDetail.userId == sessionScope.userDTO.userId}">
-				<!-- userDTO가 없을 경우 참가신청 버튼을 비활성화 -->
-				<div class="partyForumDetail-button-userApply">
-					<button class="partyForumDetail-userApply-button" disabled>참가신청</button>
+			<div class="view-wrap">
+				<div class="view-title">
+					<h1>
+						<c:out value="${forumDetail.forumTitle}" />
+						<!-- +++++++++ -->
+					</h1>
 				</div>
-			</c:if>
-
-
-
-
-			<br>
-			<c:if test="${sessionScope.userDTO != NULL}">
-				<div class="partyForumDetail-comment-list-container">
-					<div class="partyForumDetail-comment-input">
-						<input id="commentInput" type="text" placeholder="댓글을 입력해 주세요">
-					</div>
-					<button>등록</button>
-				</div>
-			</c:if>
-			<c:if test="${sessionScope.userDTO == NULL}">
-				<div class="partyForumDetail-comment-list-container">
-					<div class="partyForumDetail-comment-input">
-						<input type="text" placeholder="댓글을 입력해 주세요" disabled>
-					</div>
-					<button disabled style="cursor: default;">등록</button>
-				</div>
-			</c:if>
-		</c:forEach>
-
-		<div class="partyForumDetail-commnet-list-container">
-			<ul class="partyForumDetail-comment-list">
-				<c:forEach var="comment" items="${forumComment}">
-					<li class="partyForumDetail-comment-list-item"
-						data-comment-number="${comment.commentNumber}">
-						<div class="partyForumDetail-comment-list-details">
-							<p class="partyForumDetail-comment-list-userName">${comment.userNickname}</p>
-							<p class="partyForumDetail-comment-list-colon">:</p>
-							<p class="partyForumDetail-comment-list-content">${comment.commentContent}</p>
-							<p class="partyForumDetail-comment-list-time">${comment.commentDate}</p>
-							<c:if test="${comment.userId == sessionScope.userDTO.userId}">
-								<button class="partyForumDetail-comment-delete">삭제</button>
-							</c:if>
+				<div class="view-info">
+					<div class="info-title">
+						<div class="title-wrap">
+							<span class="writer">작성자</span>
+							<!-- 임시 작성자 -->
+							<div class="content-writer">
+								<c:out value="${forumDetail.userNickname}" />
+								<!-- +++++++++ -->
+							</div>
 						</div>
-						<hr class="partyForumDetail-comment-line-line">
-					</li>
-				</c:forEach>
-			</ul>
-		</div>
+						<div class="title-wrap">
+							<span class="date">작성일</span>
+							<div class="content-date">
+								<c:out value="${forumDetail.forumDate}" />
+								<!-- +++++++++ -->
+							</div>
+						</div>
+						<%-- <div class="title-wrap">
+						<span class="hit">조회수</span>
+						<!-- 임시 조회수 -->
+						<div class="content-hit">
+							<c:out value="${community.getBoardReadCount()}" />
+							<!-- +++++++++ -->
+						</div>
+					</div> --%>
+					</div>
+				</div>
+				<!-- 임시 내용 -->
+				<div class="view-content">
+					<c:out value="${forumDetail.forumContent}" />
+					<!-- +++++++++ -->
+				</div>
+				<!-- 임시 첨부 파일 -->
+				<div class="view-attach">
+					<!-- 수정중 -->
+					<c:forEach var="forumFiles" items="${forumFiles}">
+						<div class="img-box">
+							<img
+								src="${pageContext.request.contextPath}/upload/${forumFiles.fileOriginalName}" />
+						</div>
+					</c:forEach>
+				</div>
+				<div class="btn-group">
+					<!-- 목록 버튼 -->
+					<button type="button" class="list-btn"
+						onclick="location.href='${pageContext.request.contextPath}/app/partyForum/partyForum.fo'">목록</button>
+
+					<!-- 수정 및 삭제 버튼 (로그인한 사용자가 작성자인 경우에만 표시) -->
+					<c:if test="${sessionScope.userDTO!=null and sessionScope.userDTO.userNumber==forumDetail.userNumber}">
+						<c:if test="true">
+							<%-- test="${(sessionScope.userDTO).getUserNumber() == community.getUserNumber()}"> --%>
+							<button type="button" class="modify-btn"
+								onclick="location.href='${pageContext.request.contextPath}/app/partyForum/partyForumEdit.fo?postNum=${forumDetail.forumNumber}'">수정</button>
+							<button type="button" class="delete-btn"
+								onclick="location.href='${pageContext.request.contextPath}/app/partyForum/partyForumDelete.fo?postNum=${forumDetail.forumNumber}'">삭제</button>
+						</c:if>
+					</c:if>
+				</div>
+
+				<div class="btn-apply">
+					<button type="button" class="apply-btn">참가 신청</button>
+				</div>
+
+				<!-- 댓글 수정중 -->
+				<div class="comment-form">
+					<form id="comment-form">
+						<input type="hidden" name="forumNumber"
+							value="${forumDetail.forumNumber}">
+						<div class="form-group">
+							<textarea name="content" id="content" placeholder="댓글 내용을 입력하세요."></textarea>
+						</div>
+						<button type="button" class="submit-btn">댓글 작성</button>
+					</form>
+				</div>
+
+				<div class="comment-list">
+					<!-- 리스트 예시 -->
+					<ul id="comment-list">
+						<li>
+							<div class="comment-info">
+								<span class="writer"></span> <span class="date"></span>
+							</div>
+							<div class="comment-content-wrap">
+								<div class="comment-content">
+									<p></p>
+								</div>
+								<div class="comment-btn-group">
+									<button type=button class="comment-delete">삭제</button>
+								</div>
+							</div>
+						</li>
+					</ul>
+					<!-- /리스트 예시 -->
+				</div>
+
+				<!-- 댓글 수정중 -->
 
 
-	</main>
+			</div>
+		</c:forEach>
+	</div>
 
 	<jsp:include page="/app/preset/footer.jsp" />
-
 	<script>
 	const contextPath = '<%=request.getContextPath()%>';
-    var postNum = '${param.postNum}';
-    console.log("JavaScript에서 받은 postNum:", postNum);
-    
-    const userId = '${sessionScope.userDTO.userId}';
-    console.log("JavaScript에서 받은 userId:", userId);
-    
-	  const forumDetail = [
-		  <c:forEach var="forumDetail" items="${forumDetail}">{
-			 	 forumNumber: "${forum.forumNumber}",
-				forumTitle: "${forumDetail.forumTitle}",
-	 			userTier: "${forumDetail.userTier}",
-				userNickname: "${forumDetail.userNickname}",
-				forumDate: "${forumDetail.forumDate}",
-				forumUpdate: "${forumDetail.forumUpdate}",
-				forumContent: "${forumDetail.forumContent}",
-			  	}
-			  </c:forEach>
-			  ];  
-  
-	  forumDetail.forEach((forum) => {
-	      console.log(forum.forumUpdate);
-	      console.log(forum.forumDate);
-	  });
-	  const forumComment = [
-		  <c:forEach var="forumComment" items="${forumComment}">{
-			  userNickname: "${forumComment.userNickname}",
-			  userId: "${forumComment.userId}",
-			  commentContent: "${forumComment.commentContent}",
-			  commentDate: "${forumComment.commentDate}",
-			  	},
-			  </c:forEach>
-			  ]; 
-  
-  </script>
-
-
+	const userId = `${userDTO.userId}`;
+	<c:forEach var="forumDetail" items="${forumDetail}">
+		const postNum = `${forumDetail.forumNumber}`;
+	</c:forEach> 
+	/* console.log(userId + "userId출력확인"); */
+	</script>
 	<script
-		src="${pageContext.request.contextPath}/assets/js/partyForum/partyForumDetail.js"></script>
+		src="${pageContext.request.contextPath}/assets/js/partyForum/partyForumDetail.js"></script> 
 </body>
 
 </html>
