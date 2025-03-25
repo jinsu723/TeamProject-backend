@@ -1,270 +1,334 @@
 * {
-  /* 해당 페이지 전체 여백들 0으로 시자작 */
-  margin: 0px;
-  padding: 0px;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 body {
-  height: 100vh;
-  width: 100%;
-  /* background-color: red; */
+	background-color: #f8f8f8;
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
-
-/* 해더 끝 */
-
-/* 메인 시작 */
-.partyForumDetail-main {
-  width: 60%;
-  position: relative;
-  margin-top: 5%;
-  left: 50%;
-  transform: translate(-50%, 0%);
-  /* padding: 0px 10%; */
+.container {
+	margin: 0 auto;
+	max-width: 1024px;
+	padding: 20px;
 }
 
-/* 메인 끝 */
-
-/* 메인 제목 디자인 시작 */
-.partyForumDetail-main-container-title {
-  text-align: center;
+h1 {
+	margin-bottom: 30px;
+	font-size: 2rem;
+	font-weight: bold;
 }
 
-.partyForumDetail-main-title {
-  font-family: "Noto Sans KR Black";
+/* 게시글 정보 스타일 */
+.view-info {
+	margin-bottom: 20px;
 }
 
-/* 메인 제목 디자인 끝 */
-
-/* 게시글 제목 디자인 시작 */
-.partyForumDetail-title {
-  margin-top: 5%;
-  display: flex;
-  flex-direction: row;
-  font-family: "Noto Sans KR ExtraBold";
-  font-size: 20px;
+.title-wrap>span {
+	margin-right: 20px;
+	font-size: 0.8rem;
+	color: #999;
 }
 
-.partyForumDetail-title-content {
-  text-align: left;
-  line-height: 40px;
-  background-color: #F5F5F5;
-  border-radius: 10px;
-  padding: 0px 10px;
-  width: 85%;
-  height: 4vh;
-  border: 1px solid black;
-  color: black;
+.info-title {
+	display: flex;
 }
 
-.partyForumDetail-title-text {
-  margin-left: auto;
-  line-height: 40px;
+.title-wrap {
+	margin-right: 20px;
 }
 
-/* 게시글 제목 디자인 끝 */
-
-/* 게시글 작성자 및 업로드 시간 디자인 시작 */
-.partyForumDetail-writer {
-  display: flex;
-  flex-direction: row;
-  font-family: "Noto Sans KR ExtraBold";
-  font-size: 20px;
-  margin-top: 20px;
+.view-info .writer {
+	font-weight: bold;
 }
 
-.partyForumDetail-writer-text {
-  margin-right: 10px;
+/* 게시글 내용 스타일 */
+.view-content {
+	margin-bottom: 30px;
+	line-height: 1.5;
+	font-size: 1rem;
 }
 
-.partyForumDetail-writer-userName {
-  font-family: "Noto Sans KR Medium";
+/* 버튼 스타일 */
+.btn-group {
+	text-align: right;
+	margin-top: 30px;
 }
 
-.partyForumDetail-writer-uploadTime {
-  font-family: "Noto Sans KR Medium";
-  margin-left: auto;
-  font-size: 18px;
+.list-btn, .modify-btn, .delete-btn {
+	color: #fff;
+	background-color: #333;
+	padding: 10px 20px;
+	border-radius: 5px;
+	border: none;
+	transition: background-color 0.3s ease, color 0.3s ease;
+	cursor: pointer;
+	margin-right: 10px;
 }
 
-/* 게시글 작성자 및 업로드 시간 디자인 끝 */
-
-/* 게시글 본문 디자인 시작 */
-.partyForumDetail-content {
-  padding: 20px;
-  min-height: 346px;
-  height: auto;
-  border-radius: 15px;
-  background-color: #F5F5F5;
-  font-family: "Noto Sans KR Medimun";
-  font-size: 18px;
-  display: flex;
-  flex-direction: column;
-  margin-top: 20px;
-  border: 1px solid black;
+.list-btn:hover, .modify-btn:hover, .delete-btn:hover {
+	background-color: rgb(255, 87, 87);
+	color: #fff;
 }
 
-.partyForumDetail-content-text {
-  text-align: left;
+.view-attach {
+	margin-bottom: 20px;
 }
 
-.partyForumDetail-content-images {
-  margin-top: 25px;
-  width: 235px;
+.view-attach>a {
+	color: #333;
+	text-decoration: none;
+	font-weight: bold;
+	margin-right: 10px;
 }
 
-/* 게시글 본문 디자인 끝 */
-
-/* 수정, 삭제, 목록 버튼 디자인 시작 */
-.partyForumDetail-button-container {
-  margin: 10px 0px;
-  display: flex;
-  justify-content: space-between;
+.view-attach>a:hover {
+	text-decoration: underline;
 }
 
-.partyForumDetail-partyForum-index-button,
-.partyForumDetail-edit-button,
-.partyForumDetail-delete-button {
-  border: 0;
-  width: 10%;
-  height: 3vh;
-  font-size: 18px;
-  font-family: "Noto Sans KR Medium";
-  border-radius: 5px;
-  color: white;
-  background-color: #595959;
-  cursor: pointer;
+.comment-section {
+	margin-top: 30px;
 }
 
-.partyForumDetail-edit-button {
-  margin-left: auto;
-  margin-right: 10px;
+.comment-section h2 {
+	font-size: 1.5rem;
+	margin-bottom: 15px;
 }
 
-/* 수정, 삭제, 목록 버튼 디자인 끝 */
-
-.partyForumDetail-userApply-button {
-  border: none;
-  width: 20%;
-  font-size: 25px;
-  font-family: "Noto Sans KR Medium";
-  border-radius: 5px;
-  color: black;
-  background-color: #FFD900;
-  cursor: pointer;
-  text-align: center;
-  margin-left: 50%;
-  transform: translate(-50%, 0);
-}
-.partyForumDetail-userApply-button:disabled {
-	background-color: grey;
-	cursor: default;
+.comment-list {
+	list-style: none;
+	padding: 0;
+	margin-bottom: 20px;
 }
 
-/* 댓글 달기 디자인 시작 */
-.partyForumDetail-comment-list-container {
-  display: flex;
-  justify-content: space-between;
+.comment-list li {
+	border-bottom: 1px solid #e0e0e0;
+	padding: 10px 0;
 }
 
-.partyForumDetail-comment-input {
-  height: 37px;
-  width: 90%;
-  background-color: #F5F5F5;
+.comment-author {
+	font-weight: bold;
 }
 
-.partyForumDetail-comment-input>input {
-  padding-left: 5px;
-  width: 100%;
-  height: 37px;
-  background-color: #F5F5F5;
-  border: 1px solid black;
+.comment-date {
+	margin-left: 10px;
+	font-size: 0.8rem;
+	color: #999;
 }
 
-.partyForumDetail-comment-input>input:focus {
-  padding-left: 5px;
-  outline: none;
+.comment-content {
+	margin-top: 5px;
 }
 
-.partyForumDetail-comment-list-container>button {
-  margin-top: 5px;
-  border: 0;
-  width: 6%;
-  height: 3vh;
-  font-size: 18px;
-  font-family: "Noto Sans KR Medium";
-  border-radius: 5px;
-  color: white;
-  background-color: #595959;
-  cursor: pointer;
+#comment-form {
+	display: flex;
+	flex-direction: column;
 }
 
-/* 댓글 달기 디자인 끝 */
-
-/* 댓글 리스트 디자인 시작 */
-.partyForumDetail-commnet-list-container {
-  margin-top: 20px;
+#comment-form textarea {
+	resize: none;
+	padding: 10px;
+	font-size: 1rem;
+	margin-bottom: 10px;
 }
 
-.partyForumDetail-comment-list-item {
-  list-style-type: none;
+#comment-form button {
+	align-self: flex-end;
+	padding: 10px 20px;
+	color: #fff;
+	background-color: #333;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
 }
 
-.partyForumDetail-comment-list-details {
-  display: flex;
+#comment-form button:hover {
+	background-color: rgb(255, 87, 87);
 }
 
-.partyForumDetail-comment-list-colon {
-  margin: 0px 5px;
+/* 게시글 내용 스타일 */
+.view-content {
+	margin-bottom: 30px;
+	line-height: 1.5;
+	font-size: 1rem;
+	white-space: pre-line; /* 개행문자, 공백등을 정상적으로 처리해준다.*/
 }
 
-.partyForumDetail-comment-list-time {
-  margin-left: auto;
+/* 첨부파일 스타일 */
+.view-attach {
+	display: flex;
+	justify-content: center;
 }
 
-.partyForumDetail-comment-line-line {
-  margin: 10px 0px;
-  border: 1px solid #D9D9D9;
+.img-box {
+	width: 400px;
+	margin: 10px;
+	position: relative;
 }
 
-.partyForumDetail-comment-list-userName,
-.partyForumDetail-comment-list-colon {
-  font-size: 16px;
-  font-family: "Noto Sans KR Bold";
+.img-box>img {
+	width: 100%;
+	height: 100%;
 }
 
-.partyForumDetail-comment-list-content {
-  font-size: 14px;
-  line-height: 25px;
-  font-family: "Noto Sans KR Medium";
+.download-btn {
+	background-color: rgba(0, 0, 0, 0.4);
+	width: 1.5em;
+	height: 1.5em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	cursor: pointer;
+	border-radius: 4px;
 }
 
-.partyForumDetail-comment-list-details>button {
-  position: absolute;
-  right: -7%;
-  margin-top: 5px;
-  transform: translate(0%, -10%);
-  border: 0;
-  width: 5%;
-  height: 3vh;
-  font-size: 13px;
-  font-family: "Noto Sans KR Medium";
-  border-radius: 15px;
-  color: white;
-  background-color: #595959;
-  cursor: pointer;
+.download-btn:hover>svg {
+	stroke: rgb(255, 87, 87);
+	fill: rgb(255, 87, 87);
 }
 
-/* 댓글 리스트 디자인 끝 */
+svg {
+	width: 1em;
+	height: 1em;
+	fill: rgb(255, 255, 255);
+	stroke-width: 1;
+	stroke: rgb(255, 255, 255);
+}
 
+/* 댓글 스타일 */
+.comment-wrap {
+	margin-top: 20px;
+}
 
+.comment-form {
+	margin: 50px 0 70px 0;
+}
 
+.comment-form textarea {
+	width: 100%;
+	height: 100px;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	resize: none;
+}
 
+.comment-form button {
+	margin-top: 10px;
+	padding: 5px 10px;
+	border: none;
+	border-radius: 5px;
+	background-color: #333;
+	color: #fff;
+	cursor: pointer;
+}
 
+.comment-form button:hover {
+	background-color: rgb(255, 87, 87);
+}
 
+.form-group>label {
+	margin-right: 10px;
+	font-size: 12px;
+}
 
+#comment-list {
+	list-style: none;
+}
 
+.comment-item {
+	margin-bottom: 20px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding: 10px;
+}
 
+.comment-writer {
+	font-weight: bold;
+}
 
+.comment-date {
+	margin-left: 10px;
+	font-size: 12px;
+	color: #999;
+}
 
-/* 푸터 시작 */
+.comment-content {
+	margin-top: 5px;
+}
+
+.comment-list li {
+	border-bottom: 1px solid #e0e0e0;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+}
+
+.comment-info {
+	font-size: 14px;
+	color: #999;
+}
+
+.comment-info .writer {
+	margin-right: 10px;
+}
+
+.comment-content p {
+	font-size: 16px;
+	line-height: 1.5;
+	margin-top: 10px;
+}
+
+.comment-content-wrap {
+	display: flex;
+	justify-content: space-between;
+}
+
+.comment-btn-group button {
+	margin-top: 10px;
+	padding: 5px 10px;
+	border: none;
+	border-radius: 5px;
+	background-color: #333;
+	color: #fff;
+	cursor: pointer;
+}
+
+.comment-btn-group button:hover {
+	background-color: rgb(255, 87, 87);
+}
+
+.btn-apply button {
+	color: #fff;
+	background-color: #333;
+	padding: 15px 40px;
+	border-radius: 5px;
+	border: none;
+	transition: background-color 0.3s ease, color 0.3s ease;
+	cursor: pointer;
+	margin-left: 50%;
+	transform: translate(-50%, 0);
+	font-size: 200%;
+}
+
+.btn-apply button:hover {
+	background-color: rgb(255, 87, 87);
+	color: #fff;
+}
+
+.none {
+	display: none;
+}
+
+.comment-list textarea {
+	width: 900px;
+	height: 40px;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	resize: none;
+}

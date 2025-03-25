@@ -1,14 +1,15 @@
 package com.learning.app.dto;
 
 public class FileDTO {
-	private String fileSystemName;
+	private int fileSystemName;
 	private String fileOriginalName;
 	private int forumNumber;
 	
-	public String getFileSystemName() {
+
+	public int getFileSystemName() {
 		return fileSystemName;
 	}
-	public void setFileSystemName(String fileSystemName) {
+	public void setFileSystemName(int fileSystemName) {
 		this.fileSystemName = fileSystemName;
 	}
 	public String getFileOriginalName() {

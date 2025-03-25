@@ -20,8 +20,8 @@
 			alias="ForumDTO"></typeAlias>
 		<typeAlias type="com.learning.app.dto.MyForumDTO"
 			alias="MyForumDTO"></typeAlias>
-		<typeAlias type="com.learning.app.dto.partyForumDTO"
-			alias="partyForumDTO"></typeAlias>
+		<typeAlias type="com.learning.app.dto.PartyForumDTO"
+			alias="PartyForumDTO"></typeAlias>
 		<typeAlias type="com.learning.app.dto.AdminDTO"
 			alias="AdminDTO"></typeAlias>
 			<typeAlias type="com.learning.app.dto.AdminPartyDTO"

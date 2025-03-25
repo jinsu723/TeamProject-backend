@@ -8,7 +8,7 @@
                <a href="${pageContext.request.contextPath}/app/preset/main.jsp">learning</a>
             </div>
             <div class="main-header-post-container">
-               <a href="${pageContext.request.contextPath}/app/partyForum/partyForum.fo">
+               <a href="${pageContext.request.contextPath}/app/partyForum/partyForum.fo?page=1&FindTitle=">
                   <li>파티 모집</li>
                </a> <a href="${pageContext.request.contextPath}/app/communityForum/communityForum.cf">
                   <li>커뮤니티</li>
