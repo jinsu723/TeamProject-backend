@@ -72,7 +72,7 @@
 			<div class="mng-options-container">
       	<button id="reset-search-button"><a href="${pageContext.request.contextPath}/adminCommunity.ad">초기화</a></button>
 				<div class="mng-options-search">
-					<form action="${pageContext.request.contextPath}/adminSearchCommunity.ad"
+					<form action="${pageContext.request.contextPath}/adminCommunity.ad"
 						method="get">
 						<input type="text" name="nickname" id="manager-ban-user-search" placeholder="닉네임 검색" maxlength="30" value=<%= request.getAttribute("nickname") != null? request.getAttribute("nickname") : "" %>>
 					</form>
@@ -165,7 +165,7 @@
 					<li><a href="#" class="next">&gt;</a></li> -->
 				<c:if test="${prev}">
 					<li><a
-						href="${pageContext.request.contextPath}/adminSearchCommunity.ad?
+						href="${pageContext.request.contextPath}/adminCommunity.ad?
 						nickname=<%= request.getAttribute("nickname") != null ? 
 						request.getAttribute("nickname") : "" %>&page=${startPage - 1}"
 						class="prev">&lt;</a></li>
@@ -175,7 +175,7 @@
 					<c:choose>
 						<c:when test="${!(i == page)}">
 							<li><a
-								href="${pageContext.request.contextPath}/adminSearchCommunity.ad?
+								href="${pageContext.request.contextPath}/adminCommunity.ad?
 								nickname=<%= request.getAttribute("nickname") != null ? 
 								request.getAttribute("nickname") : "" %>&page=${i}">
 									<c:out value="${i}" />
@@ -190,7 +190,7 @@
 				</c:forEach>
 				<c:if test="${next}">
 					<li><a
-						href="${pageContext.request.contextPath}/adminSearchCommunity.ad?
+						href="${pageContext.request.contextPath}/adminCommunity.ad?
 						nickname=<%= request.getAttribute("nickname") != null ? 
 						request.getAttribute("nickname") : "" %>&page=${endPage + 1}"
 						class="next">&gt;</a></li>
