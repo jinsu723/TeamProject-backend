@@ -51,24 +51,63 @@
 
 	<!-- 파티 게시글 목록 조회 -->
 	<select id="adminParty" resultType="AdminPartyDTO">
-		SELECT f.forum_number,
-		f.forum_category, f.forum_title, f.forum_date,
+		SELECT * FROM (
+		SELECT ROWNUM
+		AS rnum, subquery.*
+		FROM (
+		SELECT
+		f.forum_number,
+		f.forum_category,
+		f.forum_title,
+		f.forum_date,
 		u.user_nickname,
 		u.user_tier
 		FROM tbl_forum f INNER JOIN tbl_user u
-		ON f.user_number =
-		u.user_number
+		ON f.user_number = u.user_number
 		WHERE f.forum_category = '모집'
 		order by f.forum_number desc
+		) subquery
+		) WHERE rnum BETWEEN #{startRow} AND #{endRow}
 	</select>
+	
 	<!-- 전체 파티 게시글 수 -->
-	<select id="totalPartyForumCount" resultType="int">
-		SELECT count(*)
+	<select id="totalPartyCount" resultType="int">
+		SELECT count(forum_number)
 		FROM tbl_forum
 		WHERE forum_category = '모집'
 	</select>
 
+	<!-- 파티 게시글에서 닉네임으로 검색하기 -->
+	<select id="adminSearhParty" resultType="AdminPartyDTO">
+		SELECT * FROM (
+		SELECT
+		ROWNUM AS rnum, subquery.*
+		FROM (
+			SELECT
+				f.forum_number,
+				f.forum_category,
+				f.forum_title,
+				f.forum_date,
+				u.user_nickname,
+				u.user_tier
+			FROM tbl_forum f INNER JOIN tbl_user u
+			ON f.user_number = u.user_number
+			WHERE f.forum_category = '모집'
+			AND u.user_nickname LIKE '%' || #{searchedPartyNick} || '%'
+			order by f.forum_number desc
+		) subquery
+		) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+	</select>
 
+	<!-- 파티 닉네임 검색했을 때 나오는 게시물 수 -->
+	<select id="adminSearhPartyTotal" resultType="int">
+		SELECT COUNT(FORUM_NUMBER)
+		FROM tbl_forum f
+		JOIN tbl_user u ON f.user_number = u.user_number
+		WHERE f.forum_category = '모집'
+		AND u.user_nickname LIKE '%' || #{searchedPartyNick} || '%'
+	</select>
+	
 	<!-- 커뮤니티 게시글 목록 -->
 	<select id="adminCommunity" resultType="AdminPartyDTO">
 		SELECT f.forum_number,
@@ -81,13 +120,65 @@
 		WHERE f.forum_category NOT LIKE '모집'
 	</select>
 
+	<!-- 커뮤니티 게시글 목록 -->
+	<select id="adminCommunity" resultType="AdminPartyDTO">
+		SELECT * FROM (
+		SELECT ROWNUM AS rnum, subquery.*
+		FROM (
+		SELECT
+		f.forum_number,
+		f.forum_category,
+		f.forum_title,
+		f.forum_date,
+		u.user_nickname,
+		u.user_tier
+		FROM tbl_forum f INNER JOIN tbl_user u
+		ON
+		f.user_number = u.user_number
+		WHERE f.forum_category NOT LIKE '모집'
+		order by f.forum_number desc
+		) subquery
+		) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+	</select>
+
 	<!-- 커뮤니티 게시글 수 -->
 	<select id="totalCommunityCount" resultType="int">
-		select count(*)
-		from
-		tbl_forum
-		where forum_category = '자유'
+		select
+		count(forum_number)
+		from tbl_forum
+		where forum_category NOT LIKE '모집'
 	</select>
+
+	<!-- 커뮤니티 게시글에서 닉네임으로 검색하기 -->
+	<select id="adminSearchCommunity" resultType="AdminPartyDTO">
+		SELECT * FROM (
+		SELECT
+		ROWNUM AS rnum, subquery.*
+		FROM (
+			SELECT
+				f.forum_number,
+				f.forum_category,
+				f.forum_title,
+				f.forum_date,
+				u.user_nickname,
+				u.user_tier
+			FROM tbl_forum f INNER JOIN tbl_user u
+			ON f.user_number = u.user_number
+			WHERE f.forum_category NOT LIKE '모집'
+			AND u.user_nickname LIKE '%' || #{searchedCommunityNick} || '%'	
+			order by f.forum_number desc
+		) subquery
+		) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+	</select>
+
+	<!-- 커뮤니티 닉네임 검색 시 게시글 수 -->
+ <select id="adminSearchCommunityTotal" resultType="int">
+ 	SELECT COUNT(*)
+	FROM tbl_forum f
+	JOIN tbl_user u ON f.user_number = u.user_number
+	WHERE f.forum_category != '모집'
+	AND u.user_nickname LIKE '%' || #{searchedCommunityNick} || '%'
+ </select>
 
 	<!-- 최근 n일동안 게시글 수 -->
 	<select id="postCount" parameterType="int" resultType="int">
