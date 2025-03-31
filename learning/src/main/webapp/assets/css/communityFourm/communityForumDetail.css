@@ -302,24 +302,6 @@ svg {
 	background-color: rgb(255, 87, 87);
 }
 
-.btn-apply button {
-	color: #fff;
-	background-color: #333;
-	padding: 15px 40px;
-	border-radius: 5px;
-	border: none;
-	transition: background-color 0.3s ease, color 0.3s ease;
-	cursor: pointer;
-	margin-left: 50%;
-	transform: translate(-50%, 0);
-	font-size: 200%;
-}
-
-.btn-apply button:hover {
-	background-color: rgb(255, 87, 87);
-	color: #fff;
-}
-
 .none {
 	display: none;
 }
