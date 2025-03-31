@@ -97,10 +97,6 @@
 					</c:if>
 				</div>
 
-				<div class="btn-apply">
-					<button type="button" class="apply-btn">참가 신청</button>
-				</div>
-
 				<!-- 댓글 수정중 -->
 				<div class="comment-form">
 					<form id="comment-form">
