@@ -20,6 +20,14 @@
 </head>
 
 <body>
+	<c:if test="${not empty sessionScope.message}">
+		<script>
+			alert("${sessionScope.message}"); // 메시지 출력
+		</script>
+		<c:remove var="message" scope="session" />
+		<!-- 세션에서 메시지 삭제 -->
+	</c:if>
+
 
 	<jsp:include page="/app/preset/header.jsp" />
 
@@ -32,10 +40,13 @@
 			<!-- 검색 및 글쓰기 버튼 -->
 			<div class="partyForum-options-container">
 				<div class="partyForum-options-search">
-					<form action="${pageContext.request.contextPath }/app/partyForum/partyForum.fo" method="get">
-						<input type="hidden" name="page" value="1"> 
-						<i class="icon-search"></i>
-						<input type="text" name="FindTitle" id="partyForum-search" placeholder="제목 검색" value="${requestScope.FindTitle}">
+					<form
+						action="${pageContext.request.contextPath }/app/partyForum/partyForum.fo"
+						method="get">
+						<input type="hidden" name="page" value="1"> <i
+							class="icon-search"></i> <input type="text" name="FindTitle"
+							id="partyForum-search" placeholder="제목 검색"
+							value="${requestScope.FindTitle}">
 					</form>
 				</div>
 
@@ -85,11 +96,22 @@
 								<c:out value="${forum.userTier}" />
 							</div>
 							<div class="partyForum-list-title">
-								<c:out value="${forum.forumTitle}" />
-							</div>
-							<div class="partyForum-list-write-time">
-								<c:out value="${forum.forumDate}" />
-							</div>
+								<c:if test="${forum.forumTitle.length() > 25}">
+									<c:out value="${fn:substring(forum.forumTitle, 0, 25)}" />...
+								</c:if>
+								<c:if test="${forum.forumTitle.length() <= 25}">
+									<c:out value="${forum.forumTitle}" />
+								</c:if>
+							</div> <c:if test="${forum.forumUpdate != NULL }">
+								<div class="partyForum-list-write-time">
+									(최근 수정됨)
+									<c:out value="${forum.forumUpdate.substring(0, 16)}" />
+								</div>
+							</c:if> <c:if test="${forum.forumUpdate == NULL }">
+								<div class="partyForum-list-write-time">
+									<c:out value="${forum.forumDate.substring(0, 16)}" />
+								</div>
+							</c:if>
 						</li>
 						<div class="partyForum-list-item-line">
 							<hr>
@@ -126,7 +148,6 @@
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
-
 				<!-- 다음 페이지 버튼 -->
 				<c:if test="${next}">
 					<li><a

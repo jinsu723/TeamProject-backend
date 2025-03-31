@@ -25,10 +25,6 @@ public class PartyForumApplyController implements Execute {
 		PartyForumDTO partyForumDTO = new PartyForumDTO();
 		HttpSession session = request.getSession();
 		Gson gson = new Gson();
-//		System.out.println("userDTO 값" +session.getAttribute("userDTO"));
-		
-		System.out.println("왜안디?");
-		System.out.println(request.getParameter("postNum"));
 
 		// 로그인 상태
 		if (session.getAttribute("userDTO") != null) {

@@ -1,4 +1,4 @@
-package com.learning.app.partyforum;
+package com.learning.app.community;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,12 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.learning.app.Execute;
 import com.learning.app.Result;
-import com.learning.app.dao.partyForumDAO;
-import com.learning.app.dto.PartyForumDTO;
+import com.learning.app.dao.CommunityDAO;
+import com.learning.app.dto.CommunityDTO;
 
-public class PartyForumFindController implements Execute {
+public class CommunityForumFindController implements Execute {
 	public Result execute(HttpServletRequest request, HttpServletResponse response) {
-		partyForumDAO partyForumDAO = new partyForumDAO();
+//		partyForumDAO partyForumDAO = new partyForumDAO();
+		CommunityDAO communityDAO = new CommunityDAO();
 		Result result = new Result();
 
 		String FindTitle = request.getParameter("FindTitle");
@@ -36,7 +37,7 @@ public class PartyForumFindController implements Execute {
 
 		// 데이터베이스 조회를 위한 매개변수 설정
 		int total = 0;
-		List<PartyForumDTO> forumList = null;
+		List<CommunityDTO> forumList = null;
 
 		if (FindTitle != null && !FindTitle.isEmpty()) {
 			// FindTitle 검색 시
@@ -45,9 +46,9 @@ public class PartyForumFindController implements Execute {
 			pageMap.put("startRow", startRow);
 			pageMap.put("endRow", endRow);
 
-			forumList = partyForumDAO.partyForumTitleList(pageMap);
+			forumList = communityDAO.getForumTitleList(pageMap);
 			request.setAttribute("FindTitle", FindTitle);
-			total = partyForumDAO.getFindUserAll(FindTitle);
+			total = communityDAO.getFindUserAll(FindTitle);
 
 		} else {
 			// FindTitle이 없을 때
@@ -55,8 +56,8 @@ public class PartyForumFindController implements Execute {
 			pageMap.put("startRow", startRow);
 			pageMap.put("endRow", endRow);
 
-			forumList = partyForumDAO.getForumList(pageMap);
-			total = partyForumDAO.getFindAll();
+			forumList = communityDAO.getForumList(pageMap);
+			total = communityDAO.getFindAll();
 		}
 
 		// 전체 게시글 수 조회 및 실제 마지막 페이지 계산
@@ -90,7 +91,7 @@ public class PartyForumFindController implements Execute {
 
 		// 결과 페이지 설정
 		result.setRedirect(false);
-		result.setPath("partyForum.jsp");
+		result.setPath("communityForum.jsp");
 
 		return result;
 	}

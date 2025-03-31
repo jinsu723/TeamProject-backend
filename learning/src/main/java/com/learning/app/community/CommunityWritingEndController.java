@@ -1,4 +1,4 @@
-package com.learning.app.partyforum;
+package com.learning.app.community;
 
 import java.io.IOException;
 import java.util.Enumeration;
@@ -10,15 +10,15 @@ import javax.servlet.http.HttpSession;
 
 import com.learning.app.Execute;
 import com.learning.app.Result;
+import com.learning.app.dao.CommunityDAO;
 import com.learning.app.dao.FileDAO;
-import com.learning.app.dao.partyForumDAO;
+import com.learning.app.dto.CommunityDTO;
 import com.learning.app.dto.FileDTO;
-import com.learning.app.dto.PartyForumDTO;
 import com.learning.app.dto.UserDTO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-public class PartyWritingEndController implements Execute {
+public class CommunityWritingEndController implements Execute {
 
 	@Override
 	public Result execute(HttpServletRequest request, HttpServletResponse response)
@@ -39,25 +39,21 @@ public class PartyWritingEndController implements Execute {
 				new DefaultFileRenamePolicy());
 
 		// DAO와 DTO 객체 생성
-		partyForumDAO partyforumDAO = new partyForumDAO();
-		PartyForumDTO partyforumDTO = new PartyForumDTO();
+		CommunityDAO communityDAO = new CommunityDAO();
+		CommunityDTO communityDTO = new CommunityDTO();
 
-		String forumTitle = multipartRequest.getParameter("forumTitle").trim();
-		String forumContent = multipartRequest.getParameter("forumContent").trim();
-
-		if (forumTitle.isEmpty() || forumContent.isEmpty() || forumTitle.length() > 50
-				|| forumContent.length() > 3000) {
-
+		if (multipartRequest.getParameter("forumCategory").isEmpty()
+				|| multipartRequest.getParameter("forumTitle").trim().isEmpty()
+				|| multipartRequest.getParameter("forumContent").trim().isEmpty()) {
 			result.setRedirect(true); // ++++ Result 객체 추가 후 작성
-			result.setPath(request.getContextPath() + "/app/partyForum/partyForum.fo?page=1&FindTitle=");
-
+			result.setPath(request.getContextPath() + "/app/communityForum/communityForum.cf?page=1&FindTitle=");
 		} else {
 
-			partyforumDTO.setUserNumber(userDTO.getUserNumber());
-			partyforumDTO.setForumCategory("모집");
-			partyforumDTO.setForumTitle(multipartRequest.getParameter("forumTitle"));
-			partyforumDTO.setForumContent(multipartRequest.getParameter("forumContent"));
-			partyforumDAO.WritingEnd(partyforumDTO);
+			communityDTO.setUserNumber(userDTO.getUserNumber());
+			communityDTO.setForumCategory(multipartRequest.getParameter("forumCategory"));
+			communityDTO.setForumTitle(multipartRequest.getParameter("forumTitle"));
+			communityDTO.setForumContent(multipartRequest.getParameter("forumContent"));
+			communityDAO.WritingEnd(communityDTO);
 
 			Enumeration<String> fileNames = multipartRequest.getFileNames();
 			while (fileNames.hasMoreElements()) {
@@ -71,7 +67,7 @@ public class PartyWritingEndController implements Execute {
 				int filepk = fileDAO.filePk();
 				fileDTO.setFileSystemName(filepk);
 				fileDTO.setFileOriginalName(fileOriginalName);
-				fileDTO.setForumNumber(partyforumDTO.getForumNumber());
+				fileDTO.setForumNumber(communityDTO.getForumNumber());
 
 //				System.out.println("업로드된 파일 정보: " + fileDTO);
 				fileDAO.insert(fileDTO);
@@ -79,7 +75,7 @@ public class PartyWritingEndController implements Execute {
 			}
 
 			result.setRedirect(true); // ++++ Result 객체 추가 후 작성
-			result.setPath(request.getContextPath() + "/app/partyForum/partyForum.fo?page=1&FindTitle=");
+			result.setPath(request.getContextPath() + "/app/communityForum/communityForum.cf?page=1&FindTitle=");
 
 		}
 

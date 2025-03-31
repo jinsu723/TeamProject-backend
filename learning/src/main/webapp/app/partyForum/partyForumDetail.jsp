@@ -42,20 +42,25 @@
 							</div>
 						</div>
 						<div class="title-wrap">
-							<span class="date">작성일</span>
+							<span class="date">유저실력</span>
 							<div class="content-date">
-								<c:out value="${forumDetail.forumDate}" />
-								<!-- +++++++++ -->
+								<c:out value="${forumDetail.userTier}" />
 							</div>
 						</div>
-						<%-- <div class="title-wrap">
-						<span class="hit">조회수</span>
-						<!-- 임시 조회수 -->
-						<div class="content-hit">
-							<c:out value="${community.getBoardReadCount()}" />
-							<!-- +++++++++ -->
+						<div class="title-wrap">
+							<span class="hit">작성일</span>
+							<!-- 임시 조회수 -->
+							<div class="content-hit">
+								<c:if test="${forumDetail.forumUpdate == NULL }">
+									<c:out value="${forumDetail.forumDate.substring(0, 16)}" />
+								</c:if>
+								<c:if test="${forumDetail.forumUpdate != NULL }">
+									<c:out value="${forumDetail.forumDate.substring(0, 16)}" />
+									- (최근 수정일) <c:out
+										value="${forumDetail.forumUpdate.substring(0, 16)}" />
+								</c:if>
+							</div>
 						</div>
-					</div> --%>
 					</div>
 				</div>
 				<!-- 임시 내용 -->
@@ -76,16 +81,17 @@
 				<div class="btn-group">
 					<!-- 목록 버튼 -->
 					<button type="button" class="list-btn"
-						onclick="location.href='${pageContext.request.contextPath}/app/partyForum/partyForum.fo'">목록</button>
+						onclick="location.href='${pageContext.request.contextPath}/app/partyForum/partyForum.fo?page=1&FindTitle='">목록</button>
 
 					<!-- 수정 및 삭제 버튼 (로그인한 사용자가 작성자인 경우에만 표시) -->
-					<c:if test="${sessionScope.userDTO!=null and sessionScope.userDTO.userNumber==forumDetail.userNumber}">
+					<c:if
+						test="${sessionScope.userDTO!=null and sessionScope.userDTO.userNumber==forumDetail.userNumber}">
 						<c:if test="true">
 							<%-- test="${(sessionScope.userDTO).getUserNumber() == community.getUserNumber()}"> --%>
 							<button type="button" class="modify-btn"
-								onclick="location.href='${pageContext.request.contextPath}/app/partyForum/partyForumEdit.fo?postNum=${forumDetail.forumNumber}'">수정</button>
+								onclick="if(confirm('정말 수정하시겠습니까?')) location.href='${pageContext.request.contextPath}/app/partyForum/partyForumEdit.fo?postNum=${forumDetail.forumNumber}'">수정</button>
 							<button type="button" class="delete-btn"
-								onclick="location.href='${pageContext.request.contextPath}/app/partyForum/partyForumDelete.fo?postNum=${forumDetail.forumNumber}'">삭제</button>
+								onclick="if(confirm('정말 삭제하시겠습니까?')) location.href='${pageContext.request.contextPath}/app/partyForum/partyForumDelete.fo?postNum=${forumDetail.forumNumber}'">삭제</button>
 						</c:if>
 					</c:if>
 				</div>
@@ -136,14 +142,14 @@
 	<jsp:include page="/app/preset/footer.jsp" />
 	<script>
 	const contextPath = '<%=request.getContextPath()%>';
-	const userId = `${userDTO.userId}`;
-	<c:forEach var="forumDetail" items="${forumDetail}">
+		const userId = `${userDTO.userId}`;
+		<c:forEach var="forumDetail" items="${forumDetail}">
 		const postNum = `${forumDetail.forumNumber}`;
-	</c:forEach> 
-	/* console.log(userId + "userId출력확인"); */
+		</c:forEach>
+		/* console.log(userId + "userId출력확인"); */
 	</script>
 	<script
-		src="${pageContext.request.contextPath}/assets/js/partyForum/partyForumDetail.js"></script> 
+		src="${pageContext.request.contextPath}/assets/js/partyForum/partyForumDetail.js"></script>
 </body>
 
 </html>

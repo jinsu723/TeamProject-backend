@@ -2,6 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Forum">
 
+	<!-- 공용 mapper들 -->
+	<delete id="forumdelete" parameterType="Int">
+		DELETE FROM TBL_FORUM
+		WHERE FORUM_NUMBER = #{postNumber}
+	</delete>
+
 	<select id="FindUserNum" parameterType="String" resultType="Int">
 		SELECT f.USER_NUMBER
 		FROM TBL_USER f
@@ -15,57 +21,22 @@
 		WHERE FORUM_NUMBER = #{forumNumber}
 	</select>
 
-	<select id="partyForumFindAll" resultType="Int">
-		SELECT
-		count(FORUM_NUMBER)
-		FROM TBL_FORUM
-		WHERE FORUM_TITLE LIKE '%' ||
-		#{FindTitle} || '%'
-	</select>
+	<update id="EditEnd" parameterType="Map">
+		UPDATE TBL_FORUM
+		SET
+		FORUM_TITLE = #{forumTitle}, FORUM_CONTENT = #{forumContent},
+		FORUM_UPDATE = SYSDATE
+		WHERE FORUM_NUMBER = #{postNum}
+	</update>
 
-	<select id="partyForumFindUserAll" parameterType="String"
-		resultType="Int">
-		SELECT
-		count(FORUM_NUMBER)
+	<delete id="commentDelete" parameterType="Int">
+		DELETE FROM TBL_COMMENT
+		WHERE COMMENT_NUMBER = #{commentNumber}
+	</delete>
 
-	</select>
-
-	<!-- partyForumWriting -->
-	<insert id="partyForumWriting" parameterType="PartyForumDTO">
-		<selectKey keyProperty="forumNumber" resultType="int"
-			order="BEFORE">
-			SELECT seq_forum.nextVal from dual
-		</selectKey>
-		INSERT INTO tbl_forum (forum_number, user_number, forum_category,
-		forum_title, forum_date, forum_update, forum_content)
-		VALUES
-		(#{forumNumber}, #{userNumber}, #{forumCategory}, #{forumTitle},
-		SYSDATE, NULL, #{forumContent})
-	</insert>
-
-	<select id="partyForumFind" resultType="partyForumDTO">
-    <![CDATA[
-    SELECT * FROM (
-        SELECT ROWNUM AS rnum, subquery.*
-        FROM (
-            SELECT 
-                u.user_number,
-                u.USER_TIER,
-                u.user_nickname,
-                f.forum_title,
-                f.forum_date,
-                f.forum_update,
-                f.forum_number
-            FROM TBL_USER u
-            JOIN TBL_FORUM f ON u.user_Number = f.user_number
-            WHERE f.forum_category LIKE '모집'
-            ORDER BY f.FORUM_DATE DESC
-        ) subquery
-    ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
-    ]]>
-	</select>
-
-	<select id="partyForumFindUser" parameterType="Map" resultType="partyForumDTO">
+	<!-- 파티 모집 전용 mapper들 -->
+	<select id="partyForumFindTitle" parameterType="Map"
+		resultType="partyForumDTO">
 	<![CDATA[
 	SELECT * FROM (
         SELECT ROWNUM AS rnum, subquery.*
@@ -88,12 +59,43 @@
 	]]>
 	</select>
 
+	<select id="partyForumFindAll" resultType="Int">
+		SELECT
+		count(FORUM_NUMBER)
+		FROM TBL_FORUM
+		WHERE FORUM_TITLE LIKE '%' ||
+		#{FindTitle} || '%'
+		AND FORUM_CATEGORY LIKE '모집'
+	</select>
+
+	<select id="partyForumFind" parameterType="Map"
+		resultType="partyForumDTO">
+    <![CDATA[
+    SELECT * FROM (
+        SELECT ROWNUM AS rnum, subquery.*
+        FROM (
+            SELECT 
+                u.user_number,
+                u.USER_TIER,
+                u.user_nickname,
+                f.forum_title,
+                f.forum_date,
+                f.forum_update,
+                f.forum_number
+            FROM TBL_USER u
+            JOIN TBL_FORUM f ON u.user_Number = f.user_number
+            WHERE f.forum_category LIKE '모집'
+            ORDER BY f.FORUM_DATE DESC
+        ) subquery
+    ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+    ]]>
+	</select>
 
 	<select id="partyForumDetail" parameterType="Int"
 		resultType="PartyForumDTO">
 		SELECT f.FORUM_NUMBER ,f.FORUM_TITLE , f.FORUM_CONTENT ,
-		u.USER_NICKNAME , f.FORUM_DATE , f.FORUM_UPDATE , u.USER_TIER ,
-		u.USER_ID , u.USER_NUMBER
+		u.USER_NICKNAME , f.FORUM_DATE , f.FORUM_UPDATE , f.FORUM_CATEGORY ,
+		u.USER_TIER , u.USER_ID , u.USER_NUMBER
 		FROM TBL_FORUM f
 		JOIN tbl_user u
 		ON
@@ -113,6 +115,25 @@
 		ORDER BY c.comment_date DESC
 	</select>
 
+	<insert id="commentAdd" parameterType="partyForumDTO">
+		INSERT INTO
+		TBL_COMMENT(COMMENT_NUMBER, FORUM_NUMBER, USER_NUMBER,
+		COMMENT_CONTENT, COMMENT_DATE)
+		VALUES (seq_comment.nextVal,
+		#{forumNumber}, #{userNumber}, #{commentContent}, SYSDATE)
+	</insert>
+
+	<!-- 중복검사 -->
+	<select id="ApplyDuplication" parameterType="PartyForumDTO"
+		resultType="Int">
+		SELECT count(PARTY_NUMBER)
+		FROM TBL_PARTY p
+		JOIN TBL_USER u
+		ON
+		p.USER_NUMBER = u.USER_NUMBER
+		WHERE u.USER_NUMBER = #{userNumber} AND
+		p.FORUM_NUMBER = #{forumNumber}
+	</select>
 
 	<insert id="partyForumApply" parameterType="PartyForumDTO">
 		INSERT INTO TBL_PARTY
@@ -122,44 +143,122 @@
 		#{forumNumber}, #{userNumber})
 	</insert>
 
-	<!-- 중복검사 -->
-	<select id="ApplyDuplication" parameterType="PartyForumDTO"
-		resultType="Int">
-		SELECT count(*)
-		FROM TBL_PARTY p
-		JOIN TBL_USER u
-		ON
-		p.USER_NUMBER = u.USER_NUMBER
-		WHERE u.USER_NUMBER = #{userNumber} AND
-		p.FORUM_NUMBER = #{forumNumber}
-	</select>
-
-	<select id="ApplyNum" parameterType="String" resultType="int">
+	<select id="findApply" parameterType="Int" resultType="Int">
 		SELECT
-		COUNT(*)
+		COUNT(PARTY_NUMBER)
 		FROM TBL_PARTY
 		WHERE FORUM_NUMBER = #{postNum}
 	</select>
 
-	<update id="EditEnd" parameterType="Map">
-		UPDATE TBL_FORUM
-		SET
-		FORUM_TITLE = #{forumTitle}, FORUM_CONTENT = #{forumContent},
-		FORUM_UPDATE = SYSDATE
-		WHERE FORUM_NUMBER = #{postNum}
-	</update>
+	<insert id="partyForumWriting" parameterType="PartyForumDTO">
+		<selectKey keyProperty="forumNumber" resultType="int"
+			order="BEFORE">
+			SELECT seq_forum.nextVal from dual
+		</selectKey>
+		INSERT INTO tbl_forum (forum_number, user_number, forum_category,
+		forum_title, forum_date, forum_update, forum_content)
+		VALUES
+		(#{forumNumber}, #{userNumber}, #{forumCategory}, #{forumTitle},
+		SYSDATE, NULL, #{forumContent})
+	</insert>
 
-	<delete id="partydelete" parameterType="Int">
-		DELETE FROM TBL_FORUM
-		WHERE FORUM_NUMBER = #{postNumber}
-	</delete>
 
-	<delete id="commentDelete" parameterType="Int">
-		DELETE FROM TBL_COMMENT
-		WHERE COMMENT_NUMBER = #{commentNumber}
-	</delete>
+	<!-- 커뮤니티 전용 -->
 
-	<insert id="commentAdd" parameterType="partyForumDTO">
+	<select id="communityForumFindTitle" parameterType="Map"
+		resultType="CommunityDTO">
+	<![CDATA[
+	SELECT * FROM (
+        SELECT ROWNUM AS rnum, subquery.*
+		FROM (
+			SELECT
+				u.user_number,
+				u.USER_TIER,
+				u.user_nickname,
+				f.forum_title,
+				f.forum_date,
+				f.forum_update,
+				f.forum_number,
+				f.forum_category
+			FROM TBL_USER u
+			JOIN TBL_FORUM f ON u.user_number = f.user_number
+			WHERE f.forum_category NOT LIKE '모집'
+			AND f.FORUM_TITLE LIKE '%' || #{FindTitle} || '%'
+			ORDER BY f.FORUM_DATE DESC
+		) subquery
+	)WHERE rnum BETWEEN #{startRow} AND #{endRow}
+	]]>
+	</select>
+
+	<select id="communityForumFindAll" resultType="Int">
+		SELECT
+		count(FORUM_NUMBER)
+		FROM TBL_FORUM
+		WHERE FORUM_TITLE LIKE '%' ||
+		#{FindTitle} || '%'
+		AND FORUM_CATEGORY NOT LIKE '모집'
+	</select>
+
+	<select id="communityForumFind" resultType="CommunityDTO">
+    <![CDATA[
+    SELECT * FROM (
+        SELECT ROWNUM AS rnum, subquery.*
+        FROM (
+            SELECT 
+                u.user_number,
+                u.USER_TIER,
+                u.user_nickname,
+                f.forum_title,
+                f.forum_date,
+                f.forum_update,
+                f.forum_number,
+                f.forum_category
+            FROM TBL_USER u
+            JOIN TBL_FORUM f ON u.user_Number = f.user_number
+            WHERE f.forum_category NOT LIKE '모집'
+            ORDER BY f.FORUM_DATE DESC
+        ) subquery
+    ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+    ]]>
+	</select>
+
+	<insert id="communityForumWriting" parameterType="CommunityDTO">
+		<selectKey keyProperty="forumNumber" resultType="int"
+			order="BEFORE">
+			SELECT seq_forum.nextVal from dual
+		</selectKey>
+		INSERT INTO tbl_forum (forum_number, user_number, forum_category,
+		forum_title, forum_date, forum_update, forum_content)
+		VALUES
+		(#{forumNumber}, #{userNumber}, #{forumCategory}, #{forumTitle},
+		SYSDATE, NULL, #{forumContent})
+	</insert>
+
+	<select id="communityForumDetail" parameterType="Int"
+		resultType="CommunityDTO">
+		SELECT f.FORUM_NUMBER ,f.FORUM_TITLE , f.FORUM_CONTENT ,
+		u.USER_NICKNAME , f.FORUM_DATE , f.FORUM_UPDATE , f.forum_category, 
+		u.USER_TIER , u.USER_ID , u.USER_NUMBER
+		FROM TBL_FORUM f
+		JOIN tbl_user u
+		ON
+		f.user_number = u.user_number
+		WHERE FORUM_NUMBER = #{forumNumber}
+	</select>
+
+	<select id="partyComment1" parameterType="int"
+		resultType="CommunityDTO">
+		SELECT c.comment_number, c.comment_content, c.comment_date,
+		u.user_nickname,
+		u.user_Id
+		FROM tbl_comment c
+		LEFT JOIN tbl_user u ON
+		c.user_number = u.user_number
+		WHERE c.forum_number = #{postNumber}
+		ORDER BY c.comment_date DESC
+	</select>
+
+	<insert id="commentAdd1" parameterType="CommunityDTO">
 		INSERT INTO
 		TBL_COMMENT(COMMENT_NUMBER, FORUM_NUMBER, USER_NUMBER,
 		COMMENT_CONTENT, COMMENT_DATE)

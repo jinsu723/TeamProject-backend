@@ -10,7 +10,7 @@
             <div class="main-header-post-container">
                <a href="${pageContext.request.contextPath}/app/partyForum/partyForum.fo?page=1&FindTitle=">
                   <li>파티 모집</li>
-               </a> <a href="${pageContext.request.contextPath}/app/communityForum/communityForum.cf">
+               </a> <a href="${pageContext.request.contextPath}/app/communityForum/communityForum.cf?page=1&FindTitle=">
                   <li>커뮤니티</li>
                </a>
             </div>

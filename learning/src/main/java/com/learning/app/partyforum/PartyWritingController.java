@@ -24,7 +24,7 @@ public class PartyWritingController implements Execute {
 		if (userDTO == null) {
 			
 			result.setRedirect(true);
-			result.setPath(request.getContextPath() + "/app/partyForum/partyForum.fo");
+			result.setPath(request.getContextPath() + "/app/partyForum/partyForum.fo?page=1&FindTitle=");
 
 		} else {
 

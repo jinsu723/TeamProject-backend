@@ -27,7 +27,7 @@
 				<input type="hidden" name="postNum"
 					value="${forumDetail.forumNumber}" />
 
-				<h1>글 수정</h1>
+				<h1>파티 모집 글 수정</h1>
 
 				<div class="form-group">
 					<label for="title">제목</label> <input type="text" id="title"
@@ -88,33 +88,6 @@
 			</form>
 		</c:forEach>
 	</div>
-	<%--     <main class="partyForumEdit-main">
-        <div class="partyForumEdit-main-container">
-            <div class="partyForumEdit-main-container-title">
-                <h1 class="partyForumEdit-main-title">파티 모집 글 수정하기</h1>
-                <h3>신청자가 있다면 게시글 삭제 불가능 합니다!!</h3>
-            </div>
-            <form action="partyForumEditEnd.fo" method="post">
-            <input type="hidden" name="postNum" value="<%= request.getParameter("postNum") %>">
-                <div class="partyForumEdit-title">
-                    <p class="partyForumEdit-title-text">제목</p>
-                    <input type="text" name="forumTitle" id="title" placeholder="제목을 입력하세요(50자)">
-                </div>
-                <div class="partyForumEdit-content">
-                    <p class="partyForumEdit-content-text">내용</p>
-                    <div class="partyForumEdit-content-text-content" contentEditable="true"></div>
-                    <input type="hidden" name="forumContent" id="hiddenForumContent">
-                </div>
-                <div class="partyForumEdit-file">
-                    <input type="file" accept=".gif, .jpg, .png" style="display:none;" class="partyForumEdit-file-select-button" onchange="selectFile()" style="visibility:hidden">
-                    <i class="icon-file-image" style="visibility:hidden"></i>
-                    <p class="partyForumEdit-file-select" style="visibility:hidden"></p>
-                    <button type="button" class="partyForumEdit-editCancel-button">수정취소</button>
-                    <button type="submit" class="partyForumEdit-editComplete-button">수정완료</button>
-                </div>
-            </form>
-        </div>
-    </main> --%>
 	<jsp:include page="/app/preset/footer.jsp" />
 	<script>
     const contextPath = '<%=request.getContextPath()%>';
@@ -134,7 +107,6 @@
 		</c:if>
 
     </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/assets/js/partyForum/partyForumEdit.js"></script>
 </body>

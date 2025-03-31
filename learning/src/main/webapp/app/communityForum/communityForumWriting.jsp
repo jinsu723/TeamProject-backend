@@ -11,7 +11,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/assets/css/preset/preset.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/partyForum/partyForumWriting.css">
+	href="${pageContext.request.contextPath}/assets/css/communityForum/communityForumWriting.css">
 <script defer
 	src="${pageContext.request.contextPath}/assets/js/preset/mainLogin.js"></script>
 
@@ -25,18 +25,32 @@
 	<div class="container">
 		<!-- 작성완료 경로 처리하기 -->
 		<form id="write-form"
-			action="${pageContext.request.contextPath}/app/partyForum/WritingEnd.fo"
+			action="${pageContext.request.contextPath}/app/communityForum/WritingEnd.cf"
 			method="post" enctype="multipart/form-data">
-			<h1>파티 모집 글쓰기</h1>
+			<h1>커뮤니티 글쓰기</h1>
+
+			<div class="form-group radio-group">
+				<label>카테고리</label> <input type="radio" id="type1"
+					name="forumCategory" value="자유" checked> <label for="type1">자유</label>
+
+				<input type="radio" id="type2" name="forumCategory" value="공략">
+				<label for="type2">공략</label>
+			</div>
+
 			<div class="form-group">
 				<label for="title">제목</label> <input type="text" id="title"
-					name="forumTitle" required maxlength="50" placeholder="제목은 최대 50자 입니다."/>
+					name="forumTitle" required maxlength="50"
+					placeholder="제목은 최대 50자 입니다." />
 			</div>
 			<div class="form-group">
 				<label for="content">내용</label>
-				<textarea id="content" name="forumContent" required maxlength="3000" placeholder="참가 신청이 있는 게시글은 삭제가 불가능 합니다. &#10;내용 최대는 3000자 입니다."></textarea>
+				<textarea id="content" name="forumContent" required required
+					maxlength="3000" placeholder="내용 최대는 3000자 입니다."></textarea>
 			</div>
-
+			<!-- 			<div class="form-group">
+				<label for="file">파일 첨부</label> <input type="file" id="file"
+					name="boardFile" />
+			</div> -->
 			<div class="form-group">
 				<label for="file">파일 첨부</label>
 
@@ -75,9 +89,8 @@
 
 	<jsp:include page="/app/preset/footer.jsp" />
 
-
 	<script
-		src="${pageContext.request.contextPath}/assets/js/partyForum/partyForumWriting.js"></script>
+		src="${pageContext.request.contextPath}/assets/js/communityForum/communityForumWriting.js"></script>
 </body>
 
 </html>
