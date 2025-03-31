@@ -1,77 +1,73 @@
 package com.learning.app.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
 import com.learning.app.dto.CommunityDTO;
+import com.learning.app.dto.PartyForumDTO;
 import com.mybatis.config.MyBatisConfig;
 
 public class CommunityDAO {
 	public SqlSession sqlSession;
-	CommunityDTO communityDTO = new CommunityDTO();
 
 	public CommunityDAO() {
 		sqlSession = MyBatisConfig.getSqlSessionFactory().openSession(true); // Auto-commit 활성화
 	}
 
-	// 게시글 목록 가져오기
-	public List<CommunityDTO> getCommunityPosts() {
-		List<CommunityDTO> communityList = sqlSession.selectList("Community.list");
-
-		return communityList;
+	public List<CommunityDTO> getForumTitleList(Map<String, Object> pageMap) {
+		List<CommunityDTO> list = sqlSession.selectList("Forum.communityForumFindTitle", pageMap);
+		return list;
 	}
 
-	// 게시글 개수 가져오기(페이지네이션 활용하기 위함)
-	public int communityPostCount() {
-		System.out.println("communityPostCount의 함수를 시작합니다");
-		return sqlSession.selectOne("Community.count");
+	public int getFindUserAll(String FindUserNickname) {
+		return sqlSession.selectOne("Forum.communityForumFindAll", FindUserNickname);
 	}
 
-	// 게시글 상세페이지 이동을 위한 DB쿼리
-	public CommunityDTO communityDetils(int postNumber) {
-		System.out.println("DB에서 값을 조회합니다. 게시글의 PK값은 " + postNumber + "입니다.");
-		List<CommunityDTO> details = sqlSession.selectList("Community.postDetails", postNumber);
-		System.out.println("DB에서 값을 조회했습니다. 아래에 내용을 확인 해 주세요");
-		return sqlSession.selectOne("Community.postDetails", postNumber);
+	public List<CommunityDTO> getForumList(Map<String, Integer> pageMap) {
+		List<CommunityDTO> list = sqlSession.selectList("Forum.communityForumFind", pageMap);
+		return list;
 	}
 
-	// 게시글 상세페이지에 따른 댓글 DB쿼리
-	public List<CommunityDTO> communityDetailComment(int postNumber) {
-		List<CommunityDTO> comment = sqlSession.selectList("Community.getComment", postNumber);
-		return comment;
+	public int getFindAll() {
+		return sqlSession.selectOne("Forum.communityForumFindAll");
 	}
 
-	public int postAddDetail(CommunityDTO communityDTO) {
-		int insert = sqlSession.insert("Community.addPost", communityDTO);
-		System.out.println(communityDTO);
-		System.out.println("게시글 번호: "+communityDTO.getForumNumber());
-		return communityDTO.getForumNumber();
+	public void WritingEnd(CommunityDTO communityDTO) {
+		sqlSession.insert("Forum.communityForumWriting", communityDTO);
 	}
 
-	public boolean editMyPost(CommunityDTO communityDTO) {
-		int successCode = sqlSession.update("Community.editMyPost", communityDTO);
-		return successCode > 0;
+	public List<CommunityDTO> getpartyComment(int postNum) {
+		return sqlSession.selectList("Forum.partyComment1", postNum);
 	}
 
-	// 내 게시글 삭제
-	public int postDeleteDetail(int postNumber) {
-		return sqlSession.delete("Community.deletePost", postNumber);
+	public List<CommunityDTO> getForumDetail(int forumNumber) {
+		return sqlSession.selectList("Forum.communityForumDetail", forumNumber);
 	}
 
-	// 내가 작성한 댓글 삭제
-	public int commentDeleteDetail(int commentNumber) {
-		return sqlSession.delete("Community.deleteComment", commentNumber);
+	public void forumDelete(int postNum) {
+		sqlSession.delete("Forum.forumdelete", postNum);
 	}
 
-	// 댓글 작성하기
-	public boolean commentAddDetail(CommunityDTO communityDTO) {
-		int successCode = sqlSession.insert("Community.addComment", communityDTO);
-		return successCode > 0;
+	public int FindUserNum(String UserId) {
+		return sqlSession.selectOne("Forum.FindUserNum", UserId);
 	}
 
-	/*
-	 * public String addComment() { return sqlSession.insert(null) }
-	 */
+	public int FindUserNum(int forumNumber) {
+		return sqlSession.selectOne("Forum.FindUserNum1", forumNumber);
+	}
+
+	public void EditEnd(Map<String, String> map) {
+		sqlSession.update("EditEnd", map);
+	}
+
+	public void CommentDelete(int commentNumber) {
+		sqlSession.delete("Forum.commentDelete", commentNumber);
+	}
+
+	public void commentAdd(CommunityDTO communityDTO) {
+		sqlSession.insert("Forum.commentAdd1", communityDTO);
+	}
 
 }

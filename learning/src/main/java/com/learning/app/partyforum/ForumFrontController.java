@@ -28,7 +28,7 @@ public class ForumFrontController extends HttpServlet {
 	private void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// URL에서 요청 경로 추출
-		System.out.println("partyforum 서블릿");
+//		System.out.println("partyforum 서블릿");
 		String target = request.getRequestURI().substring(request.getContextPath().length());
 		Result result = null;
 

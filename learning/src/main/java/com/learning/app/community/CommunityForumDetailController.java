@@ -1,4 +1,4 @@
-package com.learning.app.partyforum;
+package com.learning.app.community;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,39 +9,41 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.learning.app.Execute;
 import com.learning.app.Result;
+import com.learning.app.dao.CommunityDAO;
 import com.learning.app.dao.FileDAO;
 import com.learning.app.dao.partyForumDAO;
+import com.learning.app.dto.CommunityDTO;
 import com.learning.app.dto.FileDTO;
 import com.learning.app.dto.PartyForumDTO;
 
-public class PartyForumDetailController implements Execute {
+public class CommunityForumDetailController implements Execute {
 
 	@Override
 	public Result execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Result result = new Result();
 
-		partyForumDAO partyForumDAO = new partyForumDAO();
+		CommunityDAO communityDAO = new CommunityDAO();
 		FileDAO fileDAO = new FileDAO();
 
 		List<FileDTO> files = fileDAO.select(Integer.parseInt(request.getParameter("postNum")));
 //		System.out.println("======파일 확인======");
 //		System.out.println(files);
 
-		List<PartyForumDTO> forumDetail = partyForumDAO
+		List<CommunityDTO> forumDetail = communityDAO
 				.getForumDetail(Integer.parseInt(request.getParameter("postNum")));
-		List<PartyForumDTO> forumComment = partyForumDAO
+		List<CommunityDTO> forumComment = communityDAO
 				.getpartyComment(Integer.parseInt(request.getParameter("postNum")));
 
 		request.setAttribute("forumDetail", forumDetail);
 		request.setAttribute("forumFiles", files);
 
 		request.setAttribute("forumComment", forumComment);
+		System.out.println(forumDetail);
 
-//		System.out.println(ApplyNum);
 
 		result.setRedirect(false);
-		result.setPath("/app/partyForum/partyForumDetail.jsp");
+		result.setPath("/app/communityForum/communityForumDetail.jsp");
 
 		return result;
 	}

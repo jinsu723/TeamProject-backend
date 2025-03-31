@@ -24,40 +24,49 @@ public class PartyForumDeleteController implements Execute {
 		Result result = new Result();
 		HttpSession session = request.getSession();
 		UserDTO userDTO = (UserDTO) session.getAttribute("userDTO");
-		
+
 		partyForumDAO partyForumDAO = new partyForumDAO();
 		FileDAO fileDAO = new FileDAO();
 		final String UPLOAD_PATH = request.getSession().getServletContext().getRealPath("/") + "upload/";
 		System.out.println("기존에 저장하는 경로 확인 : " + UPLOAD_PATH);
-		
+
 		if (userDTO.getUserNumber() == partyForumDAO.FindUserNum(Integer.parseInt(request.getParameter("postNum")))) {
-			List<FileDTO> fileList = fileDAO.select(Integer.parseInt(request.getParameter("postNum")));
-//			System.out.println(fileList);
-			if (fileList != null && !fileList.isEmpty()) {
-				FileDTO existingFileDTO = fileList.get(0);
-				String filePath = UPLOAD_PATH + existingFileDTO.getFileOriginalName();
-				File file = new File(filePath);
-				System.out.println("해당 경로에 삭제하는 파일 확인 : " + filePath);
-				if (file.exists()) {
-					if (file.delete()) {
-//						System.out.println("기존 파일 삭제 성공: " + filePath);
-					} else {
-//						System.out.println("기존 파일 삭제 실패: " + filePath);
+
+			if (partyForumDAO.findApply(Integer.parseInt(request.getParameter("postNum"))) == 0) {
+
+				List<FileDTO> fileList = fileDAO.select(Integer.parseInt(request.getParameter("postNum")));
+//				System.out.println(fileList);
+				if (fileList != null && !fileList.isEmpty()) {
+					FileDTO existingFileDTO = fileList.get(0);
+					String filePath = UPLOAD_PATH + existingFileDTO.getFileOriginalName();
+					File file = new File(filePath);
+					System.out.println("해당 경로에 삭제하는 파일 확인 : " + filePath);
+					if (file.exists()) {
+						if (file.delete()) {
+//							System.out.println("기존 파일 삭제 성공: " + filePath);
+						} else {
+//							System.out.println("기존 파일 삭제 실패: " + filePath);
+						}
 					}
+					fileDAO.delete(Integer.parseInt(request.getParameter("postNum"))); // 기존 파일 정보 삭제
 				}
-				fileDAO.delete(Integer.parseInt(request.getParameter("postNum"))); // 기존 파일 정보 삭제
+
+				partyForumDAO.forumDelete(Integer.parseInt(request.getParameter("postNum")));
+
+				result.setRedirect(true);
+				result.setPath(request.getContextPath() + "/app/partyForum/partyForum.fo?page=1&FindTitle=");
+
+			} else {
+				session.setAttribute("message", "참가 한 유저가 있는 게시글 입니다.");
+				result.setRedirect(true);
+				result.setPath(request.getContextPath() + "/app/partyForum/partyForum.fo?page=1&FindTitle=");
+
 			}
-			
-			partyForumDAO.PartyDelete(Integer.parseInt(request.getParameter("postNum")));
-			
-			result.setRedirect(true);
-			result.setPath(request.getContextPath() + "/app/partyForum/partyForum.fo");
+
 		} else {
 			result.setRedirect(true);
-			result.setPath(request.getContextPath() + "/app/partyForum/partyForum.fo");
+			result.setPath(request.getContextPath() + "/app/partyForum/partyForum.fo?page=1&FindTitle=");
 		}
-
-		
 
 		return result;
 	}

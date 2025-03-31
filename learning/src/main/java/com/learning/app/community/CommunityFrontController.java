@@ -1,7 +1,6 @@
 package com.learning.app.community;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,83 +8,98 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.learning.app.Result;
-import com.learning.app.dao.CommunityDAO;
-import com.learning.app.dto.CommunityDTO;
 
-//JSTL로 값을 HTML에 넘겨주고 그걸 JS로 넘겨준다
-//JAVA>JSTL>HTML>Javscript순으로 적용이 된다 
-//2025-02-05 다른방식으로 값을 넘겨주는걸로 수정 시작
 public class CommunityFrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public CommunityFrontController() {
-		super();
-	}
-
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doProcess(request, response);
 	}
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8"); // 요청 데이터 인코딩 설정
 		doProcess(request, response);
 	}
 
-	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
+	private void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		System.out.println("Community 프론트 컨트롤러 실행");
+		// URL에서 요청 경로 추출
+		System.out.println("communityForum 서블릿");
 		String target = request.getRequestURI().substring(request.getContextPath().length());
 		Result result = null;
-//		int postNum = 0;
-//		System.out.println("target: " + target);
 
+		// URL에 따른 요청 분기
+		System.out.println("target : " + target);
 		switch (target) {
+
+		// 게시글 목록을 불러오기
 		case "/app/communityForum/communityForum.cf":
-			System.out.println("커뮤니티 리스트 컨트롤러 이동");
-			result = new CommunityListController().execute(request, response);
+			System.out.println("communityForum");
+			result = new CommunityForumFindController().execute(request, response);
 			break;
 
-		case "/app/communityForum/communityForumDetail.cf":
-			System.out.println("상세글 값 넘겨주기: " + request.getParameter("postNum"));
-//			postNum = Integer.parseInt(request.getParameter("postNum"));
-			result = new CommunityDetailController().execute(request, response);
-			break;
-		case "/app/communityForum/communityForumDetailDelete.cf":
-			System.out.println("게시글 삭제 후 리스트 페이지로 이동 함수 실행");
-			System.out.println("삭제 값 넘겨주기: " + request.getParameter("pk"));
-			result = new CommunityDetailDeleteController().execute(request, response);
-			break;
-		case "/app/communityForum/communityForumDetailCommentDelete.cf":
-			System.out.println("댓글 삭제 컨트롤러 이동");
-			result = new CommunityDetailCommentDeleteController().execute(request, response);
-			break;
-		case "/app/communityForum/communityForumDetailAdd.cf":
-			System.out.println("댓글 작성 컨트롤러 이동");
-			result = new CommunityDetailCommentAddController().execute(request, response);
-			break;
-		case "/app/communityForum/communityForumWriteing.cf":
-			System.out.println("게시글 작성 컨트롤러 이동");
+		// 파티모집 글쓰기 페이지로 이동하기
+		case "/app/communityForum/communityWriting.cf":
+			System.out.println("CommunityWriting");
 			result = new CommunityWritingController().execute(request, response);
 			break;
-		case "/app/communityForum/communityForumWritingAdd.cf":
-			System.out.println("게시글 작성 후 추가하는 컨트롤러 이동");
-			System.out.println(request.getParameter("postContent"));
-			result = new CommunityWritingAddController().execute(request, response);
+
+		// 파티모집 글쓰기 페이지에서 작성 완료시
+		case "/app/communityForum/WritingEnd.cf":
+			System.out.println("WritingEnd");
+			result = new CommunityWritingEndController().execute(request, response);
 			break;
-		case "/app/communityForum/communityForumEditMyPost.cf":
-			System.out.println("게시글 수정 페이지 컨트롤러 이동");
-			result = new CommunityEditController().execute(request, response);
+			
+			
+
+		// 파티모집 게시판에서 게시글을 클릭했을 때
+		case "/app/communityForum/communityForumDetail.cf":
+			System.out.println("communityForumDetail");
+			result = new CommunityForumDetailController().execute(request, response);
 			break;
-		case "/app/communityForum/communityForumMyPostEdit.cf":
-			System.out.println("게시글 수정 완료 페이지 컨트롤러 이동");
-			result = new CommunityEditOkController().execute(request, response);
+
+		// 파티모집 게시판에서 작성자가 게시글을 삭제했을 때
+		case "/app/communityForum/communityForumDelete.cf":
+			System.out.println("communityForumDelete");
+			result = new CommunityForumDeleteController().execute(request, response);
 			break;
-		default:
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+
+		// 파티모집 게시판에 게시글에 있는 댓글들 목록 보기
+		case "/app/communityForum/communityForumCommentList.cf":
+			System.out.println("communityForumCommentList");
+			new CommunityForumCommentListController().execute(request, response);
 			return;
+
+		// 파티모집 게시판에서 댓글 추가
+		case "/app/communityForum/communityForumCommentAdd.cf":
+			System.out.println("communityForumCommentAdd");
+			new CommunityForumCommentAddController().execute(request, response);
+			return;
+
+		// 파티모집 게시판에서 댓글 삭제
+		case "/app/communityForum/communityForumCommentDelete.cf":
+			System.out.println("communityForumCommentDelete");
+			new CommunityForumCommentDeleteController().execute(request, response);
+			return;
+
+		case "/app/communityForum/communityForumEdit.cf":
+			System.out.println("communityForumEdit");
+			result = new CommunityForumEditController().execute(request, response);
+			break;
+
+		case "/app/communityForum/communityForumEditEnd.cf":
+			System.out.println("communityForumEditEnd");
+			result = new CommunityForumEditEndController().execute(request, response);
+			break;
+
 		}
+
+		// 결과에 따라 리다이렉트 또는 포워드 처리
+		System.out.println("리다이렉트 결과 : " + result.isRedirect() + "   포워딩 경로: " + result.getPath());
 		if (result != null) {
 			if (result.isRedirect()) {
 				response.sendRedirect(result.getPath());
@@ -95,4 +109,3 @@ public class CommunityFrontController extends HttpServlet {
 		}
 	}
 }
-//
