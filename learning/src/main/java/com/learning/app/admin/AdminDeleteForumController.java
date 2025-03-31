@@ -18,7 +18,9 @@ public class AdminDeleteForumController implements Execute {
 		System.out.println("게시글 삭제");
 
 		AdminDAO adminDAO = new AdminDAO();
+		/* Result result = new Result(); */
 
+		System.out.println("forumNumber : " + request.getParameter("forumNumber"));
 		int forumNumber = Integer.parseInt(request.getParameter("forumNumber"));
 
 		System.out.println("게시글 번호 : " + forumNumber);
@@ -26,8 +28,9 @@ public class AdminDeleteForumController implements Execute {
 
 		System.out.println("게시글 삭제 완료");
 
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
+
+//		result.setPath(request.getContextPath() + "/adminParty.ad");
+//		result.setRedirect(true);
 
 		return null;
 	}
