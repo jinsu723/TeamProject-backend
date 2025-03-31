@@ -107,18 +107,6 @@
 		WHERE f.forum_category = '모집'
 		AND u.user_nickname LIKE '%' || #{searchedPartyNick} || '%'
 	</select>
-	
-	<!-- 커뮤니티 게시글 목록 -->
-	<select id="adminCommunity" resultType="AdminPartyDTO">
-		SELECT f.forum_number,
-		f.forum_category, f.forum_title, f.forum_date,
-		u.user_nickname,
-		u.user_tier
-		FROM tbl_forum f INNER JOIN tbl_user u
-		ON f.user_number =
-		u.user_number
-		WHERE f.forum_category NOT LIKE '모집'
-	</select>
 
 	<!-- 커뮤니티 게시글 목록 -->
 	<select id="adminCommunity" resultType="AdminPartyDTO">
